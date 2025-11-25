@@ -1,0 +1,126 @@
+/* Import fonts */
+@import '@fontsource/inter';
+@import '@fontsource/jetbrains-mono';
+
+/* Import Tailwind directives */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom CSS Variables */
+:root {
+	--foreground-rgb: 255, 255, 255;
+	--background-start-rgb: 10, 10, 11;
+	--background-end-rgb: 19, 19, 22;
+}
+
+/* Base Styles */
+@layer base {
+	html {
+		scroll-behavior: smooth;
+	}
+
+	body {
+		background: linear-gradient(
+			to bottom,
+			rgb(var(--background-start-rgb)),
+			rgb(var(--background-end-rgb))
+		);
+		min-height: 100vh;
+		font-feature-settings: 'cv11', 'ss01';
+		font-variation-settings: 'opsz' 32;
+	}
+
+	/* Custom scrollbar for webkit browsers */
+	::-webkit-scrollbar {
+		width: 8px;
+	}
+
+	::-webkit-scrollbar-track {
+		@apply bg-bg-secondary;
+	}
+
+	::-webkit-scrollbar-thumb {
+		@apply bg-brand-primary;
+		border-radius: 4px;
+	}
+
+	::-webkit-scrollbar-thumb:hover {
+		@apply bg-brand-secondary;
+	}
+}
+
+/* Component Layer */
+@layer components {
+	.container-custom {
+		@apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+	}
+
+	.gradient-text {
+		@apply bg-gradient-to-r from-brand-primary to-brand-secondary bg-clip-text text-transparent;
+	}
+
+	.gradient-border {
+		position: relative;
+		@apply bg-bg-secondary;
+		border-radius: 0.5rem;
+	}
+
+	.gradient-border::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		border-radius: 0.5rem;
+		padding: 1px;
+		background: linear-gradient(
+			135deg,
+			#0EA5E9,
+			#8B5CF6
+		);
+		-webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+		-webkit-mask-composite: xor;
+		mask-composite: exclude;
+	}
+}
+
+/* Utility Layer */
+@layer utilities {
+	/* Glow effect utility */
+	.glow {
+		box-shadow: 0 0 20px rgba(14, 165, 233, 0.3);
+	}
+
+	.glow-strong {
+		box-shadow: 0 0 40px rgba(14, 165, 233, 0.5);
+	}
+
+	/* Backdrop blur utility */
+	.backdrop-blur-custom {
+		backdrop-filter: blur(10px);
+		-webkit-backdrop-filter: blur(10px);
+	}
+
+	/* Animation utilities */
+	.animate-on-scroll {
+		opacity: 0;
+		transform: translateY(20px);
+		transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+	}
+
+	.animate-on-scroll.visible {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}
