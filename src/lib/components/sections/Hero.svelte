@@ -90,7 +90,7 @@
 						Book AI Strategy Call → $500
 					</a>
 					<a
-						href="#case-studies"
+						href="/case-studies"
 						class="px-8 py-4 border-2 border-brand-primary text-brand-primary font-semibold rounded-lg hover:bg-brand-primary hover:text-white transition-all duration-300 text-center"
 					>
 						View Case Studies

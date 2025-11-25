@@ -6,13 +6,19 @@ export const mobileMenuOpen = writable(false);
 // Active section tracking (for scroll spy)
 export const activeSection = writable('');
 
-// Navigation links
-export const navLinks = [
-	{ href: '/about', label: 'About' },
-	{ href: '/projects', label: 'Projects' },
+export type NavLink = {
+	href: string;
+	label: string;
+	scrollTarget?: string;
+};
+
+// Navigation links with optional smooth-scroll targets (home sections)
+export const navLinks: NavLink[] = [
+	{ href: '/about', label: 'About', scrollTarget: '#about' },
+	{ href: '/projects', label: 'Projects', scrollTarget: '#projects' },
 	{ href: '/case-studies', label: 'Case Studies' },
-	{ href: '/writing', label: 'Writing' },
-	{ href: '/book', label: 'Book a Call' }
+	{ href: '/writing', label: 'Writing', scrollTarget: '#content' },
+	{ href: '/book', label: 'Book a Call', scrollTarget: '#consultation' }
 ];
 
 // Helper functions

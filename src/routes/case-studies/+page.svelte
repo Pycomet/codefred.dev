@@ -3,6 +3,13 @@
 	import Card from '$components/ui/Card.svelte';
 	import Badge from '$components/ui/Badge.svelte';
 	import SEO from '$components/SEO.svelte';
+
+	const formatMetricLabel = (key: string) =>
+		key
+			.replace(/([A-Z])/g, ' $1')
+			.replace(/_/g, ' ')
+			.replace(/\b\w/g, (char) => char.toUpperCase())
+			.trim();
 </script>
 
 <SEO
@@ -28,64 +35,93 @@
 		</div>
 
 		<!-- Case Studies Grid -->
-		<div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+		<div class="grid md:grid-cols-2 gap-10 max-w-6xl mx-auto">
 			{#each caseStudies as study}
-				<Card hover class="p-6 lg:p-8 flex flex-col group">
-					<!-- Tags -->
-					<div class="flex flex-wrap gap-2 mb-4">
-						{#each study.tags.slice(0, 3) as tag}
-							<Badge variant="info" size="sm">{tag}</Badge>
-						{/each}
-					</div>
+				<Card hover class="p-0 overflow-hidden flex flex-col group">
+					{#if study.image}
+						<div class="relative h-56 w-full overflow-hidden">
+							<img
+								src={study.image}
+								alt={study.title}
+								class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+								loading="lazy"
+							/>
+						</div>
+					{:else}
+						<div class="h-56 bg-gradient-to-r from-brand-primary/40 to-brand-secondary/40"></div>
+					{/if}
 
-					<!-- Title -->
-					<h2
-						class="text-2xl font-display font-bold text-text-primary mb-3 group-hover:text-brand-primary transition-colors"
-					>
-						{study.title}
-					</h2>
+					<div class="p-6 lg:p-8 flex flex-col flex-1 gap-5">
+						<div class="flex flex-wrap gap-2">
+							<Badge variant="info">{study.category}</Badge>
+							{#if study.featured}
+								<Badge variant="success">Featured</Badge>
+							{/if}
+							<Badge variant="default">{study.timeline}</Badge>
+						</div>
 
-					<!-- Meta Info -->
-					<div class="flex flex-wrap gap-4 text-sm text-text-muted mb-4">
-						<span>{study.client}</span>
-						<span>•</span>
-						<span>{study.timeline}</span>
-						<span>•</span>
-						<span>{study.role}</span>
-					</div>
+						<div>
+							<h2 class="text-2xl font-display font-bold text-text-primary mb-2 group-hover:text-brand-primary transition-colors">
+								{study.title}
+							</h2>
+							<p class="text-text-secondary text-base">{study.tagline}</p>
+						</div>
 
-					<!-- Excerpt -->
-					<p class="text-base text-text-secondary mb-6 flex-1">
-						{study.excerpt}
-					</p>
-
-					<!-- Metrics -->
-					<div class="grid grid-cols-3 gap-3 mb-6">
-						{#each study.metrics as metric}
-							<div class="text-center p-3 bg-bg-accent rounded-lg">
-								<div class="text-lg font-bold text-brand-primary">
-									{metric.value}
-								</div>
-								<div class="text-xs text-text-muted">
-									{metric.label}
-								</div>
+						<div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm text-text-muted">
+							<div>
+								<p class="font-semibold text-text-primary uppercase text-xs tracking-wide">Client</p>
+								<p>{study.client}</p>
 							</div>
-						{/each}
-					</div>
+							<div>
+								<p class="font-semibold text-text-primary uppercase text-xs tracking-wide">Role</p>
+								<p>{study.role}</p>
+							</div>
+							<div>
+								<p class="font-semibold text-text-primary uppercase text-xs tracking-wide">Timeline</p>
+								<p>{study.timeline}</p>
+							</div>
+						</div>
 
-					<!-- Stack -->
-					<div class="mb-6">
-						<p class="text-xs text-text-muted uppercase tracking-wide mb-2">Stack:</p>
-						<p class="text-sm font-mono text-text-secondary">{study.stack}</p>
-					</div>
+						<p class="text-base text-text-secondary">
+							{study.excerpt}
+						</p>
 
-					<!-- CTA -->
-					<a
-						href="/case-studies/{study.slug}"
-						class="block w-full px-6 py-3 bg-gradient-to-r from-brand-primary to-brand-secondary text-white text-center font-semibold rounded-lg hover:shadow-lg hover:shadow-brand-primary/50 transition-all"
-					>
-						Read Full Case Study
-					</a>
+						<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+							{#each Object.entries(study.metrics) as [label, value]}
+								<div class="text-center p-4 bg-bg-accent rounded-lg">
+									<div class="text-xl font-bold text-brand-primary">
+										{value}
+									</div>
+									<div class="text-xs text-text-muted">
+										{formatMetricLabel(label)}
+									</div>
+								</div>
+							{/each}
+						</div>
+
+						<div>
+							<p class="text-xs text-text-muted uppercase tracking-wide mb-2">Stack</p>
+							<div class="flex flex-wrap gap-2">
+								{#each study.techStack as tech}
+									<span class="px-3 py-1 bg-bg-accent text-xs font-mono text-text-secondary rounded-full border border-brand-primary/10">
+										{tech}
+									</span>
+								{/each}
+							</div>
+						</div>
+
+						<div class="pt-2">
+							<a
+								href={`/case-studies/${study.slug}`}
+								class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-brand-primary to-brand-secondary text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-brand-primary/50 transition-all"
+							>
+								Read Full Case Study
+								<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H5" />
+								</svg>
+							</a>
+						</div>
+					</div>
 				</Card>
 			{/each}
 		</div>

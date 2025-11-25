@@ -18,8 +18,7 @@ export const caseStudies: CaseStudy[] = [
 			latencyImprovement: '400ms faster',
 			reliability: '99.1% → 99.9%'
 		},
-		techStack: ['Python', 'FastAPI', 'Redis', 'OpenAI', 'HuggingFace', 'Vector Store'],
-		image: '/images/case-studies/cost-reduction-og.png'
+		techStack: ['Python', 'FastAPI', 'Redis', 'OpenAI', 'HuggingFace', 'Vector Store']
 	},
 	{
 		slug: 'retail-security',
@@ -38,8 +37,7 @@ export const caseStudies: CaseStudy[] = [
 			fps: '30 FPS per camera',
 			impactAnnual: '$2M loss prevention'
 		},
-		techStack: ['Python', 'TensorFlow', 'OpenCV', 'RTSP', 'FastAPI', 'Redis', 'Docker'],
-		image: '/images/case-studies/retail-security-og.png'
+		techStack: ['Python', 'TensorFlow', 'OpenCV', 'RTSP', 'FastAPI', 'Redis', 'Docker']
 	},
 	{
 		slug: 'semantic-search',
@@ -58,8 +56,7 @@ export const caseStudies: CaseStudy[] = [
 			latency: '<100ms p99',
 			accuracy: '94% relevance'
 		},
-		techStack: ['Python', 'FastAPI', 'Pinecone', 'Transformers', 'PostgreSQL'],
-		image: '/images/case-studies/semantic-search-og.png'
+		techStack: ['Python', 'FastAPI', 'Pinecone', 'Transformers', 'PostgreSQL']
 	},
 	{
 		slug: 'grindproof-lab',
@@ -77,8 +74,26 @@ export const caseStudies: CaseStudy[] = [
 			purpose: 'Architecture validation',
 			approach: 'Battle-test with own money first'
 		},
-		techStack: ['Next.js', 'TypeScript', 'tRPC', 'Supabase', 'Google Generative AI', 'GitHub API'],
-		image: '/images/case-studies/grindproof-og.png'
+		techStack: ['Next.js', 'TypeScript', 'tRPC', 'Supabase', 'Google Generative AI', 'GitHub API']
+	},
+	{
+		slug: 'team-enablement',
+		title: 'Team Enablement & AI Delivery Coaching',
+		tagline: 'Embedded leadership that unblocked an internal team in five weeks',
+		client: 'Seed Stage SaaS',
+		role: 'Fractional Head of AI',
+		timeline: '5 Weeks',
+		category: 'ai',
+		featured: false,
+		excerpt:
+			'I was dropped into a five-person engineering team that had never shipped an AI feature before. We rebuilt their delivery process, set up evaluation harnesses, and paired on architecture until they shipped confidently without me.',
+		metrics: {
+			engineersCoached: 5,
+			releaseVelocity: '2x faster',
+			aiFeaturesLaunched: 3,
+			playbooks: '7 documented SOPs'
+		},
+		techStack: ['Next.js', 'FastAPI', 'PostgreSQL', 'LangChain', 'OpenAI', 'Supabase Functions']
 	},
 	{
 		slug: 'when-postgres-beat-ml',
@@ -97,8 +112,7 @@ export const caseStudies: CaseStudy[] = [
 			complexity: '90% reduction',
 			honesty: 'Priceless'
 		},
-		techStack: ['PostgreSQL', 'SQL', 'Data Modeling'],
-		image: '/images/case-studies/postgres-beat-ml-og.png'
+		techStack: ['PostgreSQL', 'SQL', 'Data Modeling']
 	}
 ];
 

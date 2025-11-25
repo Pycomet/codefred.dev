@@ -1,19 +1,36 @@
 <script lang="ts">
 	import { mobileMenuOpen, navLinks, closeMobileMenu } from '$stores/navigation';
+	import type { NavLink } from '$stores/navigation';
 	import { fly, fade } from 'svelte/transition';
 	import { quintOut } from 'svelte/easing';
 
-	function scrollToSection(e: MouseEvent, href: string) {
-		e.preventDefault();
-		closeMobileMenu();
+	function smoothScroll(selector: string) {
+		if (typeof window === 'undefined') return false;
+		const target = document.querySelector(selector);
+		if (!target) return false;
+		target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+		return true;
+	}
 
-		// Small delay to allow menu to close
-		setTimeout(() => {
-			const target = document.querySelector(href);
-			if (target) {
-				target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+	function handleNavClick(e: MouseEvent, link: NavLink) {
+		if (typeof window !== 'undefined' && link.scrollTarget && window.location.pathname === '/') {
+			const didScroll = smoothScroll(link.scrollTarget);
+			if (didScroll) {
+				e.preventDefault();
+				closeMobileMenu();
+				return;
 			}
-		}, 300);
+		}
+
+		closeMobileMenu();
+	}
+
+	function handleAnchorClick(e: MouseEvent, selector: string) {
+		const didScroll = smoothScroll(selector);
+		if (didScroll) {
+			e.preventDefault();
+			closeMobileMenu();
+		}
 	}
 </script>
 
@@ -37,7 +54,7 @@
 				{#each navLinks as link, index}
 					<a
 						href={link.href}
-						onclick={(e) => scrollToSection(e, link.href)}
+						onclick={(e) => handleNavClick(e, link)}
 						class="block px-4 py-3 text-lg font-medium text-text-primary hover:text-brand-primary hover:bg-bg-accent rounded-lg transition-all duration-200 border border-transparent hover:border-brand-primary/30"
 						style="animation-delay: {index * 50}ms"
 					>
@@ -49,7 +66,7 @@
 			<!-- CTA Button -->
 			<a
 				href="#consultation"
-				onclick={(e) => scrollToSection(e, '#consultation')}
+				onclick={(e) => handleAnchorClick(e, '#consultation')}
 				class="block w-full px-6 py-3 bg-gradient-to-r from-brand-primary to-brand-secondary text-white text-center font-semibold rounded-lg hover:shadow-lg hover:shadow-brand-primary/50 transition-all duration-300"
 			>
 				Book a Call

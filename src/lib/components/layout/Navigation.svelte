@@ -1,24 +1,54 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { mobileMenuOpen, navLinks, toggleMobileMenu, closeMobileMenu } from '$stores/navigation';
+	import type { NavLink } from '$stores/navigation';
 	import { personalData } from '$data/personal';
 
 	let scrolled = $state(false);
 
-	// Track scroll position for navbar background
-	if (typeof window !== 'undefined') {
-		window.addEventListener('scroll', () => {
+	onMount(() => {
+		if (typeof window === 'undefined') return;
+
+		const handleScroll = () => {
 			scrolled = window.scrollY > 50;
-		});
+		};
+
+		handleScroll();
+		window.addEventListener('scroll', handleScroll);
+
+		return () => {
+			window.removeEventListener('scroll', handleScroll);
+		};
+	});
+
+	function smoothScroll(selector: string) {
+		if (typeof window === 'undefined') return false;
+		const target = document.querySelector(selector);
+		if (!target) return false;
+		target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+		return true;
 	}
 
-	// Smooth scroll to section
-	function scrollToSection(e: MouseEvent, href: string) {
-		e.preventDefault();
-		closeMobileMenu();
+	function handleNavClick(e: MouseEvent, link: NavLink) {
+		if (typeof window !== 'undefined' && link.scrollTarget && window.location.pathname === '/') {
+			const didScroll = smoothScroll(link.scrollTarget);
+			if (didScroll) {
+				e.preventDefault();
+				closeMobileMenu();
+				return;
+			}
+		}
 
-		const target = document.querySelector(href);
-		if (target) {
-			target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+		if ($mobileMenuOpen) {
+			closeMobileMenu();
+		}
+	}
+
+	function handleAnchorClick(e: MouseEvent, selector: string) {
+		const didScroll = smoothScroll(selector);
+		if (didScroll) {
+			e.preventDefault();
+			closeMobileMenu();
 		}
 	}
 </script>
@@ -48,7 +78,7 @@
 				{#each navLinks as link}
 					<a
 						href={link.href}
-						onclick={(e) => scrollToSection(e, link.href)}
+						onclick={(e) => handleNavClick(e, link)}
 						class="text-text-secondary hover:text-brand-primary transition-colors duration-200 font-medium relative group"
 					>
 						{link.label}
@@ -59,7 +89,7 @@
 				<!-- CTA Button -->
 				<a
 					href="#consultation"
-					onclick={(e) => scrollToSection(e, '#consultation')}
+					onclick={(e) => handleAnchorClick(e, '#consultation')}
 					class="px-6 py-2.5 bg-gradient-to-r from-brand-primary to-brand-secondary text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-brand-primary/50 transition-all duration-300 hover:scale-105"
 				>
 					Book a Call

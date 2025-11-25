@@ -57,7 +57,28 @@ export const projects: Project[] = [
 		},
 		links: {
 			github: '',
-			demo: ''
+			demo: '',
+			caseStudy: '/case-studies/cost-reduction'
+		}
+	},
+	{
+		id: 10,
+		name: 'AI Infrastructure Cost Optimization',
+		tagline: 'Cut OpenAI spend by 92% while improving latency',
+		description:
+			'Implemented semantic caching, prompt classification, and structured outputs to slash a FinTech client’s GPT-4 bill from $60k to $4.8k per month while making responses 400ms faster.',
+		category: 'ai',
+		featured: true,
+		tools: ['Python', 'FastAPI', 'Redis', 'OpenAI', 'HuggingFace'],
+		role: 'Technical Consultant',
+		status: '✅ Delivered & Running',
+		metrics: {
+			costReduction: '92%',
+			latencyGain: '400ms faster',
+			savings: '$55k/month'
+		},
+		links: {
+			caseStudy: '/case-studies/cost-reduction'
 		}
 	},
 	{
@@ -114,6 +135,26 @@ export const projects: Project[] = [
 		}
 	},
 	{
+		id: 11,
+		name: 'Retail Security AI System',
+		tagline: 'Real-time threat detection across 50+ camera streams',
+		description:
+			'Architected and shipped an end-to-end computer vision platform monitoring 50+ retail locations. Achieved 97% detection accuracy with TensorFlow pipelines, RTSP ingestion, and FastAPI services.',
+		category: 'ai',
+		featured: true,
+		tools: ['Python', 'TensorFlow', 'OpenCV', 'FastAPI', 'Redis', 'Docker'],
+		role: 'System Architect & AI Lead',
+		status: '✅ Production 24/7',
+		metrics: {
+			streams: '50+ cameras',
+			accuracy: '97%',
+			impact: '$2M loss prevention'
+		},
+		links: {
+			caseStudy: '/case-studies/retail-security'
+		}
+	},
+	{
 		id: 4,
 		name: 'TrueClient SMS',
 		tagline: 'Enterprise Bulk Messaging Service with Twilio Integration',
@@ -153,6 +194,26 @@ export const projects: Project[] = [
 		links: {
 			github: 'https://github.com/Pycomet/escrow-service-bot',
 			demo: ''
+		}
+	},
+	{
+		id: 12,
+		name: 'Semantic Search Platform',
+		tagline: 'Multilingual vector search across 1M+ documents',
+		description:
+			'Built a semantic search platform serving English and Spanish users with sub-100ms latency. Combined embeddings, Pinecone, and FastAPI to deliver 94% relevance at scale.',
+		category: 'ai',
+		featured: true,
+		tools: ['Python', 'FastAPI', 'Pinecone', 'Transformers', 'PostgreSQL'],
+		role: 'Backend Architect',
+		status: '✅ Delivered',
+		metrics: {
+			documents: '1M+',
+			languages: '2 languages',
+			latency: '<100ms p99'
+		},
+		links: {
+			caseStudy: '/case-studies/semantic-search'
 		}
 	},
 	{
@@ -216,6 +277,46 @@ export const projects: Project[] = [
 		links: {
 			github: '',
 			demo: 'https://yieldvest.hng.tech/'
+		}
+	},
+	{
+		id: 13,
+		name: 'Team Enablement Accelerator',
+		tagline: 'Fractional AI leadership that doubled shipping velocity',
+		description:
+			'Embedded with a seed-stage team to coach five engineers, install evaluation harnesses, and launch three AI workflows in five weeks.',
+		category: 'ai',
+		featured: true,
+		tools: ['Next.js', 'FastAPI', 'LangChain', 'OpenAI', 'Supabase'],
+		role: 'Fractional Head of AI',
+		status: '✅ Delivered',
+		metrics: {
+			teamSize: '5 engineers',
+			velocity: '2x faster releases',
+			features: '3 AI launches'
+		},
+		links: {
+			caseStudy: '/case-studies/team-enablement'
+		}
+	},
+	{
+		id: 14,
+		name: 'When Postgres Beat Machine Learning',
+		tagline: 'Replaced an overbuilt LLM plan with smart SQL',
+		description:
+			'Diagnosed a supposed “AI recommendation” need and instead delivered a performant materialized view + indexing strategy entirely in PostgreSQL.',
+		category: 'full-stack',
+		featured: true,
+		tools: ['PostgreSQL', 'SQL', 'Data Modeling'],
+		role: 'Technical Consultant',
+		status: '✅ Delivered',
+		metrics: {
+			cost: '$0 infra',
+			performance: '10x faster',
+			complexityDrop: '90% less code'
+		},
+		links: {
+			caseStudy: '/case-studies/when-postgres-beat-ml'
 		}
 	},
 	{

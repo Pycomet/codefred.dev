@@ -5,11 +5,13 @@
 	import ConsultationOfferings from '$components/sections/ConsultationOfferings.svelte';
 	import ExpertiseVisualization from '$components/sections/ExpertiseVisualization.svelte';
 	import FeaturedProjects from '$components/sections/FeaturedProjects.svelte';
+	import CaseStudies from '$components/sections/CaseStudies.svelte';
 	import ContentAuthority from '$components/sections/ContentAuthority.svelte';
 	import Differentiators from '$components/sections/Differentiators.svelte';
 	import SocialProof from '$components/sections/SocialProof.svelte';
+	import About from '$components/sections/About.svelte';
+	import Experience from '$components/sections/Experience.svelte';
 	import Contact from '$components/sections/Contact.svelte';
-	import SectionPlaceholder from '$components/sections/SectionPlaceholder.svelte';
 </script>
 
 <script context="module">
@@ -60,11 +62,10 @@
 <ConsultationOfferings />
 <ExpertiseVisualization />
 <FeaturedProjects />
+<CaseStudies />
 <ContentAuthority />
 <Differentiators />
 <SocialProof />
+<About />
+<Experience />
 <Contact />
-
-<!-- Coming in Week 4 -->
-<SectionPlaceholder id="about" title="About Me" description="Learn about my journey from Mechanical Engineering to AI Architecture" />
-<SectionPlaceholder id="experience" title="Experience" description="8 years building production systems across multiple companies" />
