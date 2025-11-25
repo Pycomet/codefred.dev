@@ -19,9 +19,9 @@ export const education: Education[] = [
 	},
 	{
 		id: 3,
-		title: 'Considering: MSc Software Engineering',
+		title: 'Ongoing: MSc Software Engineering',
 		institution: 'Quantic School of Business and Technology',
-		duration: 'Future',
+		duration: '2023 - 2027 (expected)',
 		description:
 			'Exploring advanced degree in Software Engineering to deepen expertise in system design, distributed systems, and engineering leadership.'
 	}

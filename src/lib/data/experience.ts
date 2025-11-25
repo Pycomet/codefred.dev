@@ -3,7 +3,7 @@ import type { Experience } from '$lib/types';
 export const experiences: Experience[] = [
 	{
 		id: 1,
-		title: 'Full Stack Engineer',
+		title: 'Senior Full Stack Engineer',
 		company: 'InferenceCloud.ai',
 		duration: '(Feb 2024 - Present)',
 		category: 'full-time',

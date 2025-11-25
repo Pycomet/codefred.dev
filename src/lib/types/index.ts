@@ -31,7 +31,7 @@ export interface Project {
 	name: string;
 	tagline: string;
 	description: string;
-	category: 'ai' | 'full-stack' | 'laboratory' | 'infrastructure';
+	category: 'ai' | 'full-stack' | 'laboratory' | 'infrastructure' | 'blockchain' | 'automation' | 'fintech';
 	featured: boolean;
 	tools: string[];
 	role: string;

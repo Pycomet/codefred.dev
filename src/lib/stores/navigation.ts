@@ -8,12 +8,11 @@ export const activeSection = writable('');
 
 // Navigation links
 export const navLinks = [
-	{ href: '#about', label: 'About' },
-	{ href: '#experience', label: 'Experience' },
-	{ href: '#skills', label: 'Skills' },
-	{ href: '#projects', label: 'Projects' },
-	{ href: '#consultation', label: 'Services' },
-	{ href: '#contact', label: 'Contact' }
+	{ href: '/about', label: 'About' },
+	{ href: '/projects', label: 'Projects' },
+	{ href: '/case-studies', label: 'Case Studies' },
+	{ href: '/writing', label: 'Writing' },
+	{ href: '/book', label: 'Book a Call' }
 ];
 
 // Helper functions

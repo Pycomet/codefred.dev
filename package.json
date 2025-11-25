@@ -19,6 +19,7 @@
     "@sveltejs/vite-plugin-svelte": "^6.2.1",
     "@tailwindcss/typography": "^0.5.19",
     "autoprefixer": "^10.4.22",
+    "mdsvex": "^0.12.6",
     "postcss": "^8.5.6",
     "svelte": "^5.43.15",
     "tailwindcss": "^3.4.18",

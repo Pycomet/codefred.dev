@@ -20,6 +20,7 @@
 			{ label: 'GitHub', href: personalData.social.github },
 			{ label: 'LinkedIn', href: personalData.social.linkedin },
 			{ label: 'Twitter', href: personalData.social.twitter },
+			{ label: 'YouTube', href: personalData.social.youtube || '#' },
 			{ label: 'Dev.to', href: `https://dev.to/${personalData.social.devto}` }
 		]
 	};
@@ -31,12 +32,14 @@
 			<!-- Brand Column -->
 			<div class="lg:col-span-1">
 				<div class="flex items-center space-x-2 mb-4">
-					<div class="w-10 h-10 rounded-lg bg-gradient-to-br from-brand-primary to-brand-secondary flex items-center justify-center font-display font-bold text-white text-xl">
-						AE
-					</div>
+					<img
+						src="/profile.png"
+						alt="Codefred Logo"
+						class="w-10 h-10 rounded-lg"
+					/>
 					<div>
 						<div class="font-display font-bold text-lg text-text-primary">
-							{personalData.name}
+							Codefred
 						</div>
 						<div class="text-xs text-text-secondary -mt-1">
 							AI Systems Architect
@@ -44,7 +47,7 @@
 					</div>
 				</div>
 				<p class="text-sm text-text-secondary mb-4">
-					Building the future from Lagos, Nigeria 🇳🇬
+					Building the future from Abuja, Nigeria 🇳🇬
 				</p>
 				<p class="text-xs text-text-muted">
 					Currently Building: <a href="https://grindproof.com" class="text-brand-primary hover:underline">GrindProof</a>

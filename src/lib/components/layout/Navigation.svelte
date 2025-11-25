@@ -28,12 +28,14 @@
 		<div class="flex items-center justify-between h-16 lg:h-20">
 			<!-- Logo/Name -->
 			<a href="/" class="flex items-center space-x-2 group">
-				<div class="w-10 h-10 rounded-lg bg-gradient-to-br from-brand-primary to-brand-secondary flex items-center justify-center font-display font-bold text-white text-xl group-hover:scale-110 transition-transform">
-					AE
-				</div>
+				<img
+					src="/profile.png"
+					alt="Codefred Logo"
+					class="w-10 h-10 rounded-lg group-hover:scale-110 transition-transform"
+				/>
 				<div class="hidden sm:block">
 					<div class="font-display font-bold text-lg text-text-primary">
-						{personalData.name.split(' ')[0]}
+						Codefred
 					</div>
 					<div class="text-xs text-text-secondary -mt-1">
 						AI Systems Architect
