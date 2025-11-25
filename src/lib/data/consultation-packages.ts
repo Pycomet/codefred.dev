@@ -15,7 +15,7 @@ export const consultationPackages: ConsultationPackage[] = [
 			'Custom quote if needed'
 		],
 		cta: 'Book Free Call',
-		calLink: 'https://cal.com/codefred/15min', // Update with actual Cal.com link
+		calLink: 'codefred/15min', // Update with actual Cal.com link
 		availability: 'Available this week'
 	},
 	{
@@ -34,7 +34,7 @@ export const consultationPackages: ConsultationPackage[] = [
 			'Follow-up documentation'
 		],
 		cta: 'Book Quick Fix',
-		calLink: 'https://cal.com/codefred/30min', // Update with actual Cal.com link
+		calLink: 'codefred/30min', // Update with actual Cal.com link
 		availability: '2 slots this week'
 	}
 ];
