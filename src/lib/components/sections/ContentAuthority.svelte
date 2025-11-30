@@ -16,7 +16,7 @@
 			}
 
 			// Fetch dev.to articles
-			const devToRes = await fetch(`https://dev.to/api/articles?username=${personalData.devUsername}&per_page=6`);
+			const devToRes = await fetch(`https://dev.to/api/articles?username=${personalData.devto}&per_page=6`);
 			if (devToRes.ok) {
 				const articles = await devToRes.json();
 				devToArticles = articles.filter((article: any) => article.cover_image);
