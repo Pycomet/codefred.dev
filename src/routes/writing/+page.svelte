@@ -11,7 +11,7 @@
 	onMount(async () => {
 		try {
 			const response = await fetch(
-				`https://dev.to/api/articles?username=${personalData.devUsername}&per_page=20`
+				`https://dev.to/api/articles?username=${personalData.devto}&per_page=20`
 			);
 			if (response.ok) {
 				articles = await response.json();
