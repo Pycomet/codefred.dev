@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { personalData } from '$data/personal';
+
 	interface Props {
 		title?: string;
 		description?: string;
@@ -6,7 +8,7 @@
 
 	let { 
 		title = 'Want similar results?',
-		description = 'Book a free 15-minute consultation to discuss your project, or get a $500 quick audit.'
+		description = 'Book a free 15-minute consultation on Cal.com to discuss your project, or schedule a paid consultation on Upwork.'
 	}: Props = $props();
 </script>
 
@@ -36,18 +38,23 @@
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
 					</svg>
 				</a>
-				<a
-					href="https://cal.com/codefred/quick-fix"
-					target="_blank"
-					rel="noopener noreferrer"
-					class="px-8 py-4 border-2 border-brand-primary text-brand-primary font-semibold rounded-lg hover:bg-brand-primary hover:text-white transition-all duration-300 inline-flex items-center justify-center gap-2"
-				>
-					Book $500 Audit
-				</a>
+				{#if personalData.upworkConsultation}
+					<a
+						href={personalData.upworkConsultation.consultationUrl}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="px-8 py-4 border-2 border-brand-primary text-brand-primary font-semibold rounded-lg hover:bg-brand-primary hover:text-white transition-all duration-300 inline-flex items-center justify-center gap-2"
+					>
+						Paid Consultation
+					</a>
+				{/if}
 			</div>
 			
 			<p class="mt-6 text-sm text-text-muted">
-				💳 No payment required to book • 📅 Free 15-min discovery call
+				💳 Free call via Cal.com • 💼 Paid sessions: {personalData.upworkConsultation?.pricing.thirtyMin}/30min or {personalData.upworkConsultation?.pricing.oneHour}/hour on Upwork
+			</p>
+			<p class="mt-2 text-xs text-text-muted">
+				For custom work and projects, visit my <a href={personalData.upworkConsultation?.profileUrl} target="_blank" rel="noopener noreferrer" class="text-brand-primary hover:underline">Upwork profile</a>
 			</p>
 		</div>
 	</div>

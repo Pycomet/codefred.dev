@@ -22,7 +22,17 @@ export interface PersonalData {
 		stackoverflow?: string;
 		leetcode?: string;
 		devto: string; // username for dev.to
+		medium?: string; // username for medium
 		youtube?: string; // channel URL
+		upwork?: string; // Upwork profile URL
+	};
+	upworkConsultation?: {
+		profileUrl: string;
+		consultationUrl: string;
+		pricing: {
+			thirtyMin: string;
+			oneHour: string;
+		};
 	};
 }
 

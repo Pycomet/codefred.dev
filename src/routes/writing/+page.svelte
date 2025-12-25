@@ -10,12 +10,63 @@
 
 	onMount(async () => {
 		try {
-			const response = await fetch(
-				`https://dev.to/api/articles?username=${personalData.devto}&per_page=20`
+			const allArticles: any[] = [];
+
+			// Fetch Dev.to articles
+			try {
+				const devToResponse = await fetch(
+					`https://dev.to/api/articles?username=${personalData.social.devto}&per_page=20`
+				);
+				if (devToResponse.ok) {
+					const devToArticles = await devToResponse.json();
+					// Normalize Dev.to articles
+					allArticles.push(...devToArticles.map((article: any) => ({
+						...article,
+						source: 'dev.to',
+						published_at: article.published_at,
+						normalized_date: new Date(article.published_at)
+					})));
+				}
+			} catch (err) {
+				console.error('Error fetching Dev.to articles:', err);
+			}
+
+			// Fetch Medium articles via RSS2JSON
+			if (personalData.social.medium) {
+				try {
+					const mediumResponse = await fetch(
+						`https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@${personalData.social.medium}`
+					);
+					if (mediumResponse.ok) {
+						const mediumData = await mediumResponse.json();
+						if (mediumData.status === 'ok' && mediumData.items) {
+							// Normalize Medium articles to match Dev.to format
+							allArticles.push(...mediumData.items.map((article: any) => ({
+								title: article.title,
+								description: article.description?.replace(/<[^>]*>/g, '').substring(0, 200),
+								url: article.link,
+								cover_image: article.thumbnail || article.enclosure?.link,
+								published_at: article.pubDate,
+								normalized_date: new Date(article.pubDate),
+								tag_list: article.categories || [],
+								public_reactions_count: 0,
+								comments_count: 0,
+								reading_time_minutes: Math.ceil(article.content?.split(' ').length / 200) || 5,
+								source: 'medium'
+							})));
+						}
+					}
+				} catch (err) {
+					console.error('Error fetching Medium articles:', err);
+				}
+			}
+
+			// Sort all articles by date (newest first)
+			articles = allArticles.sort((a, b) => 
+				b.normalized_date.getTime() - a.normalized_date.getTime()
 			);
-			if (response.ok) {
-				articles = await response.json();
-			} else {
+
+			if (articles.length === 0) {
 				error = true;
 			}
 		} catch (err) {
@@ -61,27 +112,51 @@
 			</div>
 		{:else if error}
 			<div class="text-center py-12">
-				<p class="text-text-secondary mb-4">Failed to load articles. Visit my dev.to profile directly:</p>
-				<a
-					href="https://dev.to/{personalData.devUsername}"
-					target="_blank"
-					rel="noopener noreferrer"
-					class="inline-block px-6 py-3 bg-brand-primary text-white rounded-lg hover:bg-brand-secondary transition-colors"
-				>
-					View on dev.to
-				</a>
+				<p class="text-text-secondary mb-4">Failed to load articles. Visit my profiles directly:</p>
+				<div class="flex flex-wrap justify-center gap-4">
+					<a
+						href="https://dev.to/{personalData.social.devto}"
+						target="_blank"
+						rel="noopener noreferrer"
+						class="inline-block px-6 py-3 bg-brand-primary text-white rounded-lg hover:bg-brand-secondary transition-colors"
+					>
+						View on Dev.to
+					</a>
+					{#if personalData.social.medium}
+						<a
+							href="https://medium.com/@{personalData.social.medium}"
+							target="_blank"
+							rel="noopener noreferrer"
+							class="inline-block px-6 py-3 bg-brand-primary text-white rounded-lg hover:bg-brand-secondary transition-colors"
+						>
+							View on Medium
+						</a>
+					{/if}
+				</div>
 			</div>
 		{:else if articles.length === 0}
 			<div class="text-center py-12">
 				<p class="text-text-secondary mb-4">No articles found yet. Check back soon!</p>
-				<a
-					href="https://dev.to/{personalData.devUsername}"
-					target="_blank"
-					rel="noopener noreferrer"
-					class="text-brand-primary hover:text-brand-secondary transition-colors"
-				>
-					Follow on dev.to →
-				</a>
+				<div class="flex flex-wrap justify-center gap-4">
+					<a
+						href="https://dev.to/{personalData.social.devto}"
+						target="_blank"
+						rel="noopener noreferrer"
+						class="text-brand-primary hover:text-brand-secondary transition-colors"
+					>
+						Follow on Dev.to →
+					</a>
+					{#if personalData.social.medium}
+						<a
+							href="https://medium.com/@{personalData.social.medium}"
+							target="_blank"
+							rel="noopener noreferrer"
+							class="text-brand-primary hover:text-brand-secondary transition-colors"
+						>
+							Follow on Medium →
+						</a>
+					{/if}
+				</div>
 			</div>
 		{:else}
 			<!-- Articles Grid -->
@@ -100,13 +175,19 @@
 						{/if}
 
 						<div class="p-6 flex flex-col flex-1">
-							<!-- Tags -->
-							<div class="flex flex-wrap gap-2 mb-3">
-								{#each article.tag_list.slice(0, 3) as tag}
-									<span class="px-2 py-1 bg-brand-primary/10 text-brand-primary text-xs rounded">
-										#{tag}
-									</span>
-								{/each}
+							<!-- Source Badge -->
+							<div class="flex items-center gap-2 mb-3">
+								<span class="px-2 py-1 bg-{article.source === 'dev.to' ? 'purple' : 'green'}-500/10 text-{article.source === 'dev.to' ? 'purple' : 'green'}-500 text-xs rounded font-semibold">
+									{article.source === 'dev.to' ? 'DEV.TO' : 'MEDIUM'}
+								</span>
+								<!-- Tags -->
+								<div class="flex flex-wrap gap-2">
+									{#each article.tag_list.slice(0, 2) as tag}
+										<span class="px-2 py-1 bg-brand-primary/10 text-brand-primary text-xs rounded">
+											#{tag}
+										</span>
+									{/each}
+								</div>
 							</div>
 
 							<!-- Title -->
@@ -156,15 +237,27 @@
 			</div>
 
 			<!-- View More -->
-			<div class="mt-12 text-center">
-				<a
-					href="https://dev.to/{personalData.devUsername}"
-					target="_blank"
-					rel="noopener noreferrer"
-					class="inline-block px-8 py-4 border border-brand-primary text-brand-primary rounded-lg hover:bg-brand-primary hover:text-white transition-all font-semibold"
-				>
-					View All on dev.to →
-				</a>
+			<div class="mt-12 text-center space-y-4">
+				<div class="flex flex-wrap justify-center gap-4">
+					<a
+						href="https://dev.to/{personalData.social.devto}"
+						target="_blank"
+						rel="noopener noreferrer"
+						class="inline-block px-6 py-3 border border-brand-primary text-brand-primary rounded-lg hover:bg-brand-primary hover:text-white transition-all font-semibold"
+					>
+						View All on Dev.to →
+					</a>
+					{#if personalData.social.medium}
+						<a
+							href="https://medium.com/@{personalData.social.medium}"
+							target="_blank"
+							rel="noopener noreferrer"
+							class="inline-block px-6 py-3 border border-brand-primary text-brand-primary rounded-lg hover:bg-brand-primary hover:text-white transition-all font-semibold"
+						>
+							View All on Medium →
+						</a>
+					{/if}
+				</div>
 			</div>
 		{/if}
 	</div>

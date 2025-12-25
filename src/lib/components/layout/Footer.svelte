@@ -21,7 +21,8 @@
 			{ label: 'LinkedIn', href: personalData.social.linkedin },
 			{ label: 'Twitter', href: personalData.social.twitter },
 			{ label: 'YouTube', href: personalData.social.youtube || '#' },
-			{ label: 'Dev.to', href: `https://dev.to/${personalData.social.devto}` }
+			{ label: 'Dev.to', href: `https://dev.to/${personalData.social.devto}` },
+			{ label: 'Medium', href: `https://medium.com/@${personalData.social.medium}` }
 		]
 	};
 </script>

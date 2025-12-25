@@ -16,7 +16,7 @@
 			}
 
 			// Fetch dev.to articles
-			const devToRes = await fetch(`https://dev.to/api/articles?username=${personalData.devto}&per_page=6`);
+			const devToRes = await fetch(`https://dev.to/api/articles?username=${personalData.social.devto}&per_page=6`);
 			if (devToRes.ok) {
 				const articles = await devToRes.json();
 				devToArticles = articles.filter((article: any) => article.cover_image);
@@ -169,7 +169,7 @@
 						</div>
 
 						<a
-							href="https://dev.to/{personalData.devUsername}"
+							href="https://dev.to/{personalData.social.devto}"
 							target="_blank"
 							rel="noopener noreferrer"
 							class="block mt-6 text-center py-2 text-brand-primary hover:text-brand-secondary transition-colors font-semibold"

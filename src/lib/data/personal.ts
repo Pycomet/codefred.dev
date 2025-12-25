@@ -23,6 +23,16 @@ export const personalData: PersonalData = {
 		stackoverflow: 'https://stackoverflow.com/users/12743929/codefred',
 		leetcode: 'https://leetcode.com/u/Codefred',
 		devto: 'pycomet',
-		youtube: 'https://www.youtube.com/@CodefredHQ'
+		medium: 'alfredemmanuelinyang',
+		youtube: 'https://www.youtube.com/@CodefredHQ',
+		upwork: 'https://upwork.com/freelancers/codefred'
+	},
+	upworkConsultation: {
+		profileUrl: 'https://upwork.com/freelancers/codefred',
+		consultationUrl: 'https://www.upwork.com/services/consultation/development-it-emmanuel-1732106043934654464',
+		pricing: {
+			thirtyMin: '$35',
+			oneHour: '$70'
+		}
 	}
 };
