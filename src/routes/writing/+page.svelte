@@ -3,6 +3,9 @@
 	import { personalData } from '$data/personal';
 	import Card from '$components/ui/Card.svelte';
 	import SEO from '$components/SEO.svelte';
+	import { generateBreadcrumbSchema } from '$lib/utils/structured-data';
+
+	const siteUrl = 'https://codefred.dev';
 
 	let articles = $state<any[]>([]);
 	let loading = $state(true);
@@ -92,6 +95,15 @@
 	canonical="https://codefred.dev/writing"
 	ogImage="/og-writing.png"
 />
+
+<svelte:head>
+	{@html `<script type="application/ld+json">
+		${generateBreadcrumbSchema([
+			{ name: 'Home', url: siteUrl },
+			{ name: 'Writing', url: `${siteUrl}/writing` }
+		])}
+	<\/script>`}
+</svelte:head>
 
 <div class="py-20 bg-bg-primary">
 	<div class="container-custom">

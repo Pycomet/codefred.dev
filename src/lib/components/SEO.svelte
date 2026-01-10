@@ -35,8 +35,12 @@
 	<title>{title}</title>
 	<meta name="title" content={title} />
 	<meta name="description" content={description} />
+	
+	<!-- Robots Meta -->
 	{#if noindex}
 		<meta name="robots" content="noindex, nofollow" />
+	{:else}
+		<meta name="robots" content="index, follow" />
 	{/if}
 
 	<!-- Canonical URL -->
@@ -48,7 +52,9 @@
 	<meta property="og:title" content={title} />
 	<meta property="og:description" content={description} />
 	<meta property="og:image" content={fullOgImage} />
+	<meta property="og:image:alt" content={title} />
 	<meta property="og:site_name" content="Codefred" />
+	<meta property="og:locale" content="en_US" />
 
 	{#if article}
 		{#if article.publishedTime}
@@ -68,15 +74,15 @@
 	{/if}
 
 	<!-- Twitter -->
-	<meta property="twitter:card" content="summary_large_image" />
-	<meta property="twitter:url" content={fullCanonical} />
-	<meta property="twitter:title" content={title} />
-	<meta property="twitter:description" content={description} />
-	<meta property="twitter:image" content={fullOgImage} />
-	<meta property="twitter:creator" content={twitterHandle} />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:url" content={fullCanonical} />
+	<meta name="twitter:title" content={title} />
+	<meta name="twitter:description" content={description} />
+	<meta name="twitter:image" content={fullOgImage} />
+	<meta name="twitter:image:alt" content={title} />
+	<meta name="twitter:creator" content={twitterHandle} />
 
 	<!-- Additional SEO -->
 	<meta name="author" content="Alfred Emmanuel (Codefred)" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta name="theme-color" content="#0EA5E9" />
 </svelte:head>

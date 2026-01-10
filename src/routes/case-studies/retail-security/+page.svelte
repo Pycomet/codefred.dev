@@ -8,13 +8,52 @@
 	import CalloutBox from '$lib/components/case-study/CalloutBox.svelte';
 	import CaseStudyCTA from '$lib/components/case-study/CaseStudyCTA.svelte';
 	import SEO from '$components/SEO.svelte';
+	import { generateArticleSchema, generateBreadcrumbSchema } from '$lib/utils/structured-data';
+	import { getCaseStudyBySlug } from '$lib/data/case-studies';
+
+	const caseStudy = getCaseStudyBySlug('retail-security');
+	const siteUrl = 'https://codefred.dev';
+	const pageUrl = `${siteUrl}/case-studies/retail-security`;
+	const publishedDate = '2024-02-01';
+	const modifiedDate = new Date().toISOString().split('T')[0];
 </script>
 
 <SEO
 	title="Retail Security Computer Vision Case Study | 50+ Cameras | Codefred"
 	description="Built a distributed computer vision system processing 50+ RTSP streams in real-time with 97% accuracy, preventing $2M+ in losses for Nigerian retail chain."
-	canonical="https://codefred.dev/case-studies/retail-security"
+	canonical={pageUrl}
+	ogType="article"
+	article={{
+		publishedTime: `${publishedDate}T00:00:00Z`,
+		modifiedTime: `${modifiedDate}T00:00:00Z`,
+		author: 'Alfred Emmanuel',
+		tags: ['Computer Vision', 'AI', 'Real-time Systems', 'OpenCV', 'YOLO']
+	}}
 />
+
+<svelte:head>
+	{@html `<script type="application/ld+json">
+		${generateArticleSchema({
+			headline: caseStudy?.title || 'Retail Security Computer Vision Case Study',
+			description: 'Built a distributed computer vision system processing 50+ RTSP streams in real-time with 97% accuracy, preventing $2M+ in losses for Nigerian retail chain.',
+			url: pageUrl,
+			datePublished: `${publishedDate}T00:00:00Z`,
+			dateModified: `${modifiedDate}T00:00:00Z`,
+			author: {
+				name: 'Alfred Emmanuel',
+				url: siteUrl
+			},
+			image: `${siteUrl}/og-default.png`
+		})}
+	<\/script>`}
+	{@html `<script type="application/ld+json">
+		${generateBreadcrumbSchema([
+			{ name: 'Home', url: siteUrl },
+			{ name: 'Case Studies', url: `${siteUrl}/case-studies` },
+			{ name: caseStudy?.title || 'Retail Security', url: pageUrl }
+		])}
+	<\/script>`}
+</svelte:head>
 
 <CaseStudyHero
 	title="Real-Time Computer Vision: 50+ Camera Streams Processing"

@@ -8,13 +8,52 @@
 	import CalloutBox from '$lib/components/case-study/CalloutBox.svelte';
 	import CaseStudyCTA from '$lib/components/case-study/CaseStudyCTA.svelte';
 	import SEO from '$components/SEO.svelte';
+	import { generateArticleSchema, generateBreadcrumbSchema } from '$lib/utils/structured-data';
+	import { getCaseStudyBySlug } from '$lib/data/case-studies';
+
+	const caseStudy = getCaseStudyBySlug('semantic-search');
+	const siteUrl = 'https://codefred.dev';
+	const pageUrl = `${siteUrl}/case-studies/semantic-search`;
+	const publishedDate = '2024-02-15';
+	const modifiedDate = new Date().toISOString().split('T')[0];
 </script>
 
 <SEO
 	title="Semantic Search Case Study | 1M+ Documents | Codefred"
 	description="Built production-grade semantic search for 1M+ legal documents with <100ms p99 latency using vector embeddings and hybrid search architecture."
-	canonical="https://codefred.dev/case-studies/semantic-search"
+	canonical={pageUrl}
+	ogType="article"
+	article={{
+		publishedTime: `${publishedDate}T00:00:00Z`,
+		modifiedTime: `${modifiedDate}T00:00:00Z`,
+		author: 'Alfred Emmanuel',
+		tags: ['Semantic Search', 'Vector Search', 'AI', 'FastAPI', 'PostgreSQL']
+	}}
 />
+
+<svelte:head>
+	{@html `<script type="application/ld+json">
+		${generateArticleSchema({
+			headline: caseStudy?.title || 'Semantic Search Case Study',
+			description: 'Built production-grade semantic search for 1M+ legal documents with <100ms p99 latency using vector embeddings and hybrid search architecture.',
+			url: pageUrl,
+			datePublished: `${publishedDate}T00:00:00Z`,
+			dateModified: `${modifiedDate}T00:00:00Z`,
+			author: {
+				name: 'Alfred Emmanuel',
+				url: siteUrl
+			},
+			image: `${siteUrl}/og-default.png`
+		})}
+	<\/script>`}
+	{@html `<script type="application/ld+json">
+		${generateBreadcrumbSchema([
+			{ name: 'Home', url: siteUrl },
+			{ name: 'Case Studies', url: `${siteUrl}/case-studies` },
+			{ name: caseStudy?.title || 'Semantic Search', url: pageUrl }
+		])}
+	<\/script>`}
+</svelte:head>
 
 <CaseStudyHero
 	title="Building Semantic Search for 1M+ Documents"

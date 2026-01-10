@@ -8,13 +8,52 @@
 	import CalloutBox from '$lib/components/case-study/CalloutBox.svelte';
 	import CaseStudyCTA from '$lib/components/case-study/CaseStudyCTA.svelte';
 	import SEO from '$components/SEO.svelte';
+	import { generateArticleSchema, generateBreadcrumbSchema } from '$lib/utils/structured-data';
+	import { getCaseStudyBySlug } from '$lib/data/case-studies';
+
+	const caseStudy = getCaseStudyBySlug('grindproof-lab');
+	const siteUrl = 'https://codefred.dev';
+	const pageUrl = `${siteUrl}/case-studies/grindproof-lab`;
+	const publishedDate = '2024-03-01';
+	const modifiedDate = new Date().toISOString().split('T')[0];
 </script>
 
 <SEO
 	title="GrindProof: My Architecture Laboratory | Codefred"
 	description="How I use my own SaaS product to battle-test architecture patterns before recommending them to clients. Real users, real money, real lessons."
-	canonical="https://codefred.dev/case-studies/grindproof-lab"
+	canonical={pageUrl}
+	ogType="article"
+	article={{
+		publishedTime: `${publishedDate}T00:00:00Z`,
+		modifiedTime: `${modifiedDate}T00:00:00Z`,
+		author: 'Alfred Emmanuel',
+		tags: ['Architecture', 'SaaS', 'SvelteKit', 'Supabase', 'AI']
+	}}
 />
+
+<svelte:head>
+	{@html `<script type="application/ld+json">
+		${generateArticleSchema({
+			headline: caseStudy?.title || 'GrindProof: My Architecture Laboratory',
+			description: 'How I use my own SaaS product to battle-test architecture patterns before recommending them to clients. Real users, real money, real lessons.',
+			url: pageUrl,
+			datePublished: `${publishedDate}T00:00:00Z`,
+			dateModified: `${modifiedDate}T00:00:00Z`,
+			author: {
+				name: 'Alfred Emmanuel',
+				url: siteUrl
+			},
+			image: `${siteUrl}/og-default.png`
+		})}
+	<\/script>`}
+	{@html `<script type="application/ld+json">
+		${generateBreadcrumbSchema([
+			{ name: 'Home', url: siteUrl },
+			{ name: 'Case Studies', url: `${siteUrl}/case-studies` },
+			{ name: caseStudy?.title || 'GrindProof Lab', url: pageUrl }
+		])}
+	<\/script>`}
+</svelte:head>
 
 <CaseStudyHero
 	title="GrindProof: My Architecture Laboratory"

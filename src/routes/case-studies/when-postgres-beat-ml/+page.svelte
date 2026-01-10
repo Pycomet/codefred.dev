@@ -8,13 +8,52 @@
 	import CalloutBox from '$lib/components/case-study/CalloutBox.svelte';
 	import CaseStudyCTA from '$lib/components/case-study/CaseStudyCTA.svelte';
 	import SEO from '$components/SEO.svelte';
+	import { generateArticleSchema, generateBreadcrumbSchema } from '$lib/utils/structured-data';
+	import { getCaseStudyBySlug } from '$lib/data/case-studies';
+
+	const caseStudy = getCaseStudyBySlug('when-postgres-beat-ml');
+	const siteUrl = 'https://codefred.dev';
+	const pageUrl = `${siteUrl}/case-studies/when-postgres-beat-ml`;
+	const publishedDate = '2024-04-01';
+	const modifiedDate = new Date().toISOString().split('T')[0];
 </script>
 
 <SEO
 	title="When Postgres Beat Machine Learning | Codefred"
 	description="How a database optimization solved an 'AI problem' 10x faster and cheaper than the proposed ML solution. Sometimes SQL > AI."
-	canonical="https://codefred.dev/case-studies/when-postgres-beat-ml"
+	canonical={pageUrl}
+	ogType="article"
+	article={{
+		publishedTime: `${publishedDate}T00:00:00Z`,
+		modifiedTime: `${modifiedDate}T00:00:00Z`,
+		author: 'Alfred Emmanuel',
+		tags: ['PostgreSQL', 'Database Optimization', 'SQL', 'Data Modeling']
+	}}
 />
+
+<svelte:head>
+	{@html `<script type="application/ld+json">
+		${generateArticleSchema({
+			headline: caseStudy?.title || 'When Postgres Beat Machine Learning',
+			description: "How a database optimization solved an 'AI problem' 10x faster and cheaper than the proposed ML solution. Sometimes SQL > AI.",
+			url: pageUrl,
+			datePublished: `${publishedDate}T00:00:00Z`,
+			dateModified: `${modifiedDate}T00:00:00Z`,
+			author: {
+				name: 'Alfred Emmanuel',
+				url: siteUrl
+			},
+			image: `${siteUrl}/og-default.png`
+		})}
+	<\/script>`}
+	{@html `<script type="application/ld+json">
+		${generateBreadcrumbSchema([
+			{ name: 'Home', url: siteUrl },
+			{ name: 'Case Studies', url: `${siteUrl}/case-studies` },
+			{ name: caseStudy?.title || 'When Postgres Beat ML', url: pageUrl }
+		])}
+	<\/script>`}
+</svelte:head>
 
 <CaseStudyHero
 	title="When Postgres Beat Machine Learning"

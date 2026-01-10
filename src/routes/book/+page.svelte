@@ -3,6 +3,9 @@
 	import Card from '$components/ui/Card.svelte';
 	import Badge from '$components/ui/Badge.svelte';
 	import SEO from '$components/SEO.svelte';
+	import { generateBreadcrumbSchema } from '$lib/utils/structured-data';
+
+	const siteUrl = 'https://codefred.dev';
 </script>
 
 <SEO
@@ -11,6 +14,15 @@
 	canonical="https://codefred.dev/book"
 	ogImage="/og-book.png"
 />
+
+<svelte:head>
+	{@html `<script type="application/ld+json">
+		${generateBreadcrumbSchema([
+			{ name: 'Home', url: siteUrl },
+			{ name: 'Book a Call', url: `${siteUrl}/book` }
+		])}
+	<\/script>`}
+</svelte:head>
 
 <div class="py-20 bg-bg-primary">
 	<div class="container-custom max-w-5xl">

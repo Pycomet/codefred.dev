@@ -8,13 +8,52 @@
 	import CalloutBox from '$lib/components/case-study/CalloutBox.svelte';
 	import CaseStudyCTA from '$lib/components/case-study/CaseStudyCTA.svelte';
 	import SEO from '$components/SEO.svelte';
+	import { generateArticleSchema, generateBreadcrumbSchema } from '$lib/utils/structured-data';
+	import { getCaseStudyBySlug } from '$lib/data/case-studies';
+
+	const caseStudy = getCaseStudyBySlug('cost-reduction');
+	const siteUrl = 'https://codefred.dev';
+	const pageUrl = `${siteUrl}/case-studies/cost-reduction`;
+	const publishedDate = '2024-01-15'; // Approximate publication date
+	const modifiedDate = new Date().toISOString().split('T')[0];
 </script>
 
 <SEO
 	title="AI Cost Reduction Case Study | Cut Costs by 92% | Codefred"
 	description="How I reduced a FinTech startup's OpenAI bills from $60K/month to $4.8K while improving latency by 400ms using semantic caching and model routing."
-	canonical="https://codefred.dev/case-studies/cost-reduction"
+	canonical={pageUrl}
+	ogType="article"
+	article={{
+		publishedTime: `${publishedDate}T00:00:00Z`,
+		modifiedTime: `${modifiedDate}T00:00:00Z`,
+		author: 'Alfred Emmanuel',
+		tags: ['AI', 'Cost Optimization', 'OpenAI', 'FastAPI', 'Python']
+	}}
 />
+
+<svelte:head>
+	{@html `<script type="application/ld+json">
+		${generateArticleSchema({
+			headline: caseStudy?.title || 'AI Cost Reduction Case Study',
+			description: "How I reduced a FinTech startup's OpenAI bills from $60K/month to $4.8K while improving latency by 400ms using semantic caching and model routing.",
+			url: pageUrl,
+			datePublished: `${publishedDate}T00:00:00Z`,
+			dateModified: `${modifiedDate}T00:00:00Z`,
+			author: {
+				name: 'Alfred Emmanuel',
+				url: siteUrl
+			},
+			image: `${siteUrl}/og-default.png`
+		})}
+	<\/script>`}
+	{@html `<script type="application/ld+json">
+		${generateBreadcrumbSchema([
+			{ name: 'Home', url: siteUrl },
+			{ name: 'Case Studies', url: `${siteUrl}/case-studies` },
+			{ name: caseStudy?.title || 'AI Cost Reduction', url: pageUrl }
+		])}
+	<\/script>`}
+</svelte:head>
 
 <CaseStudyHero
 	title="How I Cut AI Infrastructure Costs by 90% (While Improving Latency)"

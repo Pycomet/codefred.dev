@@ -4,6 +4,9 @@ import type { RequestHandler } from './$types';
 const site = 'https://codefred.dev';
 
 export const GET: RequestHandler = async () => {
+	// Get current date in ISO 8601 format (YYYY-MM-DD)
+	const lastmod = new Date().toISOString().split('T')[0];
+
 	const pages = [
 		{ url: '', priority: '1.0', changefreq: 'weekly' },
 		{ url: '/about', priority: '0.8', changefreq: 'monthly' },
@@ -28,6 +31,7 @@ ${allPages
 	.map(
 		(page) => `  <url>
     <loc>${site}${page.url}</loc>
+    <lastmod>${lastmod}</lastmod>
     <changefreq>${page.changefreq}</changefreq>
     <priority>${page.priority}</priority>
   </url>`
