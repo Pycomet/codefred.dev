@@ -29,14 +29,9 @@
 							class="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-bg-accent/50 transition-colors"
 						>
 							<div class="flex-1">
-								<h3 class="text-lg font-semibold text-text-primary mb-1">
+								<h3 class="text-lg font-semibold text-text-primary">
 									{problem.problem}
 								</h3>
-								{#if openIndex !== i}
-									<p class="text-sm text-text-muted line-clamp-1">
-										{problem.solution}
-									</p>
-								{/if}
 							</div>
 							<svg
 								class="w-6 h-6 text-brand-primary transition-transform duration-300 flex-shrink-0 ml-4"
