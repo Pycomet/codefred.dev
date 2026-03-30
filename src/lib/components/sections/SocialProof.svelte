@@ -5,6 +5,7 @@
 
 	let currentIndex = $state(0);
 	let intervalId: number | undefined;
+	let paused = $state(false);
 
 	function nextTestimonial() {
 		currentIndex = (currentIndex + 1) % testimonials.length;
@@ -15,9 +16,8 @@
 	}
 
 	onMount(() => {
-		// Auto-rotate testimonials every 8 seconds
 		intervalId = window.setInterval(() => {
-			nextTestimonial();
+			if (!paused) nextTestimonial();
 		}, 8000);
 
 		return () => {
@@ -38,7 +38,14 @@
 		</div>
 
 		<!-- Testimonial Carousel -->
-		<div class="max-w-4xl mx-auto mb-16">
+		<div
+			class="max-w-4xl mx-auto mb-16"
+			role="region"
+			aria-label="Client testimonials"
+			aria-live="polite"
+			on:mouseenter={() => paused = true}
+			on:mouseleave={() => paused = false}
+		>
 			<Card class="p-8 lg:p-12 relative">
 				<!-- Quote Icon -->
 				<div class="absolute top-6 left-6 text-brand-primary/20">
@@ -116,19 +123,19 @@
 		<!-- Stats Grid -->
 		<div class="grid md:grid-cols-4 gap-6 max-w-4xl mx-auto">
 			<div class="text-center p-6 bg-bg-secondary rounded-lg border border-bg-accent">
-				<div class="text-4xl font-bold text-brand-primary mb-2">92%</div>
+				<div class="text-4xl font-bold font-display text-brand-primary mb-2">92%</div>
 				<div class="text-sm text-text-muted">Average Cost Reduction</div>
 			</div>
 			<div class="text-center p-6 bg-bg-secondary rounded-lg border border-bg-accent">
-				<div class="text-4xl font-bold text-brand-primary mb-2">3-8</div>
+				<div class="text-4xl font-bold font-display text-brand-primary mb-2">3-8</div>
 				<div class="text-sm text-text-muted">Weeks to Ship</div>
 			</div>
 			<div class="text-center p-6 bg-bg-secondary rounded-lg border border-bg-accent">
-				<div class="text-4xl font-bold text-brand-primary mb-2">100%</div>
+				<div class="text-4xl font-bold font-display text-brand-primary mb-2">99.9%</div>
 				<div class="text-sm text-text-muted">Uptime Track Record</div>
 			</div>
 			<div class="text-center p-6 bg-bg-secondary rounded-lg border border-bg-accent">
-				<div class="text-4xl font-bold text-brand-primary mb-2">8+</div>
+				<div class="text-4xl font-bold font-display text-brand-primary mb-2">8+</div>
 				<div class="text-sm text-text-muted">Years Experience</div>
 			</div>
 		</div>
