@@ -101,17 +101,24 @@
 		-webkit-backdrop-filter: blur(10px);
 	}
 
-	/* Animation utilities */
-	.animate-on-scroll {
+	/* Scroll-triggered animations */
+	.fade-up {
 		opacity: 0;
-		transform: translateY(20px);
+		transform: translateY(24px);
 		transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 	}
 
-	.animate-on-scroll.visible {
+	.fade-up.in-view {
 		opacity: 1;
 		transform: translateY(0);
 	}
+
+	.stagger-children > .fade-up:nth-child(1) { transition-delay: 0ms; }
+	.stagger-children > .fade-up:nth-child(2) { transition-delay: 80ms; }
+	.stagger-children > .fade-up:nth-child(3) { transition-delay: 160ms; }
+	.stagger-children > .fade-up:nth-child(4) { transition-delay: 240ms; }
+	.stagger-children > .fade-up:nth-child(5) { transition-delay: 320ms; }
+	.stagger-children > .fade-up:nth-child(6) { transition-delay: 400ms; }
 }
 
 /* Reduced motion preferences */
