@@ -1,9 +1,7 @@
 import { json } from '@sveltejs/kit';
 import type { RequestEvent } from '@sveltejs/kit';
 import { Resend } from 'resend';
-import { RESEND_API_KEY, EMAIL_ADDRESS } from '$env/static/private';
-
-const resend = new Resend(RESEND_API_KEY);
+import { env } from '$env/dynamic/private';
 
 // HTML email template
 const generateEmailTemplate = (name: string, email: string, userMessage: string): string => `
@@ -26,6 +24,9 @@ export async function POST({ request }: RequestEvent) {
 		const payload = await request.json();
 		const { name, email, message: userMessage } = payload;
 
+		const RESEND_API_KEY = env.RESEND_API_KEY;
+		const EMAIL_ADDRESS = env.EMAIL_ADDRESS;
+
 		if (!RESEND_API_KEY || !EMAIL_ADDRESS) {
 			return json(
 				{ success: false, message: 'Email configuration is missing.' },
@@ -40,6 +41,7 @@ export async function POST({ request }: RequestEvent) {
 			);
 		}
 
+		const resend = new Resend(RESEND_API_KEY);
 		const { error } = await resend.emails.send({
 			from: 'Codefred Portfolio <onboarding@resend.dev>',
 			to: EMAIL_ADDRESS,
