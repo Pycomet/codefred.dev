@@ -30,6 +30,7 @@
     "@fontsource/inter": "^5.2.8",
     "@fontsource/jetbrains-mono": "^5.2.8",
     "axios": "^1.13.2",
-    "nodemailer": "^7.0.10"
+    "posthog-js": "^1.364.2",
+    "resend": "^6.10.0"
   }
 }

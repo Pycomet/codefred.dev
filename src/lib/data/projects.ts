@@ -66,7 +66,7 @@ export const projects: Project[] = [
 		name: 'AI Infrastructure Cost Optimization',
 		tagline: 'Cut OpenAI spend by 92% while improving latency',
 		description:
-			'Implemented semantic caching, prompt classification, and structured outputs to slash a FinTech client’s GPT-4 bill from $60k to $4.8k per month while making responses 400ms faster.',
+			'Implemented semantic caching, prompt classification, and structured outputs to slash a FinTech client\'s GPT-4 bill from $60k to $4.8k per month while making responses 400ms faster.',
 		category: 'ai',
 		featured: true,
 		tools: ['Python', 'FastAPI', 'Redis', 'OpenAI', 'HuggingFace'],
@@ -79,6 +79,67 @@ export const projects: Project[] = [
 		},
 		links: {
 			caseStudy: '/case-studies/cost-reduction'
+		}
+	},
+	{
+		id: 15,
+		name: 'Vibe Coding Platform',
+		tagline: 'AI Code Generator with Sandboxed Execution',
+		description:
+			'An AI-powered coding platform that generates and executes code in real-time isolated sandboxes. Uses Trigger.dev for orchestrating complex async workflows and e2b for secure execution environments, with streaming results back to the browser. Demonstrates modern patterns for AI-assisted development tooling.',
+		category: 'ai',
+		featured: true,
+		tools: ['Next.js', 'TypeScript', 'Trigger.dev', 'e2b', 'Vercel AI SDK'],
+		role: 'Creator',
+		status: '🚀 Live',
+		metrics: {
+			execution: 'Isolated sandboxes',
+			streaming: 'Real-time results',
+			orchestration: 'Trigger.dev workflows'
+		},
+		links: {
+			github: 'https://github.com/Pycomet/vibe-coding-e2b-trigger',
+			demo: 'https://vibe-coding-e2b-trigger.vercel.app'
+		}
+	},
+	{
+		id: 16,
+		name: 'O-Agent Core',
+		tagline: 'Production LLM Agent Execution Framework',
+		description:
+			'A multi-runtime agent framework that accepts natural language goals, decides whether to answer directly or invoke tools, and returns structured results with full execution traces. Features a schema-driven tool registry, safe sandboxed execution, and hybrid Python + Node.js architecture with Trigger.dev orchestration.',
+		category: 'ai',
+		featured: true,
+		tools: ['Python', 'FastAPI', 'TypeScript', 'Trigger.dev', 'Vercel AI SDK', 'OpenAI', 'Docker'],
+		role: 'Architect',
+		status: '✅ Delivered',
+		metrics: {
+			architecture: 'Multi-runtime (Python + Node.js)',
+			toolExecution: 'Schema-driven registry',
+			tracing: 'Full execution traces'
+		},
+		links: {
+			github: 'https://github.com/Pycomet/o-agent-core'
+		}
+	},
+	{
+		id: 17,
+		name: 'Tracepaper',
+		tagline: 'Offline-First AI Research Assistant',
+		description:
+			'A desktop research companion that monitors your activity—papers, podcasts, videos, code—and turns it into searchable, structured knowledge. Features semantic search over personal research, automatic transcription with Whisper, daily summaries, and a Chrome extension for content capture. Built as an Electron app with a FastAPI ML backend.',
+		category: 'ai',
+		featured: true,
+		tools: ['Electron', 'React', 'FastAPI', 'Whisper', 'Sentence Transformers', 'FAISS', 'SQLite', 'Docker'],
+		role: 'Creator',
+		status: '🚀 Active',
+		metrics: {
+			search: 'Semantic vector search',
+			transcription: 'Whisper-powered',
+			platform: 'Desktop + Chrome extension'
+		},
+		links: {
+			github: 'https://github.com/Pycomet/tracepaper'
 		}
 	},
 	{
@@ -111,6 +172,27 @@ export const projects: Project[] = [
 		links: {
 			github: '',
 			demo: ''
+		}
+	},
+	{
+		id: 18,
+		name: 'Cafe Fausse',
+		tagline: 'Full-Stack Restaurant Management Platform',
+		description:
+			'A complete restaurant management system with a Flask REST API backend and React 19 frontend. Features table reservations, menu management, newsletter signups, and staff authentication. Backend includes Swagger API docs, Alembic migrations, Resend email integration, and 49 tests. Frontend is E2E tested with Playwright and includes a password-protected staff admin.',
+		category: 'full-stack',
+		featured: true,
+		tools: ['React 19', 'TailwindCSS', 'Flask', 'SQLAlchemy', 'PostgreSQL', 'Alembic', 'Playwright', 'Docker'],
+		role: 'Full Stack Developer',
+		status: '✅ Live',
+		metrics: {
+			tests: '49 backend + E2E',
+			api: 'Swagger documented',
+			deployment: 'Fly.io + Vercel'
+		},
+		links: {
+			github: 'https://github.com/Pycomet/cafe-fausse-be',
+			demo: 'https://cafe-fausse-fe.vercel.app'
 		}
 	},
 	{
@@ -180,20 +262,20 @@ export const projects: Project[] = [
 		name: 'EscrowBot',
 		tagline: 'Telegram-Native Cryptocurrency Escrow Service',
 		description:
-			'Built a Telegram-native platform for secure, guided peer-to-peer cryptocurrency trading with escrow functionality. The bot supports multiple cryptocurrencies and provides automated escrow services directly within Telegram, eliminating the need for external platforms. Features dispute resolution, multi-currency support, and real-time transaction tracking.',
+			'Built a Telegram-native platform for secure, guided peer-to-peer cryptocurrency trading with escrow functionality. Integrates with BTCPay Server for multi-sig wallet management, features automated dispute resolution, affiliate and broker systems, and comprehensive trade state machines. Fully containerized with a professional dev workflow.',
 		category: 'blockchain',
-		featured: true,
-		tools: ['Python', 'Telegram Bot API', 'Cryptocurrency APIs', 'Database'],
+		featured: false,
+		tools: ['Python', 'Telegram Bot API', 'BTCPay Server', 'MongoDB', 'Docker'],
 		role: 'Lead Developer',
 		status: '✅ Live',
 		metrics: {
-			stars: '34 GitHub stars',
-			currencies: 'Multi-cryptocurrency support',
-			platform: 'Telegram-native'
+			platform: 'Telegram-native',
+			payments: 'BTCPay multi-sig',
+			features: 'Escrow, affiliates, broker system'
 		},
 		links: {
 			github: 'https://github.com/Pycomet/escrow-service-bot',
-			demo: ''
+			demo: 'https://trustedescrowbot.live'
 		}
 	},
 	{
@@ -214,69 +296,6 @@ export const projects: Project[] = [
 		},
 		links: {
 			caseStudy: '/case-studies/semantic-search'
-		}
-	},
-	{
-		id: 6,
-		name: 'PixelAI',
-		tagline: 'Free AI-Powered Thumbnail Creator',
-		description:
-			'Developed an AI-powered thumbnail creation tool that helps content creators generate professional-looking thumbnails for YouTube videos, blog posts, and social media. Uses machine learning to suggest optimal layouts, text placement, and color schemes based on content type and platform requirements.',
-		category: 'ai',
-		featured: false,
-		tools: ['TypeScript', 'Next.js', 'AI/ML APIs', 'Canvas API'],
-		role: 'Creator',
-		status: '🚀 Active',
-		metrics: {
-			stars: '3 GitHub stars',
-			purpose: 'Content creation automation',
-			cost: 'Free tool'
-		},
-		links: {
-			github: 'https://github.com/Pycomet/pixelai',
-			demo: ''
-		}
-	},
-	{
-		id: 7,
-		name: 'Advertisement Telegram Bot',
-		tagline: 'Targeted Group Marketing Automation Tool',
-		description:
-			'Created a Telegram automation bot designed for targeted marketing campaigns. The bot can join multiple Telegram groups, identify relevant audiences, and send customized messages to group members. Includes rate limiting, smart targeting, and compliance features to prevent spam while maximizing reach.',
-		category: 'automation',
-		featured: false,
-		tools: ['Python', 'Telegram Bot API', 'Async/Await', 'Database'],
-		role: 'Developer',
-		status: '✅ Archived',
-		metrics: {
-			stars: '26 GitHub stars',
-			automation: 'Multi-group targeting',
-			scale: 'Bulk messaging'
-		},
-		links: {
-			github: 'https://github.com/Pycomet-zz/advertisement-telegram-bot',
-			demo: ''
-		}
-	},
-	{
-		id: 8,
-		name: 'Yieldvest',
-		tagline: 'Curated Stock Market Intelligence Platform',
-		description:
-			'Built a platform providing curated information for stock market investors based on fundamental analysis. Aggregates financial data, company metrics, and market indicators to help investors make informed decisions. Features real-time data updates, custom watchlists, and automated investment alerts.',
-		category: 'fintech',
-		featured: false,
-		tools: ['React', 'TypeScript', 'Financial APIs', 'Data Analytics'],
-		role: 'Full Stack Developer',
-		status: '✅ Delivered',
-		metrics: {
-			focus: 'Fundamental analysis',
-			data: 'Real-time stock data',
-			timeline: 'Oct-Dec 2022'
-		},
-		links: {
-			github: '',
-			demo: 'https://yieldvest.hng.tech/'
 		}
 	},
 	{
@@ -304,7 +323,7 @@ export const projects: Project[] = [
 		name: 'When Postgres Beat Machine Learning',
 		tagline: 'Replaced an overbuilt LLM plan with smart SQL',
 		description:
-			'Diagnosed a supposed “AI recommendation” need and instead delivered a performant materialized view + indexing strategy entirely in PostgreSQL.',
+			'Diagnosed a supposed "AI recommendation" need and instead delivered a performant materialized view + indexing strategy entirely in PostgreSQL.',
 		category: 'full-stack',
 		featured: true,
 		tools: ['PostgreSQL', 'SQL', 'Data Modeling'],
@@ -320,24 +339,24 @@ export const projects: Project[] = [
 		}
 	},
 	{
-		id: 9,
-		name: 'MintWave',
-		tagline: 'Multi-Blockchain NFT Asset Tracker',
+		id: 6,
+		name: 'PixelAI',
+		tagline: 'Free AI-Powered Thumbnail Creator',
 		description:
-			'Developed an NFT multi-blockchain real-time asset tracker for the Gitcoin Hackathon. Uses the Covalent API to track NFT assets across multiple blockchain networks, providing unified portfolio views, price tracking, and transaction history. Supports Ethereum, Polygon, BSC, and other major chains.',
-		category: 'blockchain',
+			'Developed an AI-powered thumbnail creation tool that helps content creators generate professional-looking thumbnails for YouTube videos, blog posts, and social media. Uses machine learning to suggest optimal layouts, text placement, and color schemes based on content type and platform requirements.',
+		category: 'ai',
 		featured: false,
-		tools: ['React', 'TypeScript', 'Covalent API', 'Web3', 'Multi-chain'],
-		role: 'Hackathon Developer',
-		status: '🏆 Hackathon Project',
+		tools: ['TypeScript', 'Next.js', 'AI/ML APIs', 'Canvas API'],
+		role: 'Creator',
+		status: '🚀 Active',
 		metrics: {
-			blockchains: 'Multi-chain support',
-			event: 'Gitcoin Hackathon',
-			tracking: 'Real-time NFT data'
+			stars: '3 GitHub stars',
+			purpose: 'Content creation automation',
+			cost: 'Free tool'
 		},
 		links: {
-			github: '',
-			demo: 'https://mint-wave.vercel.app/'
+			github: 'https://github.com/Pycomet/pixelai',
+			demo: ''
 		}
 	}
 ];

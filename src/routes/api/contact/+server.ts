@@ -1,44 +1,9 @@
 import { json } from '@sveltejs/kit';
 import type { RequestEvent } from '@sveltejs/kit';
-import nodemailer from 'nodemailer';
-import axios from 'axios';
-import {
-	TELEGRAM_BOT_TOKEN,
-	TELEGRAM_CHAT_ID,
-	GMAIL_PASSKEY,
-	EMAIL_ADDRESS
-} from '$env/static/private';
+import { Resend } from 'resend';
+import { RESEND_API_KEY, EMAIL_ADDRESS } from '$env/static/private';
 
-// Create and configure Nodemailer transporter
-const transporter = nodemailer.createTransport({
-	service: 'gmail',
-	host: 'smtp.gmail.com',
-	port: 587,
-	secure: false,
-	auth: {
-		user: EMAIL_ADDRESS,
-		pass: GMAIL_PASSKEY
-	}
-});
-
-// Helper function to send a message via Telegram
-async function sendTelegramMessage(
-	token: string,
-	chat_id: string,
-	message: string
-): Promise<boolean> {
-	const url = `https://api.telegram.org/bot${token}/sendMessage`;
-	try {
-		const res = await axios.post(url, {
-			text: message,
-			chat_id
-		});
-		return res.data.ok;
-	} catch (error) {
-		console.error('Error sending Telegram message:', error);
-		return false;
-	}
-}
+const resend = new Resend(RESEND_API_KEY);
 
 // HTML email template
 const generateEmailTemplate = (name: string, email: string, userMessage: string): string => `
@@ -56,100 +21,50 @@ const generateEmailTemplate = (name: string, email: string, userMessage: string)
   </div>
 `;
 
-// Helper function to send an email via Nodemailer
-async function sendEmail(
-	payload: { name: string; email: string; message: string },
-	message: string
-): Promise<boolean> {
-	const { name, email, message: userMessage } = payload;
-
-	const mailOptions = {
-		from: 'Codefred Portfolio',
-		to: EMAIL_ADDRESS,
-		subject: `New Message From ${name}`,
-		text: message,
-		html: generateEmailTemplate(name, email, userMessage),
-		replyTo: email
-	};
-
-	try {
-		await transporter.sendMail(mailOptions);
-		return true;
-	} catch (error) {
-		console.error('Error while sending email:', error);
-		return false;
-	}
-}
-
 export async function POST({ request }: RequestEvent) {
 	try {
 		const payload = await request.json();
 		const { name, email, message: userMessage } = payload;
 
-		// Validate environment variables
-		if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) {
+		if (!RESEND_API_KEY || !EMAIL_ADDRESS) {
 			return json(
-				{
-					success: false,
-					message: 'Telegram token or chat ID is missing.'
-				},
+				{ success: false, message: 'Email configuration is missing.' },
 				{ status: 400 }
 			);
 		}
 
-		if (!GMAIL_PASSKEY || !EMAIL_ADDRESS) {
-			return json(
-				{
-					success: false,
-					message: 'Email configuration is missing.'
-				},
-				{ status: 400 }
-			);
-		}
-
-		// Validate request payload
 		if (!name || !email || !userMessage) {
 			return json(
-				{
-					success: false,
-					message: 'Name, email, and message are required.'
-				},
+				{ success: false, message: 'Name, email, and message are required.' },
 				{ status: 400 }
 			);
 		}
 
-		const message = `New message from ${name}\n\nEmail: ${email}\n\nMessage:\n\n${userMessage}\n\n`;
+		const { error } = await resend.emails.send({
+			from: 'Codefred Portfolio <onboarding@resend.dev>',
+			to: EMAIL_ADDRESS,
+			subject: `New Message From ${name}`,
+			text: `New message from ${name}\n\nEmail: ${email}\n\nMessage:\n\n${userMessage}`,
+			html: generateEmailTemplate(name, email, userMessage),
+			replyTo: email
+		});
 
-		// Send Telegram message
-		const telegramSuccess = await sendTelegramMessage(TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, message);
-
-		// Send email
-		const emailSuccess = await sendEmail(payload, message);
-
-		if (telegramSuccess && emailSuccess) {
+		if (error) {
+			console.error('Resend error:', error);
 			return json(
-				{
-					success: true,
-					message: 'Message sent successfully!'
-				},
-				{ status: 200 }
+				{ success: false, message: 'Failed to send message. Please try again.' },
+				{ status: 500 }
 			);
 		}
 
 		return json(
-			{
-				success: false,
-				message: 'Failed to send message. Please try again.'
-			},
-			{ status: 500 }
+			{ success: true, message: 'Message sent successfully!' },
+			{ status: 200 }
 		);
 	} catch (error) {
 		console.error('API Error:', error);
 		return json(
-			{
-				success: false,
-				message: 'Server error occurred.'
-			},
+			{ success: false, message: 'Server error occurred.' },
 			{ status: 500 }
 		);
 	}
