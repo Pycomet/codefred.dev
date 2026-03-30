@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { mobileMenuOpen, navLinks, closeMobileMenu } from '$stores/navigation';
 	import type { NavLink } from '$stores/navigation';
+	import { personalData } from '$data/personal';
 	import { fly, fade } from 'svelte/transition';
 	import { quintOut } from 'svelte/easing';
 
@@ -77,7 +78,7 @@
 				<p class="text-sm text-text-muted mb-3">Connect with me</p>
 				<div class="flex space-x-4">
 					<a
-						href="https://github.com/pycomet"
+						href={personalData.social.github}
 						target="_blank"
 						rel="noopener noreferrer"
 						class="text-text-secondary hover:text-brand-primary transition-colors"
@@ -88,7 +89,7 @@
 						</svg>
 					</a>
 					<a
-						href="https://www.linkedin.com/in/alfredemmanuelinyang/"
+						href={personalData.social.linkedin}
 						target="_blank"
 						rel="noopener noreferrer"
 						class="text-text-secondary hover:text-brand-primary transition-colors"
@@ -99,7 +100,7 @@
 						</svg>
 					</a>
 					<a
-						href="https://twitter.com/code_fredy"
+						href={personalData.social.twitter}
 						target="_blank"
 						rel="noopener noreferrer"
 						class="text-text-secondary hover:text-brand-primary transition-colors"
