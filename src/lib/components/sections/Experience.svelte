@@ -33,8 +33,8 @@
 				<div class="text-sm text-text-muted">Countries</div>
 			</div>
 			<div class="text-center p-6 bg-bg-secondary border border-brand-primary/20 rounded-xl">
-				<div class="text-3xl md:text-4xl font-display font-bold gradient-text mb-2">100%</div>
-				<div class="text-sm text-text-muted">Client Satisfaction</div>
+				<div class="text-3xl md:text-4xl font-display font-bold gradient-text mb-2">4.9/5</div>
+				<div class="text-sm text-text-muted">Client Rating</div>
 			</div>
 		</div>
 
@@ -53,7 +53,7 @@
 							</div>
 
 							<!-- Content card - alternating sides on desktop -->
-							<div class="md:grid md:grid-cols-2 md:gap-8 {index % 2 === 0 ? 'md:pr-8' : 'md:pl-8 md:col-start-2'}">
+							<div class="md:w-[calc(50%-1rem)] {index % 2 === 0 ? 'md:mr-auto md:pr-4' : 'md:ml-auto md:pl-4'}">
 								<Card hover class="p-6 h-full">
 									<div class="flex items-start justify-between mb-4">
 										<div>
