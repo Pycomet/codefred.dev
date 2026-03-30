@@ -1,11 +1,6 @@
 /* Import fonts */
 @import '@fontsource/inter';
 @import '@fontsource/jetbrains-mono';
-/* @import '@fontsource-variable/clash-display'; */
-/* NOTE: Clash Display is not on Fontsource/npm. To activate: add font files to
-   static/fonts/ and replace this line with @font-face rules, or source the
-   package from another registry. The Tailwind display stack already lists
-   'Clash Display Variable' and 'Clash Display' as primaries, falling back to Inter. */
 
 /* Import Tailwind directives */
 @tailwind base;

@@ -25,7 +25,7 @@ export default {
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
-        display: ['Clash Display Variable', 'Clash Display', 'Inter', 'sans-serif'],
+        display: ['Clash Display', 'Inter', 'sans-serif'],
       },
       fontSize: {
         xs: ['clamp(0.75rem, 2vw, 0.875rem)', { lineHeight: '1.5' }],
