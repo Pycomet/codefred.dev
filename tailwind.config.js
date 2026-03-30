@@ -5,12 +5,12 @@ export default {
     extend: {
       colors: {
         bg: {
-          primary: '#0A0A0B',
-          secondary: '#131316',
-          accent: '#1A1A1F',
+          primary: '#09090B',
+          secondary: '#18181B',
+          accent: '#27272A',
         },
         text: {
-          primary: '#FFFFFF',
+          primary: '#FAFAFA',
           secondary: '#A1A1AA',
           muted: '#71717A',
         },

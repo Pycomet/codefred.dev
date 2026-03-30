@@ -14,9 +14,9 @@
 
 /* Custom CSS Variables */
 :root {
-	--foreground-rgb: 255, 255, 255;
-	--background-start-rgb: 10, 10, 11;
-	--background-end-rgb: 19, 19, 22;
+	--foreground-rgb: 250, 250, 250;
+	--background-start-rgb: 9, 9, 11;
+	--background-end-rgb: 24, 24, 27;
 }
 
 /* Base Styles */
