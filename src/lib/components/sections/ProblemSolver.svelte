@@ -9,7 +9,7 @@
 	}
 </script>
 
-<section id="problems" class="py-20 lg:py-24 bg-bg-secondary/30">
+<section id="problems" class="py-16 lg:py-20 bg-bg-secondary/30">
 	<div class="container-custom">
 		<div class="max-w-4xl mx-auto">
 			<div class="text-center mb-12">

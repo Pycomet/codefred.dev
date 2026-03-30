@@ -5,7 +5,7 @@
 	import Card from '$components/ui/Card.svelte';
 </script>
 
-<section id="consultation" class="py-20 lg:py-24 bg-bg-primary">
+<section id="consultation" class="py-24 lg:py-32 bg-bg-primary">
 	<div class="container-custom">
 		<div class="text-center mb-12">
 			<h2 class="text-3xl md:text-4xl lg:text-5xl font-display font-bold gradient-text mb-4">

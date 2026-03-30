@@ -10,7 +10,7 @@
 	<div class="container-custom">
 		<div class="text-center mb-12">
 			<p class="text-brand-primary font-mono text-sm tracking-wide uppercase mb-2">Career Journey</p>
-			<h2 class="text-3xl md:text-4xl lg:text-5xl font-display font-bold gradient-text mb-4">
+			<h2 class="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-text-primary mb-4">
 				Experience
 			</h2>
 			<p class="text-lg text-text-secondary max-w-2xl mx-auto">

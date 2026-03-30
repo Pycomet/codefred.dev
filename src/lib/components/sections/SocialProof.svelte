@@ -26,7 +26,7 @@
 	});
 </script>
 
-<section id="testimonials" class="py-20 lg:py-24 bg-bg-primary">
+<section id="testimonials" class="py-24 lg:py-32 bg-bg-primary">
 	<div class="container-custom">
 		<div class="text-center mb-12">
 			<h2 class="text-3xl md:text-4xl lg:text-5xl font-display font-bold gradient-text mb-4">
@@ -43,8 +43,8 @@
 			role="region"
 			aria-label="Client testimonials"
 			aria-live="polite"
-			on:mouseenter={() => paused = true}
-			on:mouseleave={() => paused = false}
+			onmouseenter={() => paused = true}
+			onmouseleave={() => paused = false}
 		>
 			<Card class="p-8 lg:p-12 relative">
 				<!-- Quote Icon -->

@@ -3,7 +3,7 @@
 	import { personalData } from '$data/personal';
 </script>
 
-<section id="contact" class="py-20 lg:py-24 bg-bg-secondary/30">
+<section id="contact" class="py-24 lg:py-32 bg-bg-secondary/30">
 	<div class="container-custom">
 		<div class="max-w-4xl mx-auto">
 			<div class="text-center mb-12">

@@ -6,7 +6,7 @@
 <section id="skills" class="py-20 lg:py-24 bg-bg-secondary/30">
 	<div class="container-custom">
 		<div class="text-center mb-12">
-			<h2 class="text-3xl md:text-4xl lg:text-5xl font-display font-bold gradient-text mb-4">
+			<h2 class="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-text-primary mb-4">
 				Technical Expertise
 			</h2>
 			<p class="text-lg text-text-secondary max-w-2xl mx-auto">
