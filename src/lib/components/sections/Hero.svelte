@@ -4,22 +4,33 @@
 	import { contentData } from '$data/content';
 
 	let currentHeadlineIndex = $state(0);
+	let headlineVisible = $state(true);
 	let mouseX = $state(0);
 	let mouseY = $state(0);
+	let rafId: number | null = null;
 
-	// Rotate headlines every 3 seconds
 	onMount(() => {
 		const interval = setInterval(() => {
-			currentHeadlineIndex = (currentHeadlineIndex + 1) % contentData.heroHeadlines.length;
-		}, 3000);
+			headlineVisible = false;
+			setTimeout(() => {
+				currentHeadlineIndex = (currentHeadlineIndex + 1) % contentData.heroHeadlines.length;
+				headlineVisible = true;
+			}, 400);
+		}, 3500);
 
-		return () => clearInterval(interval);
+		return () => {
+			clearInterval(interval);
+			if (rafId) cancelAnimationFrame(rafId);
+		};
 	});
 
-	// Track mouse position for gradient effect
 	function handleMouseMove(e: MouseEvent) {
-		mouseX = e.clientX;
-		mouseY = e.clientY;
+		if (rafId) return;
+		rafId = requestAnimationFrame(() => {
+			mouseX = e.clientX;
+			mouseY = e.clientY;
+			rafId = null;
+		});
 	}
 </script>
 
@@ -30,18 +41,18 @@
 	class="relative min-h-screen flex items-center justify-center overflow-hidden bg-bg-primary"
 >
 	<!-- Gradient Mesh Background -->
-	<div class="absolute inset-0 opacity-30">
+	<div class="absolute inset-0 opacity-20">
 		<div
-			class="absolute top-0 -left-4 w-96 h-96 bg-brand-primary rounded-full mix-blend-multiply filter blur-3xl animate-pulse"
+			class="absolute top-0 -left-4 w-96 h-96 bg-brand-primary rounded-full mix-blend-multiply filter blur-3xl"
 			style="transform: translate({mouseX * 0.02}px, {mouseY * 0.02}px)"
 		></div>
 		<div
-			class="absolute top-0 -right-4 w-96 h-96 bg-brand-secondary rounded-full mix-blend-multiply filter blur-3xl animate-pulse"
-			style="animation-delay: 2s; transform: translate({mouseX * -0.02}px, {mouseY * -0.02}px)"
+			class="absolute top-0 -right-4 w-96 h-96 bg-brand-secondary rounded-full mix-blend-multiply filter blur-3xl"
+			style="transform: translate({mouseX * -0.02}px, {mouseY * -0.02}px)"
 		></div>
 		<div
-			class="absolute -bottom-8 left-20 w-96 h-96 bg-brand-primary rounded-full mix-blend-multiply filter blur-3xl animate-pulse"
-			style="animation-delay: 4s; transform: translate({mouseX * 0.01}px, {mouseY * 0.01}px)"
+			class="absolute -bottom-8 left-20 w-96 h-96 bg-brand-primary/50 rounded-full mix-blend-multiply filter blur-3xl"
+			style="transform: translate({mouseX * 0.01}px, {mouseY * 0.01}px)"
 		></div>
 	</div>
 
@@ -50,13 +61,18 @@
 		<div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 			<!-- Left Column: Text Content -->
 			<div class="space-y-8">
-				<!-- Animated Headline -->
 				<div class="space-y-4">
 					<p class="text-brand-primary font-mono text-sm lg:text-base">
-						Hi, I'm {personalData.name} 👋
+						Hi, I'm {personalData.name}
 					</p>
-					<h1 class="text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-tight">
-						<span class="gradient-text transition-all duration-500">
+					<h1 class="text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-tight max-w-xl">
+						<span
+							class="gradient-text inline-block transition-all duration-400"
+							class:opacity-0={!headlineVisible}
+							class:translate-y-2={!headlineVisible}
+							class:opacity-100={headlineVisible}
+							class:translate-y-0={headlineVisible}
+						>
 							{contentData.heroHeadlines[currentHeadlineIndex]}
 						</span>
 					</h1>
@@ -66,17 +82,17 @@
 				</div>
 
 				<!-- Metrics Bar -->
-				<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+				<div class="grid grid-cols-3 gap-4">
 					<div class="bg-bg-secondary/50 backdrop-blur-sm rounded-lg p-4 border border-brand-primary/10">
-						<div class="text-2xl font-bold text-brand-primary">{contentData.metrics.yearsExperience}</div>
+						<div class="text-2xl font-bold font-display text-brand-primary">{contentData.metrics.yearsExperience}+</div>
 						<div class="text-xs text-text-muted">Years Experience</div>
 					</div>
 					<div class="bg-bg-secondary/50 backdrop-blur-sm rounded-lg p-4 border border-brand-primary/10">
-						<div class="text-2xl font-bold text-brand-primary">{contentData.metrics.productionSystems}</div>
+						<div class="text-2xl font-bold font-display text-brand-primary">{contentData.metrics.productionSystems}</div>
 						<div class="text-xs text-text-muted">Production Systems</div>
 					</div>
-					<div class="col-span-2 bg-bg-secondary/50 backdrop-blur-sm rounded-lg p-4 border border-brand-primary/10">
-						<div class="text-lg font-bold text-brand-primary">{contentData.metrics.currentRole}</div>
+					<div class="bg-bg-secondary/50 backdrop-blur-sm rounded-lg p-4 border border-brand-primary/10">
+						<div class="text-lg font-bold font-display text-brand-primary">{contentData.metrics.currentRole}</div>
 						<div class="text-xs text-text-muted">{contentData.metrics.availability}</div>
 					</div>
 				</div>
@@ -87,11 +103,11 @@
 						href="#consultation"
 						class="px-8 py-4 bg-gradient-to-r from-brand-primary to-brand-secondary text-white font-semibold rounded-lg hover:shadow-2xl hover:shadow-brand-primary/50 transition-all duration-300 hover:scale-105 text-center"
 					>
-						Book AI Strategy Call → $500
+						Book a Strategy Call
 					</a>
 					<a
 						href="/case-studies"
-						class="px-8 py-4 border-2 border-brand-primary text-brand-primary font-semibold rounded-lg hover:bg-brand-primary hover:text-white transition-all duration-300 text-center"
+						class="px-8 py-4 border-2 border-brand-primary/40 text-text-primary font-semibold rounded-lg hover:border-brand-primary hover:bg-brand-primary/10 transition-all duration-300 text-center"
 					>
 						View Case Studies
 					</a>
@@ -139,12 +155,14 @@
 			<!-- Right Column: Profile Image -->
 			<div class="flex justify-center lg:justify-end">
 				<div class="relative group">
-					<div class="absolute -inset-4 bg-gradient-to-r from-brand-primary to-brand-secondary rounded-full blur-2xl opacity-30 group-hover:opacity-50 transition-opacity"></div>
-					<div class="relative w-72 h-72 md:w-96 md:h-96 rounded-full overflow-hidden border-4 border-brand-primary/30 hover:border-brand-primary transition-all duration-300 hover:scale-105">
+					<div class="absolute -inset-4 bg-gradient-to-r from-brand-primary to-brand-secondary rounded-full blur-2xl opacity-20 group-hover:opacity-40 transition-opacity duration-500"></div>
+					<div class="relative w-72 h-72 md:w-96 md:h-96 rounded-full overflow-hidden border-4 border-brand-primary/30 hover:border-brand-primary transition-all duration-500">
 						<img
 							src={personalData.profileImage}
 							alt={personalData.name}
-							class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
+							width="384"
+							height="384"
+							class="w-full h-full object-cover"
 						/>
 					</div>
 				</div>
@@ -154,7 +172,7 @@
 
 	<!-- Scroll Indicator -->
 	<div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-		<a href="#about" class="flex flex-col items-center text-text-muted hover:text-brand-primary transition-colors">
+		<a href="#trust" class="flex flex-col items-center text-text-muted hover:text-brand-primary transition-colors">
 			<span class="text-xs mb-2">Scroll Down</span>
 			<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
