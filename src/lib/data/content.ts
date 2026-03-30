@@ -87,39 +87,3 @@ export const contentData: ContentData = {
 		availability: 'Taking 2 Clients'
 	}
 };
-
-// Testimonials (to be collected from user)
-export const testimonials = [
-	// Placeholder - will be replaced with real testimonials
-	{
-		id: 1,
-		quote:
-			'Alfred saved us from a $2M mistake. He identified architectural issues our team missed for months',
-		author: 'CTO, FinTech Startup',
-		role: 'CTO',
-		company: 'FinTech Startup',
-		projectType: 'ai' as const,
-		metric: 'Saved $2M',
-		featured: true
-	},
-	{
-		id: 2,
-		quote:
-			'Finally, someone who admits when AI isn\'t the solution. Refreshingly honest and technically brilliant',
-		author: 'Founder, E-commerce Platform',
-		role: 'Founder',
-		company: 'E-commerce Platform',
-		projectType: 'full-stack' as const,
-		featured: true
-	},
-	{
-		id: 3,
-		quote:
-			'Turned our prototype into a system handling 10K requests/second. Worth every penny',
-		author: 'VP Engineering, Media Company',
-		role: 'VP Engineering',
-		company: 'Media Company',
-		projectType: 'leadership' as const,
-		featured: true
-	}
-];

@@ -21,7 +21,7 @@ export const consultationPackages: ConsultationPackage[] = [
 	{
 		id: 'quick-fix',
 		name: 'Quick Fix / Project Audit',
-		price: '$200',
+		price: '$500',
 		duration: 'One-time engagement',
 		badge: 'Most Popular',
 		description: 'Perfect for specific problems or audits. Get expert eyes on your code, architecture, or AI implementation.',

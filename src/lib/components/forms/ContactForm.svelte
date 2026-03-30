@@ -237,12 +237,12 @@
 <style>
 	input,
 	textarea {
-		color: var(--text-primary);
+		color: #ffffff;
 	}
 
 	input::placeholder,
 	textarea::placeholder {
-		color: var(--text-muted);
+		color: #71717A;
 	}
 
 	input:disabled,

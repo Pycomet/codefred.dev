@@ -17,7 +17,7 @@ export const navLinks: NavLink[] = [
 	{ href: '/about', label: 'About', scrollTarget: '#about' },
 	{ href: '/projects', label: 'Projects', scrollTarget: '#projects' },
 	{ href: '/case-studies', label: 'Case Studies' },
-	{ href: '/writing', label: 'Writing', scrollTarget: '#content' },
+	{ href: '/writing', label: 'Writing' },
 	{ href: '/book', label: 'Book a Call', scrollTarget: '#consultation' }
 ];
 

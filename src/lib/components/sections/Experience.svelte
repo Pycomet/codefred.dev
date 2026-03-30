@@ -111,7 +111,7 @@
 					Want to work together?
 				</h3>
 				<p class="text-text-secondary mb-6 max-w-lg">
-					I'm currently taking on 2 new clients for December 2025. Available for consulting, fractional CTO roles, or project-based work.
+					I'm currently taking on new clients for Q2 2026. Available for consulting, fractional CTO roles, or project-based work.
 				</p>
 				<div class="flex flex-wrap gap-4 justify-center">
 					<a

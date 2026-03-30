@@ -189,7 +189,7 @@
 						<div class="p-6 flex flex-col flex-1">
 							<!-- Source Badge -->
 							<div class="flex items-center gap-2 mb-3">
-								<span class="px-2 py-1 bg-{article.source === 'dev.to' ? 'purple' : 'green'}-500/10 text-{article.source === 'dev.to' ? 'purple' : 'green'}-500 text-xs rounded font-semibold">
+								<span class="px-2 py-1 text-xs rounded font-semibold {article.source === 'dev.to' ? 'bg-purple-500/10 text-purple-500' : 'bg-green-500/10 text-green-500'}">
 									{article.source === 'dev.to' ? 'DEV.TO' : 'MEDIUM'}
 								</span>
 								<!-- Tags -->
