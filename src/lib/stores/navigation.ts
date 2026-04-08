@@ -14,11 +14,9 @@ export type NavLink = {
 
 // Navigation links with optional smooth-scroll targets (home sections)
 export const navLinks: NavLink[] = [
-	{ href: '/about', label: 'About', scrollTarget: '#about' },
-	{ href: '/projects', label: 'Projects', scrollTarget: '#projects' },
-	{ href: '/case-studies', label: 'Case Studies' },
-	{ href: '/writing', label: 'Writing' },
-	{ href: '/book', label: 'Book a Call', scrollTarget: '#consultation' }
+	{ href: '/case-studies', label: 'Work' },
+	{ href: '/about', label: 'About' },
+	{ href: '#contact', label: 'Contact', scrollTarget: '#contact' }
 ];
 
 // Helper functions

@@ -91,14 +91,7 @@
 					</a>
 				{/each}
 
-				<!-- CTA Button -->
-				<a
-					href="#consultation"
-					onclick={(e) => handleAnchorClick(e, '#consultation')}
-					class="px-6 py-2.5 bg-gradient-to-r from-brand-primary to-brand-secondary text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-brand-primary/50 transition-all duration-300 hover:scale-105"
-				>
-					Book a Call
-				</a>
+
 			</div>
 
 			<!-- Mobile Menu Button -->
