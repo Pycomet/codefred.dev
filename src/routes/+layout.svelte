@@ -3,11 +3,15 @@
 	import Navigation from '$components/layout/Navigation.svelte';
 	import MobileMenu from '$components/layout/MobileMenu.svelte';
 	import Footer from '$components/layout/Footer.svelte';
+	import FooterMinimal from '$components/layout/FooterMinimal.svelte';
+	import { page } from '$app/stores';
 	import { browser } from '$app/environment';
 	import { PUBLIC_POSTHOG_KEY, PUBLIC_POSTHOG_HOST } from '$env/static/public';
 	import posthog from 'posthog-js';
 
 	let { children } = $props();
+
+	let isHomepage = $derived($page.url.pathname === '/');
 
 	if (browser && PUBLIC_POSTHOG_KEY) {
 		posthog.init(PUBLIC_POSTHOG_KEY, {
@@ -25,5 +29,9 @@
 		{@render children()}
 	</main>
 
-	<Footer />
+	{#if isHomepage}
+		<FooterMinimal />
+	{:else}
+		<Footer />
+	{/if}
 </div>
