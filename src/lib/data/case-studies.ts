@@ -40,6 +40,25 @@ export const caseStudies: CaseStudy[] = [
 		techStack: ['Python', 'TensorFlow', 'OpenCV', 'RTSP', 'FastAPI', 'Redis', 'Docker']
 	},
 	{
+		slug: 'compass-kenya',
+		title: "Optimizing LLM Agents for Kenya's Job Seekers",
+		tagline: '50% Shorter AI Conversations + Full Swahili Support, Backed by an Evaluation Harness',
+		client: 'Tabiya — Compass Kenya (Workforce AI, Nonprofit)',
+		role: 'Full-Stack AI Developer',
+		timeline: '6 Months (5 Milestones)',
+		category: 'ai',
+		featured: true,
+		excerpt:
+			"Compass is an AI career-guidance chatbot helping Kenyan job seekers discover their skills. Its multi-agent LLM pipeline was verbose (up to 70 turns per conversation), repetitive, and English-only. I built an evaluation harness first, then used it to drive persona-aware flow refactors, full Swahili enablement, and CV integration — cutting worst-case conversations in half while maintaining skill-discovery quality.",
+		metrics: {
+			turnReduction: '50%',
+			swahiliParity: '80%+ vs English',
+			llmCallReduction: '20% fewer calls',
+			clientRating: '5.0★ across 5 milestones'
+		},
+		techStack: ['Python', 'FastAPI', 'TypeScript', 'React', 'Gemini 2.5', 'MongoDB', 'GCP', 'Pulumi']
+	},
+	{
 		slug: 'semantic-search',
 		title: 'Semantic Search Implementation',
 		tagline: 'Multilingual Vector Search for 1M+ Documents',
