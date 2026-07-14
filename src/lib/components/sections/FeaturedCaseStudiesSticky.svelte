@@ -8,14 +8,14 @@
 	const featured = [
 		caseStudies.find((cs) => cs.slug === 'cost-reduction')!,
 		caseStudies.find((cs) => cs.slug === 'retail-security')!,
-		caseStudies.find((cs) => cs.slug === 'semantic-search')!
+		caseStudies.find((cs) => cs.slug === 'compass-kenya')!
 	];
 
 	// Hero metric config per case study
 	const metricConfig: Record<string, { target: number; suffix: string; prefix: string; label: string }> = {
 		'cost-reduction': { target: 92, suffix: '%', prefix: '', label: 'cost reduction' },
 		'retail-security': { target: 97, suffix: '%', prefix: '', label: 'threat detection accuracy' },
-		'semantic-search': { target: 100, suffix: 'ms', prefix: '<', label: 'p99 latency' }
+		'compass-kenya': { target: 50, suffix: '%', prefix: '', label: 'shorter AI conversations' }
 	};
 
 	// Case study narrative content (problem → approach → outcome)
@@ -36,13 +36,13 @@
 			outcome:
 				'97% threat detection accuracy across all cameras at full frame rate. The system prevented an estimated $2M in annual losses and runs reliably 24/7 with automated alerting.'
 		},
-		'semantic-search': {
+		'compass-kenya': {
 			problem:
-				'An international knowledge platform needed search that understood meaning, not just keywords — across Spanish and English documents. Traditional search was missing relevant results constantly.',
+				"Tabiya's Compass — an AI career-guidance chatbot for Kenyan job seekers — was too chatty for its market. Conversations averaged 32 turns (up to 70 in the worst case), repeated questions users had already answered, and only worked in English.",
 			approach:
-				'I built a vector search pipeline using multilingual embeddings, with Pinecone for similarity search and a PostgreSQL hybrid layer for metadata filtering. Query preprocessing handles language detection and expansion automatically.',
+				'I built an evaluation harness first: automated metrics, golden transcripts, and CI quality gates. Then I used it to safely refactor the multi-agent flow — persona detection that adapts probing per user type, full Swahili enablement with a 50+ term taxonomy mapping, and CV integration that pre-populates the agent so it stops asking what it already knows.',
 			outcome:
-				'Sub-100ms p99 latency across 1M+ documents in two languages. Lawyers using the system spend 67% less time searching and find cases they would have missed with keyword search.'
+				'Worst-case conversations dropped from 70 to 35 turns and LLM calls fell 20%, with skill-discovery quality held at 85%+ of baseline. Swahili conversations run at 80%+ parity with English. The client rated all five milestones 5.0★ on Upwork.'
 		}
 	};
 
