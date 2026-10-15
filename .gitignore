@@ -39,3 +39,7 @@ coverage
 
 # Local tooling
 .superpowers/
+
+# Claude Code local state
+.claude/worktrees/
+.claude/settings.local.json

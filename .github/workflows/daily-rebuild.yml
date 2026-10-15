@@ -1,0 +1,24 @@
+name: Daily rebuild
+
+# Rebuilds the site once a day so new YouTube uploads appear without a code change.
+# Setup: Vercel > Project > Settings > Git > Deploy Hooks > create one for `main`,
+# then add its URL as the repository secret VERCEL_DEPLOY_HOOK.
+
+on:
+  schedule:
+    - cron: '0 6 * * *' # 06:00 UTC
+  workflow_dispatch:
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Vercel deploy hook
+        env:
+          HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
+        run: |
+          if [ -z "$HOOK" ]; then
+            echo "::error::VERCEL_DEPLOY_HOOK secret is not set"
+            exit 1
+          fi
+          curl -fsS -X POST "$HOOK"
