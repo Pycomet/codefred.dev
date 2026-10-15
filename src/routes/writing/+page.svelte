@@ -90,10 +90,10 @@
 </script>
 
 <SEO
-	title="Writing | Codefred - Technical Articles & Insights"
+	title="Writing | Codefred - Technical Articles and Insights"
 	description="Technical articles on AI systems, full-stack development, and production engineering. Real-world insights from building systems that scale."
 	canonical="https://codefred.dev/writing"
-	ogImage="/og-writing.png"
+	ogImage="/og-image.png"
 />
 
 <svelte:head>

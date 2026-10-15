@@ -115,7 +115,7 @@
 				</p>
 				<div class="flex flex-wrap gap-4 justify-center">
 					<a
-						href="https://cal.com/codefred/consultation"
+						href="https://cal.com/codefred/30min"
 						target="_blank"
 						rel="noopener noreferrer"
 						class="px-6 py-3 bg-gradient-to-r from-brand-primary to-brand-secondary text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-brand-primary/50 transition-all"

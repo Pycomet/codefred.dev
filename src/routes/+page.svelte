@@ -9,13 +9,14 @@
 <script context="module">
 	import SEO from '$components/SEO.svelte';
 	import { generatePersonSchema } from '$lib/utils/structured-data';
+	import { personalData } from '$data/personal';
 </script>
 
 <SEO
-	title="Codefred | AI Systems Architect & Full-Stack Engineer"
+	title="Codefred | AI Systems Architect and Full-Stack Engineer"
 	description="Senior Software Engineer with 8 years building production AI systems. Cut AI costs by 92%, build computer vision at scale. Based in Nigeria, working globally."
 	canonical="https://codefred.dev"
-	ogImage="/og-home.png"
+	ogImage="/og-image.png"
 />
 
 <svelte:head>
@@ -26,12 +27,14 @@
 			image: 'https://codefred.dev/profile.png',
 			jobTitle: 'AI Systems Architect & Full-Stack Engineer',
 			description: 'Senior Software Engineer specializing in AI cost optimization, computer vision, and production systems architecture. 8 years experience building scalable systems.',
-			email: 'alfred@codefred.dev',
+			email: personalData.email,
 			socialLinks: [
-				'https://github.com/pycomet',
-				'https://linkedin.com/in/codefred',
-				'https://twitter.com/codefred',
-				'https://dev.to/pycomet'
+				personalData.social.github,
+				personalData.social.linkedin,
+				personalData.social.youtube!,
+				personalData.social.instagram!,
+				personalData.social.twitter,
+				`https://dev.to/${personalData.social.devto}`
 			],
 			location: { city: 'Abuja', country: 'Nigeria' },
 			skills: [

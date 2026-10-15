@@ -20,10 +20,10 @@
 </script>
 
 <SEO
-	title="Case Studies | Codefred - Real AI & Full-Stack Projects"
+	title="Case Studies | Codefred - Real AI and Full-Stack Projects"
 	description="Deep dives into production AI systems, cost optimization, and architecture decisions. See how I've helped clients save millions and build scalable systems."
 	canonical="https://codefred.dev/case-studies"
-	ogImage="/og-case-studies.png"
+	ogImage="/og-image.png"
 />
 
 <div class="py-20 bg-bg-primary">
@@ -151,12 +151,12 @@
 				Want results like these?
 			</h3>
 			<p class="text-text-secondary mb-8 text-sm">
-				Book a free 15-minute consultation to discuss your project, or get a $500 quick audit
+				Book a free 30-minute consultation to discuss your project, or get a $500 quick audit
 				to identify cost savings and bottlenecks.
 			</p>
 			<div class="flex flex-wrap gap-3 justify-center">
 				<a
-					href="https://cal.com/codefred/consultation"
+					href="https://cal.com/codefred/30min"
 					target="_blank"
 					rel="noopener noreferrer"
 					class="px-6 py-2.5 bg-gradient-to-r from-brand-primary to-brand-secondary text-white text-sm font-semibold rounded-lg hover:shadow-lg hover:shadow-brand-primary/30 transition-all"
@@ -164,7 +164,7 @@
 					Book Free Call
 				</a>
 				<a
-					href="https://cal.com/codefred/quick-fix"
+					href="https://cal.com/codefred/30min"
 					target="_blank"
 					rel="noopener noreferrer"
 					class="px-6 py-2.5 border border-brand-primary/40 text-brand-primary text-sm font-semibold rounded-lg hover:bg-brand-primary/10 transition-all"

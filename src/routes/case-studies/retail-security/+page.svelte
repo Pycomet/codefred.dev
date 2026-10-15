@@ -3,7 +3,6 @@
 	import MetricsGrid from '$lib/components/case-study/MetricsGrid.svelte';
 	import ContentSection from '$lib/components/case-study/ContentSection.svelte';
 	import CodeBlock from '$lib/components/case-study/CodeBlock.svelte';
-	import Testimonial from '$lib/components/case-study/Testimonial.svelte';
 	import ComparisonTable from '$lib/components/case-study/ComparisonTable.svelte';
 	import CalloutBox from '$lib/components/case-study/CalloutBox.svelte';
 	import CaseStudyCTA from '$lib/components/case-study/CaseStudyCTA.svelte';
@@ -43,7 +42,7 @@
 				name: 'Alfred Emmanuel',
 				url: siteUrl
 			},
-			image: `${siteUrl}/og-default.png`
+			image: `${siteUrl}/og-image.png`
 		})}
 	<\/script>`}
 	{@html `<script type="application/ld+json">
@@ -266,10 +265,6 @@ def process_stream(rtsp_url: str, camera_id: str):
 		</ul>
 	</CalloutBox>
 
-	<Testimonial
-		quote="The system paid for itself in the first 3 months. Now we catch theft as it happens, not after we've lost the inventory."
-		author="Security Director"
-	/>
 
 	<ContentSection title="The Lesson" variant="dark">
 		<p>

@@ -5,7 +5,7 @@ export const consultationPackages: ConsultationPackage[] = [
 		id: 'free-consultation',
 		name: 'Free Consultation',
 		price: 'Free',
-		duration: '15 minutes',
+		duration: '30 minutes',
 		badge: 'Start Here',
 		description: 'Let\'s discuss your project and see if we\'re a good fit. No pressure, just honest conversation.',
 		includes: [
@@ -15,7 +15,7 @@ export const consultationPackages: ConsultationPackage[] = [
 			'Custom quote if needed'
 		],
 		cta: 'Book Free Call',
-		calLink: 'codefred/15min', // Update with actual Cal.com link
+		calLink: 'codefred/30min', // Update with actual Cal.com link
 		availability: 'Available this week'
 	},
 	{

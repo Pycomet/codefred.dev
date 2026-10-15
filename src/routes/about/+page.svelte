@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { personalData } from '$data/personal';
+	import EmailLink from '$components/ui/EmailLink.svelte';
 	import Card from '$components/ui/Card.svelte';
 	import Badge from '$components/ui/Badge.svelte';
 	import SEO from '$components/SEO.svelte';
@@ -12,7 +13,7 @@
 	title="About Me | Codefred - AI Systems Architect Journey"
 	description="From Mechanical Engineering to AI Architecture. 8 years building production systems across Nigeria and globally. Based in Abuja, working with clients worldwide."
 	canonical="https://codefred.dev/about"
-	ogImage="/og-about.png"
+	ogImage="/og-image.png"
 />
 
 <svelte:head>
@@ -81,7 +82,7 @@
 			<h2>What I Actually Do</h2>
 			<p>I help companies with three main problems:</p>
 			<ol>
-				<li><strong>AI Cost Optimization:</strong> Your GPT-4 bill is $60K/month and growing. I implement semantic caching + model routing to cut it by 90%.</li>
+				<li><strong>AI Cost Optimization:</strong> Your GPT-4 bill is $60K/month and growing. I implement semantic caching + model routing to cut it by 92%.</li>
 				<li><strong>Production AI Systems:</strong> You built a cool demo, but it breaks in production. I architect systems that scale reliably.</li>
 				<li><strong>Technical Leadership:</strong> Your team needs guidance on AI strategy, architecture decisions, or technology choices. I don't just consult - I show you the code.</li>
 			</ol>
@@ -204,23 +205,22 @@
 				Let's Work Together
 			</h3>
 			<p class="text-text-secondary mb-6 max-w-2xl mx-auto">
-				Whether you need a quick audit, architecture review, or ongoing technical leadership - I'm here to help. Start with a free 15-minute consultation.
+				Whether you need a quick audit, architecture review, or ongoing technical leadership - I'm here to help. Start with a free 30-minute consultation.
 			</p>
 			<div class="flex flex-wrap gap-4 justify-center">
 				<a
-					href="https://cal.com/codefred/consultation"
+					href="https://cal.com/codefred/30min"
 					target="_blank"
 					rel="noopener noreferrer"
 					class="px-6 py-3 bg-gradient-to-r from-brand-primary to-brand-secondary text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-brand-primary/50 transition-all"
 				>
 					Book Free Call
 				</a>
-				<a
-					href="mailto:{personalData.email}"
+				<EmailLink
 					class="px-6 py-3 border border-brand-primary text-brand-primary font-semibold rounded-lg hover:bg-brand-primary hover:text-white transition-all"
 				>
 					Send Email
-				</a>
+				</EmailLink>
 			</div>
 		</div>
 	</div>

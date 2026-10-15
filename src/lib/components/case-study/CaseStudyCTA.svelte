@@ -8,7 +8,7 @@
 
 	let { 
 		title = 'Want similar results?',
-		description = 'Book a free 15-minute consultation on Cal.com to discuss your project, or schedule a paid consultation on Upwork.'
+		description = 'Book a free 30-minute consultation on Cal.com to discuss your project, or schedule a paid consultation on Upwork.'
 	}: Props = $props();
 </script>
 
@@ -28,7 +28,7 @@
 			
 			<div class="flex flex-col sm:flex-row gap-4 justify-center">
 				<a
-					href="https://cal.com/codefred/consultation"
+					href="https://cal.com/codefred/30min"
 					target="_blank"
 					rel="noopener noreferrer"
 					class="group px-8 py-4 bg-gradient-to-r from-brand-primary to-brand-secondary text-white font-semibold rounded-lg hover:shadow-2xl hover:shadow-brand-primary/50 transition-all duration-300 hover:scale-105 inline-flex items-center justify-center gap-2"

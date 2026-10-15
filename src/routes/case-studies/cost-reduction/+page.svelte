@@ -3,7 +3,6 @@
 	import MetricsGrid from '$lib/components/case-study/MetricsGrid.svelte';
 	import ContentSection from '$lib/components/case-study/ContentSection.svelte';
 	import CodeBlock from '$lib/components/case-study/CodeBlock.svelte';
-	import Testimonial from '$lib/components/case-study/Testimonial.svelte';
 	import ComparisonTable from '$lib/components/case-study/ComparisonTable.svelte';
 	import CalloutBox from '$lib/components/case-study/CalloutBox.svelte';
 	import CaseStudyCTA from '$lib/components/case-study/CaseStudyCTA.svelte';
@@ -43,7 +42,7 @@
 				name: 'Alfred Emmanuel',
 				url: siteUrl
 			},
-			image: `${siteUrl}/og-default.png`
+			image: `${siteUrl}/og-image.png`
 		})}
 	<\/script>`}
 	{@html `<script type="application/ld+json">
@@ -56,7 +55,7 @@
 </svelte:head>
 
 <CaseStudyHero
-	title="How I Cut AI Infrastructure Costs by 90% (While Improving Latency)"
+	title="How I Cut AI Infrastructure Costs by 92% (While Improving Latency)"
 	client="Series B SaaS (FinTech)"
 	role="Technical Consultant"
 	timeline="3 Weeks"
@@ -196,11 +195,6 @@ async def route_request(user_query: str):
 		]}
 	/>
 
-	<Testimonial
-		quote="Codefred didn't just fix the code; he fixed our unit economics. We were worried reducing costs would hurt quality, but the system is actually faster and smarter now because we aren't forcing GPT-4 to do data entry."
-		author="James K."
-		role="CTO"
-	/>
 
 	<ContentSection title="The Lesson" variant="dark">
 		<p>

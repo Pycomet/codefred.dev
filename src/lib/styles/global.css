@@ -118,13 +118,14 @@
 	}
 
 	/* Scroll-triggered animations */
-	.fade-up {
+	/* Only hide when JS is running (html.js set in app.html), so content is never invisible without it */
+	html.js .fade-up {
 		opacity: 0;
 		transform: translateY(24px);
 		transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 	}
 
-	.fade-up.in-view {
+	html.js .fade-up.in-view {
 		opacity: 1;
 		transform: translateY(0);
 	}

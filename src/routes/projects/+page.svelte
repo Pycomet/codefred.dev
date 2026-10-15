@@ -9,10 +9,10 @@
 </script>
 
 <SEO
-	title="Projects | Codefred - AI & Full-Stack Portfolio"
+	title="Projects | Codefred - AI and Full-Stack Portfolio"
 	description="Explore all my projects: from AI accountability SaaS to computer vision systems, semantic search, and full-stack applications. Built with Python, SvelteKit, and modern AI tools."
 	canonical="https://codefred.dev/projects"
-	ogImage="/og-projects.png"
+	ogImage="/og-image.png"
 />
 
 <svelte:head>
@@ -149,7 +149,7 @@
 				Whether it's an AI system, full-stack application, or technical architecture - let's discuss your project.
 			</p>
 			<a
-				href="https://cal.com/codefred/consultation"
+				href="https://cal.com/codefred/30min"
 				target="_blank"
 				rel="noopener noreferrer"
 				class="inline-block px-8 py-4 bg-gradient-to-r from-brand-primary to-brand-secondary text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-brand-primary/50 transition-all"

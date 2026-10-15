@@ -3,7 +3,6 @@
 	import MetricsGrid from '$lib/components/case-study/MetricsGrid.svelte';
 	import ContentSection from '$lib/components/case-study/ContentSection.svelte';
 	import CodeBlock from '$lib/components/case-study/CodeBlock.svelte';
-	import Testimonial from '$lib/components/case-study/Testimonial.svelte';
 	import ComparisonTable from '$lib/components/case-study/ComparisonTable.svelte';
 	import CalloutBox from '$lib/components/case-study/CalloutBox.svelte';
 	import CaseStudyCTA from '$lib/components/case-study/CaseStudyCTA.svelte';
@@ -43,7 +42,7 @@
 				name: 'Alfred Emmanuel',
 				url: siteUrl
 			},
-			image: `${siteUrl}/og-default.png`
+			image: `${siteUrl}/og-image.png`
 		})}
 	<\/script>`}
 	{@html `<script type="application/ld+json">
@@ -304,11 +303,6 @@ async function verifyCommitment(commitment, evidence) {
 		</CalloutBox>
 	</ContentSection>
 
-	<Testimonial
-		quote="Other consultants talk about best practices. Codefred shows me his production monitoring dashboard."
-		author="GrindProof Beta User"
-		role="Who also became a client"
-	/>
 
 	<div class="text-center my-12">
 		<p class="text-text-secondary mb-4">Want to see it live?</p>

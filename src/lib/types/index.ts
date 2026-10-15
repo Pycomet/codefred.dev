@@ -24,6 +24,7 @@ export interface PersonalData {
 		devto: string; // username for dev.to
 		medium?: string; // username for medium
 		youtube?: string; // channel URL
+		instagram?: string; // profile URL
 		upwork?: string; // Upwork profile URL
 	};
 	upworkConsultation?: {

@@ -20,38 +20,9 @@ export const testimonials: Testimonial[] = [
 		rating: 5,
 		projectType: 'Full-Stack Development',
 		linkedinUrl: 'https://www.linkedin.com/in/alfredemmanuelinyang/'
-	},
-	{
-		id: '2',
-		author: 'LinkedIn Colleague',
-		role: 'Team Member',
-		company: 'Professional Network',
-		content:
-			'Alfred has shown through various interactions a capacity for hard and independent work, acceptance of responsibility and an uncanny ability to meet set goals and targets.',
-		rating: 5,
-		projectType: 'Software Engineering',
-		linkedinUrl: 'https://www.linkedin.com/in/alfredemmanuelinyang/'
-	},
-	{
-		id: '3',
-		author: 'James K.',
-		role: 'CTO',
-		company: 'FinTech SaaS',
-		content:
-			"Codefred didn't just fix the code; he fixed our unit economics. We were worried reducing costs would hurt quality, but the system is actually faster and smarter now because we aren't forcing GPT-4 to do data entry.",
-		rating: 5,
-		projectType: 'AI Cost Optimization'
-	},
-	{
-		id: '4',
-		author: 'Sarah M.',
-		role: 'Product Lead',
-		company: 'Legal Tech Startup',
-		content:
-			"This isn't just better search - it's like having a junior associate who's read every case in the database. Our lawyers spend 67% less time searching and found cases they would have missed before.",
-		rating: 5,
-		projectType: 'Semantic Search'
 	}
+	// Add more only with a real name, role, company and a link to the source
+	// (LinkedIn recommendation or Upwork review).
 ];
 
 export const getRandomTestimonials = (count: number = 3): Testimonial[] => {
