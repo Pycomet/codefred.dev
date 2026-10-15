@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { personalData } from '$data/personal';
+	import EmailLink from '$components/ui/EmailLink.svelte';
 
 	const currentYear = new Date().getFullYear();
 
@@ -20,7 +21,8 @@
 			{ label: 'GitHub', href: personalData.social.github },
 			{ label: 'LinkedIn', href: personalData.social.linkedin },
 			{ label: 'Twitter', href: personalData.social.twitter },
-			{ label: 'YouTube', href: personalData.social.youtube || '#' },
+			{ label: 'YouTube', href: personalData.social.youtube! },
+			{ label: 'Instagram', href: personalData.social.instagram! },
 			{ label: 'Dev.to', href: `https://dev.to/${personalData.social.devto}` },
 			{ label: 'Medium', href: `https://medium.com/@${personalData.social.medium}` }
 		]
@@ -101,12 +103,7 @@
 					{/each}
 				</ul>
 				<div class="mt-4">
-					<a
-						href="mailto:{personalData.email}"
-						class="text-sm text-brand-primary hover:underline"
-					>
-						{personalData.email}
-					</a>
+					<EmailLink class="text-sm text-brand-primary hover:underline" />
 				</div>
 			</div>
 		</div>

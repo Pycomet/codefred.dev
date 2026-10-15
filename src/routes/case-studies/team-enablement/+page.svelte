@@ -16,7 +16,7 @@
 </script>
 
 <SEO
-	title="Team Enablement & AI Delivery Coaching | Codefred"
+	title="Team Enablement and AI Delivery Coaching | Codefred"
 	description="Embedded with a seed-stage team to rebuild delivery rituals and ship AI features confidently. 5 engineers coached, 3 features launched, 2x release velocity."
 	canonical={pageUrl}
 	ogType="article"
@@ -40,7 +40,7 @@
 				name: 'Alfred Emmanuel',
 				url: siteUrl
 			},
-			image: `${siteUrl}/og-default.png`
+			image: `${siteUrl}/og-image.png`
 		})}
 	<\/script>`}
 	{@html `<script type="application/ld+json">
@@ -53,7 +53,7 @@
 </svelte:head>
 
 <CaseStudyHero
-	title="Team Enablement & AI Delivery Coaching"
+	title="Team Enablement and AI Delivery Coaching"
 	client="Seed Stage SaaS"
 	role="Fractional Head of AI"
 	timeline="5 Weeks"

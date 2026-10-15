@@ -28,11 +28,11 @@
 				Want similar results?
 			</h3>
 			<p class="text-text-secondary mb-6">
-				Book a free 15-minute consultation to discuss your project, or get a $500 quick audit.
+				Book a free 30-minute consultation to discuss your project, or get a $500 quick audit.
 			</p>
 			<div class="flex flex-wrap gap-4">
 				<a
-					href="https://cal.com/codefred/consultation"
+					href="https://cal.com/codefred/30min"
 					target="_blank"
 					rel="noopener noreferrer"
 					class="px-6 py-3 bg-gradient-to-r from-brand-primary to-brand-secondary text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-brand-primary/50 transition-all"
@@ -40,7 +40,7 @@
 					Book Free Call
 				</a>
 				<a
-					href="https://cal.com/codefred/quick-fix"
+					href="https://cal.com/codefred/30min"
 					target="_blank"
 					rel="noopener noreferrer"
 					class="px-6 py-3 border border-brand-primary text-brand-primary font-semibold rounded-lg hover:bg-brand-primary hover:text-white transition-all"

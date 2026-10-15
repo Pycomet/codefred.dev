@@ -1,16 +1,11 @@
 <!-- src/lib/components/sections/HeroRedesign.svelte -->
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import { countup } from '$lib/actions/countup';
-
-	let visible = $state(false);
-
-	onMount(() => {
-		// Trigger fade-in on load
-		requestAnimationFrame(() => {
-			visible = true;
-		});
-	});
+	// Each figure is taken from the linked case study
+	const heroStats = [
+		{ value: '92%', label: 'lower AI spend', slug: 'cost-reduction', color: 'text-brand-primary' },
+		{ value: '97%', label: 'threat detection accuracy', slug: 'retail-security', color: 'text-brand-secondary' },
+		{ value: '70 → 35', label: 'worst-case agent turns', slug: 'compass-kenya', color: 'text-brand-success' }
+	];
 </script>
 
 <section
@@ -24,13 +19,7 @@
 
 	<!-- Content -->
 	<div class="container-custom relative z-10 text-center py-20">
-		<div
-			class="max-w-3xl mx-auto space-y-8 transition-all duration-500 ease-out"
-			class:opacity-0={!visible}
-			class:translate-y-4={!visible}
-			class:opacity-100={visible}
-			class:translate-y-0={visible}
-		>
+		<div class="max-w-3xl mx-auto space-y-8">
 			<!-- Label -->
 			<p class="text-brand-primary font-mono text-sm tracking-[0.2em] uppercase">
 				AI Systems Architect
@@ -44,28 +33,18 @@
 			</h1>
 
 			<!-- Metrics -->
-			<div class="flex justify-center gap-12 md:gap-16 pt-4">
-				<div class="text-center">
-					<div
-						class="text-3xl md:text-4xl font-bold font-display text-brand-primary"
-						use:countup={{ target: 92, suffix: '%', delay: 300 }}
-					></div>
-					<div class="text-xs text-text-muted mt-1">Cost Reduced</div>
-				</div>
-				<div class="text-center">
-					<div
-						class="text-3xl md:text-4xl font-bold font-display text-brand-secondary"
-						use:countup={{ target: 2, prefix: '$', suffix: 'M+', delay: 400 }}
-					></div>
-					<div class="text-xs text-text-muted mt-1">Saved</div>
-				</div>
-				<div class="text-center">
-					<div
-						class="text-3xl md:text-4xl font-bold font-display text-brand-success"
-						use:countup={{ target: 15, suffix: '+', delay: 500 }}
-					></div>
-					<div class="text-xs text-text-muted mt-1">Systems Built</div>
-				</div>
+			<!-- Rendered server-side: every number is in the HTML and links to its proof -->
+			<div class="flex flex-wrap justify-center gap-x-12 gap-y-6 md:gap-x-16 pt-4">
+				{#each heroStats as stat}
+					<a href="/case-studies/{stat.slug}" class="text-center group">
+						<div class="text-3xl md:text-4xl font-bold font-display {stat.color}">
+							{stat.value}
+						</div>
+						<div class="text-xs text-text-muted mt-1 group-hover:text-text-secondary transition-colors">
+							{stat.label}
+						</div>
+					</a>
+				{/each}
 			</div>
 
 			<!-- CTAs -->

@@ -3,7 +3,6 @@
 	import MetricsGrid from '$lib/components/case-study/MetricsGrid.svelte';
 	import ContentSection from '$lib/components/case-study/ContentSection.svelte';
 	import CodeBlock from '$lib/components/case-study/CodeBlock.svelte';
-	import Testimonial from '$lib/components/case-study/Testimonial.svelte';
 	import ComparisonTable from '$lib/components/case-study/ComparisonTable.svelte';
 	import CalloutBox from '$lib/components/case-study/CalloutBox.svelte';
 	import CaseStudyCTA from '$lib/components/case-study/CaseStudyCTA.svelte';
@@ -43,7 +42,7 @@
 				name: 'Alfred Emmanuel',
 				url: siteUrl
 			},
-			image: `${siteUrl}/og-default.png`
+			image: `${siteUrl}/og-image.png`
 		})}
 	<\/script>`}
 	{@html `<script type="application/ld+json">
@@ -298,10 +297,6 @@
 		</ul>
 	</CalloutBox>
 
-	<Testimonial
-		quote="This isn't just better search - it's like having a junior associate who's read every case in the database."
-		author="Product Lead"
-	/>
 
 	<ContentSection title="The Lesson" variant="dark">
 		<p>

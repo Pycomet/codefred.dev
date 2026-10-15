@@ -19,7 +19,7 @@
 </script>
 
 <SEO
-	title="LLM Agent Optimization & Swahili NLP Case Study | Compass Kenya | Codefred"
+	title="LLM Agent Optimization and Swahili NLP Case Study | Compass Kenya | Codefred"
 	description="How I cut an AI career-guidance chatbot's worst-case conversations from 70 to 35 turns and enabled full Swahili support at 80%+ quality parity — evaluation harness first."
 	canonical={pageUrl}
 	ogType="article"
@@ -43,7 +43,7 @@
 				name: 'Alfred Emmanuel',
 				url: siteUrl
 			},
-			image: `${siteUrl}/og-default.png`
+			image: `${siteUrl}/og-image.png`
 		})}
 	<\/script>`}
 	{@html `<script type="application/ld+json">

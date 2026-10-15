@@ -25,6 +25,7 @@ export const personalData: PersonalData = {
 		devto: 'pycomet',
 		medium: 'alfredemmanuelinyang',
 		youtube: 'https://www.youtube.com/@CodefredHQ',
+		instagram: 'https://www.instagram.com/codefredhq',
 		upwork: 'https://upwork.com/freelancers/codefred'
 	},
 	upworkConsultation: {

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { inview } from '$lib/actions/inview';
-	import { personalData } from '$data/personal';
+	import EmailLink from '$components/ui/EmailLink.svelte';
 </script>
 
 <section id="contact" class="py-32 md:py-40 bg-bg-primary">
@@ -13,12 +13,11 @@
 				I'm currently available for consulting engagements.
 			</p>
 			<div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-				<a
-					href="mailto:{personalData.email}"
+				<EmailLink
 					class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-brand-primary to-brand-secondary text-white font-semibold rounded-lg hover:brightness-110 transition-all duration-300 text-center"
 				>
 					Get in touch
-				</a>
+				</EmailLink>
 				<a
 					href="/book"
 					class="text-text-secondary hover:text-brand-primary transition-colors text-sm"
@@ -27,7 +26,7 @@
 				</a>
 			</div>
 			<p class="text-xs text-text-muted pt-4">
-				{personalData.email}
+				<EmailLink class="hover:text-brand-primary transition-colors" />
 			</p>
 		</div>
 	</div>

@@ -3,7 +3,6 @@
 	import MetricsGrid from '$lib/components/case-study/MetricsGrid.svelte';
 	import ContentSection from '$lib/components/case-study/ContentSection.svelte';
 	import CodeBlock from '$lib/components/case-study/CodeBlock.svelte';
-	import Testimonial from '$lib/components/case-study/Testimonial.svelte';
 	import ComparisonTable from '$lib/components/case-study/ComparisonTable.svelte';
 	import CalloutBox from '$lib/components/case-study/CalloutBox.svelte';
 	import CaseStudyCTA from '$lib/components/case-study/CaseStudyCTA.svelte';
@@ -43,7 +42,7 @@
 				name: 'Alfred Emmanuel',
 				url: siteUrl
 			},
-			image: `${siteUrl}/og-default.png`
+			image: `${siteUrl}/og-image.png`
 		})}
 	<\/script>`}
 	{@html `<script type="application/ld+json">
@@ -215,11 +214,6 @@ LIMIT 10;`}
 		</ul>
 	</CalloutBox>
 
-	<Testimonial
-		quote="I was ready to hire a data science team. Codefred showed me we already had everything we needed in our database. This honesty saved us months of work and tens of thousands of dollars."
-		author="Founder"
-		role="E-commerce Platform"
-	/>
 
 	<ContentSection title="The Lesson" variant="dark">
 		<p class="text-lg text-text-primary font-semibold mb-4">

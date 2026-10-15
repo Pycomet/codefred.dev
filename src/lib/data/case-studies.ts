@@ -3,7 +3,7 @@ import type { CaseStudy } from '$lib/types';
 export const caseStudies: CaseStudy[] = [
 	{
 		slug: 'cost-reduction',
-		title: 'How I Cut AI Infrastructure Costs by 90%',
+		title: 'How I Cut AI Infrastructure Costs by 92%',
 		tagline: 'From $60k/month to $4.8k/month (While Improving Latency)',
 		client: 'Series B SaaS (FinTech)',
 		role: 'Technical Consultant',

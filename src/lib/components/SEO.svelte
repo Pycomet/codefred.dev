@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { personalData } from '$data/personal';
+
 	interface Props {
 		title: string;
 		description: string;
@@ -18,7 +20,7 @@
 		title,
 		description,
 		canonical = '',
-		ogImage = '/og-default.png',
+		ogImage = '/og-image.png',
 		ogType = 'website',
 		article,
 		noindex = false
@@ -27,7 +29,8 @@
 	const siteUrl = 'https://codefred.dev';
 	const fullCanonical = canonical || siteUrl;
 	const fullOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
-	const twitterHandle = '@codefred';
+	// Derived from the footer's profile URL so the two can't drift apart
+	const twitterHandle = `@${personalData.social.twitter.split('/').pop()}`;
 </script>
 
 <svelte:head>

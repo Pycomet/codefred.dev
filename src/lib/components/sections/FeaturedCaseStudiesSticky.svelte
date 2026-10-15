@@ -1,7 +1,6 @@
 <!-- src/lib/components/sections/FeaturedCaseStudiesSticky.svelte -->
 <script lang="ts">
 	import { inview } from '$lib/actions/inview';
-	import { countup } from '$lib/actions/countup';
 	import { caseStudies } from '$data/case-studies';
 
 	// Pick the 3 strongest case studies for the homepage
@@ -74,10 +73,9 @@
 							<h3 class="text-xl font-display font-semibold text-text-primary">
 								{study.title}
 							</h3>
-							<div
-								class="text-5xl lg:text-6xl font-bold font-display text-brand-success"
-								use:countup={{ target: config.target, suffix: config.suffix, prefix: config.prefix, delay: 200 }}
-							></div>
+							<div class="text-5xl lg:text-6xl font-bold font-display text-brand-success">
+								{config.prefix}{config.target}{config.suffix}
+							</div>
 							<p class="text-sm text-text-muted">{config.label}</p>
 							<a
 								href="/case-studies/{study.slug}"

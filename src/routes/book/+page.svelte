@@ -2,6 +2,7 @@
 	import { consultationPackages } from '$data/consultation-packages';
 	import Card from '$components/ui/Card.svelte';
 	import Badge from '$components/ui/Badge.svelte';
+	import EmailLink from '$components/ui/EmailLink.svelte';
 	import SEO from '$components/SEO.svelte';
 	import { generateBreadcrumbSchema } from '$lib/utils/structured-data';
 
@@ -9,10 +10,10 @@
 </script>
 
 <SEO
-	title="Book a Call | Codefred - AI Consulting & Technical Leadership"
-	description="Book a free 15-minute consultation or $500 quick fix audit. Get honest technical guidance on AI systems, architecture, and cost optimization."
+	title="Book a Call | Codefred - AI Consulting and Technical Leadership"
+	description="Book a free 30-minute consultation or $500 quick fix audit. Get honest technical guidance on AI systems, architecture, and cost optimization."
 	canonical="https://codefred.dev/book"
-	ogImage="/og-book.png"
+	ogImage="/og-image.png"
 />
 
 <svelte:head>
@@ -152,7 +153,7 @@
 						What if the free call isn't enough?
 					</h3>
 					<p class="text-text-secondary">
-						The free 15-min call is for mutual fit assessment. If you need deeper analysis, the $500 Quick Fix gives you a full audit with actionable recommendations. For ongoing work, we'll discuss custom engagements.
+						The free 30-min call is for mutual fit assessment. If you need deeper analysis, the $500 Quick Fix gives you a full audit with actionable recommendations. For ongoing work, we'll discuss custom engagements.
 					</p>
 				</Card>
 
@@ -193,12 +194,11 @@
 			<p class="text-text-secondary mb-6">
 				Email me directly and I'll get back to you within 24 hours.
 			</p>
-			<a
-				href="mailto:alfred@codefred.dev"
+			<EmailLink
 				class="inline-block px-8 py-4 border border-brand-primary text-brand-primary rounded-lg hover:bg-brand-primary hover:text-white transition-all font-semibold"
 			>
 				Send Email
-			</a>
+			</EmailLink>
 		</div>
 	</div>
 </div>
