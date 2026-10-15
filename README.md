@@ -11,6 +11,7 @@ Every routine update is a text edit and a push. No code changes.
 | --- | --- |
 | Email, handles, booking link, "currently in" line | `src/lib/config/site.ts` |
 | Add or edit a case study | `src/content/case-studies/<slug>.md` (copy an existing one; frontmatter drives the cards) |
+| Personal projects under "Things I've built" | `src/lib/data/builds.ts` (own work only, no client code) |
 | Instagram posts (3-6, newest first) | `src/lib/data/instagram.ts` + square image in `static/social/` |
 | Video type playlists for the /content filter | `src/lib/data/channel.ts` |
 | Photos on Home and About | `src/lib/data/photos.ts` + WebP files in `static/photos/` |

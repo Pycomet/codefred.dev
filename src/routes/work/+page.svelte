@@ -4,6 +4,7 @@
 	import SEO from '$components/SEO.svelte';
 	import Result from '$components/work/Result.svelte';
 	import type { Area } from '$lib/content/case-studies';
+	import { builds } from '$lib/data/builds';
 
 	let { data } = $props();
 
@@ -84,4 +85,26 @@
 			<li class="py-8 text-ink-muted">Nothing in this area yet.</li>
 		{/each}
 	</ol>
+
+	<section class="mt-24" aria-labelledby="builds">
+		<h2 id="builds" class="text-xl font-semibold tracking-tight">Things I've built</h2>
+		<p class="mt-2 max-w-prose text-ink-muted">My own products and experiments, outside client work.</p>
+		<ul class="mt-8 grid gap-x-12 gap-y-10 md:grid-cols-2">
+			{#each builds as b}
+				<li>
+					<div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+						<h3 class="font-medium">{b.name}</h3>
+						<span class="text-sm text-ink-subtle">{b.kind}</span>
+					</div>
+					<p class="mt-2 text-ink-muted">{b.description}</p>
+					<p class="mt-3 font-mono text-xs text-ink-subtle">{b.stack.join(' / ')}</p>
+					{#if b.link}
+						<a href={b.link.url} class="link mt-3 inline-block text-sm" target="_blank" rel="noopener"
+							>{b.link.label}</a
+						>
+					{/if}
+				</li>
+			{/each}
+		</ul>
+	</section>
 </div>
