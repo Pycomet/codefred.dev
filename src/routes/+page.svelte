@@ -132,12 +132,16 @@
 <!-- 4. What I do -->
 <section class="wrap mt-24 sm:mt-32" aria-labelledby="services">
 	<h2 id="services" class="h-section">What I do</h2>
-	<ul class="mt-8 grid gap-x-12 gap-y-8 sm:grid-cols-2">
+	<ul class="mt-8 divide-y divide-line border-y border-line">
 		{#each services as s}
 			<li>
-				<a href={data.usedAreas.includes(s.area) ? `/work?area=${s.area}` : '/work#builds'} class="group block">
+				<a
+					href={data.usedAreas.includes(s.area) ? `/work?area=${s.area}` : '/work#builds'}
+					class="group grid gap-1 py-5 sm:grid-cols-[16rem_1fr_auto] sm:items-baseline sm:gap-8"
+				>
 					<h3 class="font-medium group-hover:text-accent">{s.title}</h3>
-					<p class="copy mt-1.5 text-ink-muted">{s.line}</p>
+					<p class="copy text-ink-muted">{s.line}</p>
+					<span aria-hidden="true" class="hidden text-ink-subtle group-hover:text-accent sm:inline">→</span>
 				</a>
 			</li>
 		{/each}
@@ -163,8 +167,8 @@
 		<div class="max-w-prose">
 			<h2 id="about-h" class="h-section">Mechanical engineer turned AI engineer</h2>
 			<p class="copy mt-3 text-ink-muted">
-				Eight years of remote work for teams in the US, Canada and Australia, from wherever the wifi works. These
-				days I build AI systems and make videos about the work.
+				Eight years of remote work for teams in the US, Canada and Australia. These days I build AI systems and make
+				videos about the work.
 			</p>
 			<p class="mt-4 flex flex-wrap gap-x-6 gap-y-2">
 				<a href="/about" class="link">More about me</a>
@@ -177,10 +181,10 @@
 <!-- 6. Testimonials -->
 <section class="wrap mt-24 sm:mt-32" aria-labelledby="quotes">
 	<h2 id="quotes" class="sr-only">What people say</h2>
-	<div class="grid gap-12 md:grid-cols-2">
-		{#each testimonials as t}
+	<div class="max-w-3xl space-y-12">
+		{#each testimonials as t, i}
 			<figure>
-				<blockquote class="text-lg leading-relaxed text-ink">“{t.quote}”</blockquote>
+				<blockquote class="{i === 0 ? 'text-xl md:text-2xl' : 'text-lg'} leading-relaxed text-ink">“{t.quote}”</blockquote>
 				<figcaption class="mt-4 text-sm">
 					<span class="font-medium">{t.name}</span><span class="text-ink-muted">, {t.role}</span>
 					<a href={t.source.url} class="link ml-2" target="_blank" rel="noopener">{t.source.label}</a>

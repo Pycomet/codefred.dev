@@ -26,10 +26,7 @@
 						decoding="async"
 						width="480"
 						height="360"
-						class="w-full object-cover transition-transform duration-300 group-hover:scale-[1.02] {post.kind ===
-						'short'
-							? 'aspect-[9/16]'
-							: 'aspect-square'}"
+						class="aspect-[4/5] w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
 					/>
 				</a>
 			</li>

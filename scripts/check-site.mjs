@@ -60,6 +60,13 @@ for (const path of paths) {
 	}
 	check(path, 'footer links the CV', /href="\/cv\/codefred-cv\.pdf"[^>]*data-track-from="footer"/.test(body));
 
+	const visible = body.replace(/<script[\s\S]*?<\/script>/g, '').replace(/<[^>]+>/g, ' ');
+	check(path, 'no "Alfred" in visible text', !/\bAlfred\b/.test(visible));
+	for (const [, q] of body.matchAll(/<blockquote[^>]*>([\s\S]*?)<\/blockquote>/g)) {
+		const words = q.replace(/<[^>]+>/g, ' ').trim().split(/\s+/).length;
+		check(path, `quote is 30 words or fewer (${words})`, words <= 30);
+	}
+
 	for (const img of body.match(/<img\b[^>]*>/g) ?? []) {
 		check(path, 'image has alt, width and height', /\salt="/.test(img) && /\swidth="/.test(img) && /\sheight="/.test(img), img.slice(0, 80));
 	}
@@ -75,6 +82,7 @@ check('/work', 'ends with Book a call', workHtml.includes('data-track-from="work
 check('/', 'closing CTA is a panel', /data-cta="panel"/.test(home));
 check('/', 'proof cards say "Read case study"', (home.match(/Read case study/g) ?? []).length === 3);
 check('/', 'lead result is the large size', /data-result-size="xl"/.test(home));
+check('/', '"wifi" line appears only on About', !/wifi/.test(home));
 check('/', 'About teaser links the CV', /href="\/cv\/codefred-cv\.pdf"[^>]*data-track-from="home-about"/.test(home));
 
 for (const [from, to] of [

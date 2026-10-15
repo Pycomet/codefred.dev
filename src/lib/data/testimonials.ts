@@ -11,14 +11,14 @@ export interface Testimonial {
 export const testimonials: Testimonial[] = [
 	{
 		quote:
-			"He didn't just execute the basic requirements; he proactively suggested forward-looking and sustainable code edits that significantly improved our Python and TypeScript codebase.",
+			"He didn't just execute the basic requirements; he proactively suggested forward-looking and sustainable code edits...",
 		name: 'Tabiya',
 		role: 'Compass Kenya, 5 milestones rated 5.0',
 		source: { label: 'Upwork review', url: 'https://www.upwork.com/freelancers/codefred' }
 	},
 	{
 		quote:
-			'Alfred is not only a talented developer, but he is also a great communicator and shows extreme enthusiasm and passion for a project, allowing him to fit into any team and collaborate well with others.',
+			'...a great communicator and shows extreme enthusiasm and passion for a project, allowing him to fit into any team and collaborate well with others.',
 		name: 'Sadaf Amouzegar',
 		role: 'Colleague at RivetAI',
 		source: { label: 'LinkedIn recommendation', url: 'https://www.linkedin.com/in/alfredemmanuelinyang/' }
