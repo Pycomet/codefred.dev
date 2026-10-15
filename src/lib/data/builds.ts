@@ -4,7 +4,7 @@
 
 export interface Build {
 	name: string;
-	kind: 'Product' | 'Open source' | 'Side project' | 'Demo';
+	kind: 'Product' | 'Open source' | 'Side project' | 'Fast build';
 	description: string; // one or two plain sentences
 	stack: string[];
 	link?: { label: string; url: string };
@@ -18,6 +18,22 @@ export const builds: Build[] = [
 			'An AI accountability app. Plan the day in the morning, mark what got done in the evening, and get a weekly AI roast for the gap.',
 		stack: ['Next.js', 'Supabase', 'tRPC', 'Gemini', 'MCP', 'Expo'],
 		link: { label: 'grindproof.co', url: 'https://grindproof.co' }
+	},
+	{
+		name: 'Café Fausse',
+		kind: 'Fast build',
+		description:
+			'A full restaurant site in 2-4 hours of hands-on work with Claude Code: menu, gallery, online reservations with table availability, a newsletter and a password-protected staff view, backed by an API with 49 tests.',
+		stack: ['React', 'Flask', 'SQLAlchemy', 'Postgres'],
+		link: { label: 'Try it', url: 'https://cafe-fausse-fe.vercel.app' }
+	},
+	{
+		name: 'Vibe coding platform',
+		kind: 'Side project',
+		description:
+			"Type a prompt and an agent builds and previews a full-stack app. Built on Vercel's open-source vibe coding template, with Trigger.dev and E2B added as the sandbox execution layer.",
+		stack: ['Next.js', 'AI SDK', 'Trigger.dev', 'E2B'],
+		link: { label: 'Try it', url: 'https://vibe-coding-e2b-trigger.vercel.app' }
 	},
 	{
 		name: 'o-agent-core',
