@@ -57,7 +57,7 @@
 					onclick={() => choose(a as Area | 'all')}
 					class="min-h-11 rounded border px-3 text-sm transition-colors disabled:opacity-60 {area === a
 						? 'border-ink bg-ink text-canvas'
-						: 'border-line text-ink-muted hover:border-ink-subtle hover:text-ink'}"
+						: 'border-line text-ink-muted enabled:hover:border-ink-subtle enabled:hover:text-ink'}"
 				>
 					{a === 'all' ? 'All' : data.areas[a as Area]}
 				</button>

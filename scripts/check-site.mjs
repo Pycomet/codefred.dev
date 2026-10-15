@@ -89,6 +89,12 @@ check('/', 'lead result is the large size', /data-result-size="xl"/.test(home));
 check('/', '"wifi" line appears only on About', !/wifi/.test(home));
 check('/work', 'filter result count is announced', /role="status"/.test(workHtml));
 check('/work', 'filter buttons are in the static HTML', /aria-label="Filter by area"/.test(workHtml));
+// Disabled (pre-hydration) filter buttons must not react to hover, or they look clickable
+const contentHtml = await (await fetch(`${base}/content`)).text();
+for (const [page, html] of [['/work', workHtml], ['/content', contentHtml]]) {
+	const hoverOnDisabled = [...html.matchAll(/<button[^>]*disabled[^>]*>/g)].some((m) => /(^|\s)hover:/.test(m[0].match(/class="([^"]*)"/)?.[1] ?? ''));
+	check(page, 'disabled filter buttons have no hover styles', !hoverOnDisabled);
+}
 check('/work', 'filter buttons start disabled', /<button[^>]*aria-pressed[^>]*disabled/.test(workHtml));
 const cssHref = home.match(/href="\.?(\/_app\/immutable\/assets\/[^"]+\.css)"/)?.[1];
 const css = cssHref ? await (await fetch(`${base}${cssHref}`)).text() : '';

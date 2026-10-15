@@ -20,11 +20,25 @@ const TIMEOUT_MS = 8000;
 
 type Item = Omit<Video, 'types'>;
 
-async function get(url: string): Promise<string | null> {
+// Failed requests, recorded by a safe label (never the URL: Data API URLs carry the key)
+type Failures = string[];
+
+async function get(url: string, label: string, failures: Failures): Promise<string | null> {
 	try {
 		const res = await fetch(url, { signal: AbortSignal.timeout(TIMEOUT_MS) });
-		return res.ok ? await res.text() : null;
-	} catch {
+		if (res.ok) return await res.text();
+		let reason = '';
+		try {
+			const err = (await res.json()) as { error?: { message?: string; errors?: { reason?: string }[] } };
+			reason = err.error?.errors?.[0]?.reason ?? err.error?.message ?? '';
+		} catch {
+			// not JSON (RSS errors are HTML)
+		}
+		failures.push(`${label} -> ${res.status}${reason ? ` ${reason}` : ''}`);
+		return null;
+	} catch (e) {
+		const err = e as { name?: string; cause?: { code?: string } };
+		failures.push(`${label} -> ${err.name === 'TimeoutError' ? 'timeout' : (err.cause?.code ?? 'network error')}`);
 		return null;
 	}
 }
@@ -37,10 +51,14 @@ const item = (id: string, title: string, published: string): Item => ({
 	thumbnail: `https://i.ytimg.com/vi/${id}/hqdefault.jpg`
 });
 
-async function resolveChannelId(key: string | undefined): Promise<string | null> {
+async function resolveChannelId(key: string | undefined, failures: Failures): Promise<string | null> {
 	if (channel.id) return channel.id;
 	if (key) {
-		const json = await get(`${API}/channels?part=id&forHandle=${encodeURIComponent(channel.handle)}&key=${key}`);
+		const json = await get(
+			`${API}/channels?part=id&forHandle=${encodeURIComponent(channel.handle)}&key=${key}`,
+			'channels forHandle',
+			failures
+		);
 		try {
 			const id = json ? (JSON.parse(json) as { items?: { id: string }[] }).items?.[0]?.id : undefined;
 			if (id) return id;
@@ -48,14 +66,16 @@ async function resolveChannelId(key: string | undefined): Promise<string | null>
 			// fall through to the page scrape
 		}
 	}
-	const html = await get(`https://www.youtube.com/${channel.handle}`);
+	const html = await get(`https://www.youtube.com/${channel.handle}`, 'channel page', failures);
 	return html?.match(/"(?:channelId|externalId)":"(UC[\w-]{22})"/)?.[1] ?? null;
 }
 
 /** Newest items of a playlist via the Data API (long-form: UULF..., Shorts: UUSH...) */
-async function apiPlaylist(playlistId: string, key: string): Promise<Item[]> {
+async function apiPlaylist(playlistId: string, key: string, failures: Failures): Promise<Item[]> {
 	const json = await get(
-		`${API}/playlistItems?part=snippet,contentDetails&maxResults=15&playlistId=${playlistId}&key=${key}`
+		`${API}/playlistItems?part=snippet,contentDetails&maxResults=15&playlistId=${playlistId}&key=${key}`,
+		`playlistItems ${playlistId}`,
+		failures
 	);
 	if (!json) return [];
 	try {
@@ -94,16 +114,20 @@ async function load(): Promise<Feed> {
 	const channelUrl = `https://www.youtube.com/${channel.handle}`;
 	const key = env.YOUTUBE_API_KEY || undefined;
 	const source = key ? 'Data API' : 'RSS';
+	const failures: Failures = [];
 	const empty = (why: string): Feed => {
-		console.warn(`[youtube] No videos for ${channel.handle} (source: ${source}): ${why}. Home shows the fallback text.`);
+		const detail = failures.length ? ` Failed requests: ${failures.slice(0, 4).join('; ')}.` : '';
+		console.warn(`[youtube] No videos for ${channel.handle} (source: ${source}): ${why}.${detail} Home shows the fallback text.`);
 		return { channelUrl, videos: [], shorts: [] };
 	};
 
-	const id = await resolveChannelId(key);
+	const id = await resolveChannelId(key, failures);
 	if (!id) return empty('channel ID could not be resolved');
 
 	const fetchList = (playlistId: string): Promise<Item[]> =>
-		key ? apiPlaylist(playlistId, key) : get(`${FEED}?playlist_id=${playlistId}`).then(parse);
+		key
+			? apiPlaylist(playlistId, key, failures)
+			: get(`${FEED}?playlist_id=${playlistId}`, `rss ${playlistId}`, failures).then(parse);
 
 	// YouTube's auto playlists: UULF = long-form uploads, UUSH = Shorts
 	const tail = id.slice(2);

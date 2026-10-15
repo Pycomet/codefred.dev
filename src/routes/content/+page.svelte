@@ -53,7 +53,7 @@
 						onclick={() => (type = t.key)}
 						class="min-h-11 rounded border px-3 text-sm transition-colors disabled:opacity-60 {type === t.key
 							? 'border-ink bg-ink text-canvas'
-							: 'border-line text-ink-muted hover:border-ink-subtle hover:text-ink'}">{t.label}</button
+							: 'border-line text-ink-muted enabled:hover:border-ink-subtle enabled:hover:text-ink'}">{t.label}</button
 					>
 				{/each}
 			</div>
