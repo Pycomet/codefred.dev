@@ -60,6 +60,9 @@ for (const path of paths) {
 	}
 	check(path, 'footer links the CV', /href="\/cv\/codefred-cv\.pdf"[^>]*data-track-from="footer"/.test(body));
 
+	if (path.startsWith('/work/')) {
+		check(path, 'body does not repeat the spec sheet headings', !/<h2[^>]*>The (problem|approach|outcome)<\/h2>/.test(body));
+	}
 	const visible = body.replace(/<script[\s\S]*?<\/script>/g, '').replace(/<[^>]+>/g, ' ');
 	check(path, 'no "Alfred" in visible text', !/\bAlfred\b/.test(visible));
 	for (const [, q] of body.matchAll(/<blockquote[^>]*>([\s\S]*?)<\/blockquote>/g)) {

@@ -23,7 +23,7 @@ stack: [Python, FastAPI, TypeScript, React, Gemini 2.5 Flash, MongoDB, GCP, Pulu
 
 For the Kenya launch, the multi-agent pipeline had a problem: conversations were long, repetitive and English-only. In a market where many users pay per megabyte and speak Swahili first, every unnecessary turn was a user lost.
 
-## The problem
+## What I found
 
 The core flow is a chain of LLM agents (welcome, collect experiences, explore skills, farewell). It worked, but nobody could say how well. My first deliverable was measurement, not fixes. Instrumenting the end-to-end suite and running repeated conversations per persona showed:
 
@@ -35,7 +35,7 @@ The core flow is a chain of LLM agents (welcome, collect experiences, explore sk
 
 The ask: 20% faster conversations, 30% less repetition and Swahili support, without degrading the skills discovered. That last constraint is what makes it hard.
 
-## The approach
+## What I built
 
 You can't refactor prompts safely without a regression net, so the net came first.
 
@@ -74,7 +74,7 @@ def detect_persona(user_messages: list[str]) -> PersonaType:
     return PersonaType.INFORMAL
 ```
 
-## The outcome
+## The numbers
 
 Every number below comes from the same harness that set the baseline.
 
