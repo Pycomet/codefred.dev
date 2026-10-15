@@ -52,6 +52,7 @@ for (const path of paths) {
 
 	check(path, 'header Book a call link', /href="\/book"[^>]*data-track="book"/.test(body));
 	check(path, 'footer YouTube and Instagram links', body.includes('youtube.com/@CodefredHQ') && body.includes('instagram.com/codefredhq'));
+	check(path, 'phone header has Book a call', /href="\/book"[^>]*data-track-from="header-mobile"/.test(body));
 	check(path, 'footer links the CV', /href="\/cv\/codefred-cv\.pdf"[^>]*data-track-from="footer"/.test(body));
 
 	for (const img of body.match(/<img\b[^>]*>/g) ?? []) {
