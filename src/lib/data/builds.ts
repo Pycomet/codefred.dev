@@ -8,6 +8,7 @@ export interface Build {
 	description: string; // one or two plain sentences
 	stack: string[];
 	link?: { label: string; url: string };
+	image?: { src: string; alt: string }; // 16:10 screenshot in static/builds/
 }
 
 export const builds: Build[] = [

@@ -94,6 +94,17 @@
 		<ul class="mt-8 grid gap-x-12 gap-y-10 md:grid-cols-2">
 			{#each builds as b}
 				<li>
+					{#if b.image}
+						<img
+							src={b.image.src}
+							alt={b.image.alt}
+							width="800"
+							height="500"
+							loading="lazy"
+							decoding="async"
+							class="mb-4 aspect-[16/10] w-full rounded border border-line object-cover object-top"
+						/>
+					{/if}
 					<div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
 						<h3 class="font-medium">{b.name}</h3>
 						<span class="text-sm text-ink-subtle">{b.kind}</span>
