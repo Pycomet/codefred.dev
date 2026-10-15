@@ -76,14 +76,19 @@
 <!-- 2. Proof strip -->
 <section class="wrap mt-12 sm:mt-16" aria-labelledby="proof">
 	<h2 id="proof" class="sr-only">Results</h2>
-	<ul class="grid gap-px overflow-hidden rounded border border-line bg-line md:grid-cols-3">
-		{#each data.proof as study}
-			<li class="bg-canvas">
-				<a href="/work/{study.slug}" class="group flex h-full flex-col justify-between gap-6 p-6">
-					<Result result={study.result} />
-					<p class="text-sm text-ink-muted">
-						{study.client}
-						<span class="ml-1 text-accent opacity-0 transition-opacity group-hover:opacity-100" aria-hidden="true">→</span>
+	<ul class="grid gap-px overflow-hidden rounded border border-line bg-line md:grid-cols-[1.4fr_1fr] md:grid-rows-2">
+		{#each data.proof as study, i}
+			<li class="bg-canvas {i === 0 ? 'md:row-span-2' : ''}">
+				<a
+					href="/work/{study.slug}"
+					class="group flex h-full flex-col justify-between gap-6 {i === 0 ? 'p-6 md:p-10' : 'p-6'}"
+				>
+					<Result result={study.result} size={i === 0 ? 'xl' : 'md'} stacked accent />
+					<p class="flex flex-wrap items-baseline justify-between gap-2 text-sm">
+						<span class="text-ink-muted">{study.client}</span>
+						<span class="text-ink-subtle transition-colors group-hover:text-accent group-focus-visible:text-accent"
+							>Read case study <span aria-hidden="true">→</span></span
+						>
 					</p>
 				</a>
 			</li>

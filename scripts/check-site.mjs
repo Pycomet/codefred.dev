@@ -73,6 +73,8 @@ for (const [, area] of home.matchAll(/href="\/work\?area=([\w-]+)"/g)) {
 }
 check('/work', 'ends with Book a call', workHtml.includes('data-track-from="work"'));
 check('/', 'closing CTA is a panel', /data-cta="panel"/.test(home));
+check('/', 'proof cards say "Read case study"', (home.match(/Read case study/g) ?? []).length === 3);
+check('/', 'lead result is the large size', /data-result-size="xl"/.test(home));
 check('/', 'About teaser links the CV', /href="\/cv\/codefred-cv\.pdf"[^>]*data-track-from="home-about"/.test(home));
 
 for (const [from, to] of [
