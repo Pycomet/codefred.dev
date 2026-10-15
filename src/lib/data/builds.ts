@@ -40,12 +40,5 @@ export const builds: Build[] = [
 		description:
 			'Splits group travel costs from a shared link, no accounts. Money is stored as integers and the balance maths is unit-tested to always sum to zero.',
 		stack: ['Next.js', 'TypeScript', 'Drizzle', 'Postgres']
-	},
-	{
-		name: 'WhatsApp front desk',
-		kind: 'Demo',
-		description:
-			'An LLM front desk for a fictional dental clinic on the WhatsApp Cloud API. It answers questions and handles booking requests.',
-		stack: ['Python', 'FastAPI', 'OpenAI', 'WhatsApp Cloud API']
 	}
 ];
