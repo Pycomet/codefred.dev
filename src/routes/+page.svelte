@@ -42,14 +42,13 @@
 
 <!-- 1. Hero -->
 <section class="wrap pt-12 sm:pt-20">
-	<div class="grid items-center gap-10 md:grid-cols-[1fr_auto] md:gap-16">
+	<div class="grid items-start gap-10 md:grid-cols-[1fr_auto] md:gap-16">
 		<div class="max-w-2xl">
-			<p class="text-sm text-ink-muted">{site.name}, AI engineer</p>
-			<h1 class="mt-4 text-4xl font-semibold leading-[1.08] tracking-tight sm:text-5xl">
+			<h1 class="text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl">
 				I turn expensive AI problems into efficient systems.
 			</h1>
-			<p class="mt-5 max-w-xl text-lg text-ink-muted">
-				8+ years in production. I cut LLM costs, speed up agents and ship computer vision that holds up.
+			<p class="mt-6 max-w-xl text-lg text-ink-muted">
+				AI engineer, 8+ years in production. I cut LLM costs, speed up agents and ship computer vision that holds up.
 			</p>
 			<div class="mt-8 flex flex-wrap gap-3">
 				<a href="/book" class="btn-primary" data-track="book" data-track-from="hero">Book a call</a>
@@ -75,7 +74,7 @@
 </section>
 
 <!-- 2. Proof strip -->
-<section class="wrap mt-20 sm:mt-28" aria-labelledby="proof">
+<section class="wrap mt-12 sm:mt-16" aria-labelledby="proof">
 	<h2 id="proof" class="sr-only">Results</h2>
 	<ul class="grid gap-px overflow-hidden rounded border border-line bg-line md:grid-cols-3">
 		{#each data.proof as study}
@@ -96,7 +95,7 @@
 <!-- 3. Latest content -->
 <section id="latest" class="wrap mt-24 scroll-mt-24 sm:mt-32" aria-labelledby="latest-h">
 	<div class="flex flex-wrap items-baseline justify-between gap-4">
-		<h2 id="latest-h" class="text-xl font-semibold tracking-tight">Latest from the channel</h2>
+		<h2 id="latest-h" class="h-section">Latest from the channel</h2>
 		<a
 			href="{site.social.youtube.url}?sub_confirmation=1"
 			class="link text-sm"
@@ -127,13 +126,13 @@
 
 <!-- 4. What I do -->
 <section class="wrap mt-24 sm:mt-32" aria-labelledby="services">
-	<h2 id="services" class="text-xl font-semibold tracking-tight">What I do</h2>
+	<h2 id="services" class="h-section">What I do</h2>
 	<ul class="mt-8 grid gap-x-12 gap-y-8 sm:grid-cols-2">
 		{#each services as s}
 			<li>
 				<a href={data.usedAreas.includes(s.area) ? `/work?area=${s.area}` : '/work#builds'} class="group block">
 					<h3 class="font-medium group-hover:text-accent">{s.title}</h3>
-					<p class="mt-1.5 text-ink-muted">{s.line}</p>
+					<p class="copy mt-1.5 text-ink-muted">{s.line}</p>
 				</a>
 			</li>
 		{/each}
@@ -141,7 +140,7 @@
 </section>
 
 <!-- 5. About teaser -->
-<section class="wrap mt-24 sm:mt-32" aria-labelledby="about-h">
+<section class="wrap mt-28 sm:mt-40" aria-labelledby="about-h">
 	<div class="grid items-center gap-8 sm:grid-cols-[14rem_1fr] sm:gap-12">
 		{#if road}
 			<img
@@ -157,8 +156,8 @@
 			/>
 		{/if}
 		<div class="max-w-prose">
-			<h2 id="about-h" class="text-xl font-semibold tracking-tight">Mechanical engineer turned AI engineer</h2>
-			<p class="mt-3 text-ink-muted">
+			<h2 id="about-h" class="h-section">Mechanical engineer turned AI engineer</h2>
+			<p class="copy mt-3 text-ink-muted">
 				Eight years of remote work for teams in the US, Canada and Australia, from wherever the wifi works. These
 				days I build AI systems and make videos about the work.
 			</p>
@@ -187,8 +186,9 @@
 </section>
 
 <!-- 7. Closing call to action -->
-<div class="wrap mt-24 sm:mt-32">
+<div class="wrap mt-28 sm:mt-40">
 	<BookCall
+		variant="panel"
 		from="home-closing"
 		heading="Is an AI system costing you too much?"
 		body="Tell me what you're building. In {site.booking.minutes} minutes you'll know whether I can help and roughly what it would take."

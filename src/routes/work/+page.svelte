@@ -72,7 +72,7 @@
 					class="group grid gap-3 py-8 md:grid-cols-[1fr_minmax(0,18rem)] md:gap-10"
 				>
 					<div>
-						<h2 class="text-lg font-medium leading-snug tracking-tight group-hover:text-accent sm:text-xl">
+						<h2 data-heading="item" class="text-lg font-medium leading-snug tracking-tight group-hover:text-accent sm:text-xl">
 							{study.title}
 						</h2>
 						<p class="mt-2 text-sm text-ink-muted">{study.client}</p>
@@ -89,7 +89,7 @@
 	</ol>
 
 	<section class="mt-24" aria-labelledby="builds">
-		<h2 id="builds" class="text-xl font-semibold tracking-tight">Things I've built</h2>
+		<h2 id="builds" class="h-section">Things I've built</h2>
 		<p class="mt-2 max-w-prose text-ink-muted">My own products and experiments, outside client work.</p>
 		<ul class="mt-8 grid gap-x-12 gap-y-10 md:grid-cols-2">
 			{#each builds as b}

@@ -117,7 +117,7 @@
 
 	<section class="mt-24" aria-labelledby="timeline">
 		<div class="flex flex-wrap items-baseline justify-between gap-4">
-			<h2 id="timeline" class="text-xl font-semibold tracking-tight">Experience</h2>
+			<h2 id="timeline" class="h-section">Experience</h2>
 			<a href={site.cv} class="link text-sm" download data-track="cv" data-track-from="about">Download CV (PDF)</a>
 		</div>
 		<ol class="mt-8 space-y-8">
@@ -134,7 +134,7 @@
 	</section>
 
 	<section class="mt-24" aria-labelledby="stack">
-		<h2 id="stack" class="text-xl font-semibold tracking-tight">Stack</h2>
+		<h2 id="stack" class="h-section">Stack</h2>
 		<dl class="mt-8 grid gap-x-10 gap-y-6 sm:grid-cols-2">
 			{#each stack as s}
 				<div>

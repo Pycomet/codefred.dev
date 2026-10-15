@@ -71,6 +71,15 @@
 		@apply font-mono tabular-nums tracking-tight;
 	}
 
+	/* Section headings: one step below the h1, so sections have a clear ladder */
+	.h-section {
+		@apply text-2xl font-semibold tracking-tight sm:text-3xl;
+	}
+	/* Long-form body on marketing pages */
+	.copy {
+		@apply text-[17px] leading-[1.65];
+	}
+
 	/* Long-form case study body (rendered Markdown) */
 	.prose-cf {
 		@apply text-[17px] leading-[1.7] text-ink-muted;
@@ -144,32 +153,6 @@
 	.prose-cf .token.string {
 		@apply text-accent;
 	}
-
-	/* Legacy helpers still used by pages awaiting migration */
-	.container-custom {
-		@apply wrap;
-	}
-	.gradient-text {
-		@apply text-ink;
-	}
-	.skip-to-content {
-		@apply skip-link;
-	}
-}
-
-@layer utilities {
-	/* Legacy reveal: content only hides when JS runs (html.js, set in app.html) */
-	html.js .fade-up {
-		opacity: 0;
-		transform: translateY(16px);
-		transition:
-			opacity 0.5s ease-out,
-			transform 0.5s ease-out;
-	}
-	html.js .fade-up.in-view {
-		opacity: 1;
-		transform: none;
-	}
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -179,9 +162,5 @@
 		animation-duration: 0.01ms !important;
 		animation-iteration-count: 1 !important;
 		transition-duration: 0.01ms !important;
-	}
-	html.js .fade-up {
-		opacity: 1;
-		transform: none;
 	}
 }

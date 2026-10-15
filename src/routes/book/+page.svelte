@@ -92,7 +92,7 @@
 				{site.booking.minutes} minutes on video, free. Pick any open time.
 			</p>
 
-			<h2 class="mt-10 text-sm font-medium">What happens on the call</h2>
+			<h2 data-heading="label" class="mt-10 text-sm font-medium">What happens on the call</h2>
 			<ol class="mt-3 list-decimal space-y-2 pl-5 text-sm text-ink-muted marker:text-ink-subtle">
 				<li>You walk me through the problem and what you've tried.</li>
 				<li>I ask about the system, the numbers and the deadline.</li>

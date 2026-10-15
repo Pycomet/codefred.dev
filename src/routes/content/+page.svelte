@@ -38,7 +38,7 @@
 	</div>
 
 	<section class="mt-16" aria-labelledby="videos">
-		<h2 id="videos" class="text-xl font-semibold tracking-tight">Latest videos</h2>
+		<h2 id="videos" class="h-section">Latest videos</h2>
 
 		{#if data.types.length}
 			<div role="group" aria-label="Filter by type" class="mt-5 flex flex-wrap gap-2">
@@ -76,14 +76,14 @@
 
 	{#if data.shorts.length}
 		<section class="mt-20" aria-labelledby="shorts">
-			<h2 id="shorts" class="text-xl font-semibold tracking-tight">Shorts</h2>
+			<h2 id="shorts" class="h-section">Shorts</h2>
 			<div class="mt-6"><PostStrip posts={data.shorts} from="content-shorts" /></div>
 		</section>
 	{/if}
 
 	<section class="mt-20" aria-labelledby="instagram">
 		<div class="flex flex-wrap items-baseline justify-between gap-4">
-			<h2 id="instagram" class="text-xl font-semibold tracking-tight">On Instagram</h2>
+			<h2 id="instagram" class="h-section">On Instagram</h2>
 			<a href={ig.url} class="link text-sm" target="_blank" rel="me noopener" data-track="instagram" data-track-from="content-strip"
 				>Follow {ig.handle}</a
 			>

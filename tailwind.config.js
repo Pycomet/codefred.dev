@@ -20,18 +20,6 @@ export default {
 				accent: {
 					DEFAULT: token('accent'),
 					ink: token('accent-ink')
-				},
-
-				// Legacy names used by pages not yet migrated. They resolve to the same
-				// tokens so nothing renders off-palette; remove once the old sections are gone.
-				bg: { primary: token('canvas'), secondary: token('surface'), accent: token('line') },
-				text: { primary: token('ink'), secondary: token('ink-muted'), muted: token('ink-subtle') },
-				brand: {
-					primary: token('accent'),
-					secondary: token('accent'),
-					success: token('accent'),
-					warning: '#B45309',
-					danger: '#B91C1C'
 				}
 			},
 			fontFamily: {
