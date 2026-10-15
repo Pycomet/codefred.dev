@@ -1,0 +1,21 @@
+name: Post-deploy check
+
+# After every successful production deploy, check the live site: the email link
+# works, pages respond, redirects hold. Vercel reports deployments to GitHub.
+
+on:
+  deployment_status:
+
+jobs:
+  check:
+    if: github.event.deployment_status.state == 'success' && github.event.deployment_status.environment == 'Production'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check live site
+        run: node scripts/check-site.mjs
+        env:
+          BASE_URL: https://codefred.dev

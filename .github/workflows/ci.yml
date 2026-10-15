@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  site:
+    runs-on: ubuntu-latest
+    env:
+      # Analytics keys aren't needed to build or test
+      PUBLIC_POSTHOG_KEY: ''
+      PUBLIC_POSTHOG_HOST: ''
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+
+      - name: Type check
+        run: npx svelte-kit sync && npx --yes svelte-check@4 --tsconfig ./tsconfig.json --threshold error
+
+      # Prerendering crawls every page and fails on any broken internal link
+      - name: Build
+        run: npm run build
+
+      - name: Start preview
+        run: npm run preview -- --port 4173 &
+
+      - name: Site checks (email link, headings, redirects, assets)
+        run: node scripts/check-site.mjs
+
+      - name: External links
+        uses: lycheeverse/lychee-action@v2
+        with:
+          fail: true
+          # Links to codefred.dev (canonical, og:url, sitemap) are checked against this build,
+          # not production, which still serves the previous version until this branch merges.
+          # These sites block automated checkers, so they'd fail even when the link is fine.
+          args: >-
+            --no-progress
+            --base-url http://localhost:4173
+            --remap 'https://codefred\.dev http://localhost:4173'
+            --exclude linkedin.com --exclude instagram.com --exclude twitter.com --exclude x.com
+            --exclude cal.com --exclude upwork.com
+            '.svelte-kit/output/prerendered/pages/**/*.html'
+
+      - name: Lighthouse (mobile)
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          configPath: ./lighthouserc.json
+          uploadArtifacts: true
+          temporaryPublicStorage: true

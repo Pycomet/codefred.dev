@@ -1,0 +1,80 @@
+/*
+ * Codefred design tokens. Single source for colour and type, shared with
+ * social templates. Colours are "R G B" triplets consumed by tailwind.config.js.
+ */
+
+@font-face {
+	font-family: 'Geist';
+	src: url('/fonts/Geist-Regular.woff2') format('woff2');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: 'Geist';
+	src: url('/fonts/Geist-Medium.woff2') format('woff2');
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: 'Geist';
+	src: url('/fonts/Geist-SemiBold.woff2') format('woff2');
+	font-weight: 600 700;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: 'Geist Mono';
+	src: url('/fonts/GeistMono-Regular.woff2') format('woff2');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: 'Geist Mono';
+	src: url('/fonts/GeistMono-Medium.woff2') format('woff2');
+	font-weight: 500 700;
+	font-style: normal;
+	font-display: swap;
+}
+
+/* Light (default) */
+:root {
+	--canvas: 250 250 250; /* zinc-50 */
+	--surface: 244 244 245; /* zinc-100 */
+	--line: 228 228 231; /* zinc-200 */
+	--ink: 24 24 27; /* zinc-900 */
+	--ink-muted: 82 82 91; /* zinc-600, 7.4:1 on canvas */
+	--ink-subtle: 113 113 122; /* zinc-500, 4.6:1 on canvas */
+	--accent: 3 105 161; /* sky-700, 5.6:1 on canvas */
+	--accent-ink: 250 250 250; /* text on accent buttons */
+	color-scheme: light;
+}
+
+/* Dark: follows the OS unless the visitor picked light */
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme='light']) {
+		--canvas: 12 12 14;
+		--surface: 24 24 27; /* zinc-900 */
+		--line: 39 39 42; /* zinc-800 */
+		--ink: 244 244 245; /* zinc-100 */
+		--ink-muted: 161 161 170; /* zinc-400, 7.6:1 on canvas */
+		--ink-subtle: 140 140 150; /* 5.6:1 on canvas */
+		--accent: 56 189 248; /* sky-400, 9.4:1 on canvas */
+		--accent-ink: 12 12 14;
+		color-scheme: dark;
+	}
+}
+
+:root[data-theme='dark'] {
+	--canvas: 12 12 14;
+	--surface: 24 24 27;
+	--line: 39 39 42;
+	--ink: 244 244 245;
+	--ink-muted: 161 161 170;
+	--ink-subtle: 140 140 150;
+	--accent: 56 189 248;
+	--accent-ink: 12 12 14;
+	color-scheme: dark;
+}

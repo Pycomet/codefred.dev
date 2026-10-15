@@ -1,15 +1,8 @@
-import type { RequestHandler } from './$types';
+import { site } from '$lib/config/site';
 
-export const GET: RequestHandler = async () => {
-	const robots = `User-agent: *
-Allow: /
+export const prerender = true;
 
-Sitemap: https://codefred.dev/sitemap.xml`;
-
-	return new Response(robots, {
-		headers: {
-			'Content-Type': 'text/plain',
-			'Cache-Control': 'max-age=0, s-maxage=86400'
-		}
+export const GET = () =>
+	new Response(`User-agent: *\nAllow: /\n\nSitemap: ${site.url}/sitemap.xml\n`, {
+		headers: { 'Content-Type': 'text/plain' }
 	});
-};

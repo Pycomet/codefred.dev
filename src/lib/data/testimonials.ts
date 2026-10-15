@@ -1,31 +1,26 @@
+// Only verified quotes: a real name or organisation, and a link a prospect can check.
+// Keep each quote to about three lines; trim with "..." rather than rewording.
+
 export interface Testimonial {
-	id: string;
-	author: string;
+	quote: string;
+	name: string;
 	role: string;
-	company: string;
-	content: string;
-	rating: number;
-	projectType: string;
-	linkedinUrl?: string;
+	source: { label: string; url: string };
 }
 
 export const testimonials: Testimonial[] = [
 	{
-		id: '1',
-		author: 'Sadaf Amouzegar',
-		role: 'Colleague',
-		company: 'RivetAI',
-		content:
-			'Alfred is not only a talented developer, but he is also a great communicator and shows extreme enthusiasm and passion for a project, allowing him to fit into any team and collaborate well with others.',
-		rating: 5,
-		projectType: 'Full-Stack Development',
-		linkedinUrl: 'https://www.linkedin.com/in/alfredemmanuelinyang/'
+		quote:
+			"He didn't just execute the basic requirements; he proactively suggested forward-looking and sustainable code edits...",
+		name: 'Tabiya',
+		role: 'Compass Kenya, 5 milestones rated 5.0',
+		source: { label: 'Upwork review', url: 'https://www.upwork.com/freelancers/codefred' }
+	},
+	{
+		quote:
+			'...a great communicator and shows extreme enthusiasm and passion for a project, allowing him to fit into any team and collaborate well with others.',
+		name: 'Sadaf Amouzegar',
+		role: 'Colleague at RivetAI',
+		source: { label: 'LinkedIn recommendation', url: 'https://www.linkedin.com/in/alfredemmanuelinyang/' }
 	}
-	// Add more only with a real name, role, company and a link to the source
-	// (LinkedIn recommendation or Upwork review).
 ];
-
-export const getRandomTestimonials = (count: number = 3): Testimonial[] => {
-	const shuffled = [...testimonials].sort(() => 0.5 - Math.random());
-	return shuffled.slice(0, count);
-};
