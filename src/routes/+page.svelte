@@ -5,13 +5,14 @@
 	import PostStrip from '$components/content/PostStrip.svelte';
 	import BookCall from '$components/BookCall.svelte';
 	import { site } from '$lib/config/site';
+	import type { Area } from '$lib/content/case-studies';
 	import { portrait, roadPhotos } from '$lib/data/photos';
 	import { testimonials } from '$lib/data/testimonials';
 	import { generatePersonSchema } from '$lib/utils/structured-data';
 
 	let { data } = $props();
 
-	const services = [
+	const services: { area: Area; title: string; line: string }[] = [
 		{ area: 'ai-cost', title: 'AI cost optimisation', line: 'Caching, model routing and leaner prompts for LLM bills that grow faster than users.' },
 		{ area: 'agents', title: 'Agents and LLM pipelines', line: 'Evaluation harnesses first, then faster, cheaper, multilingual agents and RAG.' },
 		{ area: 'computer-vision', title: 'Computer vision', line: 'Real-time detection on edge devices that keeps working when the network does not.' },
@@ -130,7 +131,7 @@
 	<ul class="mt-8 grid gap-x-12 gap-y-8 sm:grid-cols-2">
 		{#each services as s}
 			<li>
-				<a href="/work?area={s.area}" class="group block">
+				<a href={data.usedAreas.includes(s.area) ? `/work?area=${s.area}` : '/work#builds'} class="group block">
 					<h3 class="font-medium group-hover:text-accent">{s.title}</h3>
 					<p class="mt-1.5 text-ink-muted">{s.line}</p>
 				</a>
@@ -161,7 +162,10 @@
 				Eight years of remote work for teams in the US, Canada and Australia, from wherever the wifi works. These
 				days I build AI systems and make videos about the work.
 			</p>
-			<p class="mt-4"><a href="/about" class="link">More about me</a></p>
+			<p class="mt-4 flex flex-wrap gap-x-6 gap-y-2">
+				<a href="/about" class="link">More about me</a>
+				<a href={site.cv} class="link" download data-track="cv" data-track-from="home-about">CV (PDF)</a>
+			</p>
 		</div>
 	</div>
 </section>

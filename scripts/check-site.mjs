@@ -52,11 +52,21 @@ for (const path of paths) {
 
 	check(path, 'header Book a call link', /href="\/book"[^>]*data-track="book"/.test(body));
 	check(path, 'footer YouTube and Instagram links', body.includes('youtube.com/@CodefredHQ') && body.includes('instagram.com/codefredhq'));
+	check(path, 'footer links the CV', /href="\/cv\/codefred-cv\.pdf"[^>]*data-track-from="footer"/.test(body));
 
 	for (const img of body.match(/<img\b[^>]*>/g) ?? []) {
 		check(path, 'image has alt, width and height', /\salt="/.test(img) && /\swidth="/.test(img) && /\sheight="/.test(img), img.slice(0, 80));
 	}
 }
+
+// Every filter deep link must land on an area that has at least one case study
+const home = await (await fetch(`${base}/`)).text();
+const workHtml = await (await fetch(`${base}/work`)).text();
+for (const [, area] of home.matchAll(/href="\/work\?area=([\w-]+)"/g)) {
+	check('/', `area link "${area}" has case studies`, workHtml.includes(`data-area="${area}"`));
+}
+check('/work', 'ends with Book a call', workHtml.includes('data-track-from="work"'));
+check('/', 'About teaser links the CV', /href="\/cv\/codefred-cv\.pdf"[^>]*data-track-from="home-about"/.test(home));
 
 for (const [from, to] of [
 	['/case-studies', '/work'],

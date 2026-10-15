@@ -3,6 +3,7 @@
 	import { replaceState } from '$app/navigation';
 	import SEO from '$components/SEO.svelte';
 	import Result from '$components/work/Result.svelte';
+	import BookCall from '$components/BookCall.svelte';
 	import type { Area } from '$lib/content/case-studies';
 	import { builds } from '$lib/data/builds';
 
@@ -20,7 +21,8 @@
 
 	onMount(() => {
 		const q = new URLSearchParams(location.search).get('area');
-		if (q && q in data.areas) area = q as Area;
+		// Unknown or empty areas fall back to "All" instead of an empty list
+		if (q && usedAreas.includes(q as Area)) area = q as Area;
 		ready = true;
 	});
 
@@ -64,7 +66,7 @@
 
 	<ol class="mt-10 divide-y divide-line border-y border-line">
 		{#each visible as study (study.slug)}
-			<li>
+			<li data-area={study.area}>
 				<a
 					href="/work/{study.slug}"
 					class="group grid gap-3 py-8 md:grid-cols-[1fr_minmax(0,18rem)] md:gap-10"
@@ -107,4 +109,8 @@
 			{/each}
 		</ul>
 	</section>
+
+	<div class="mt-24 max-w-3xl">
+		<BookCall from="work" heading="Want results like these?" />
+	</div>
 </div>
