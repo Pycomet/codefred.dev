@@ -32,13 +32,15 @@ export const builds: Build[] = [
 		kind: 'Side project',
 		description:
 			'An AI thumbnail generator across five image providers, with per-user daily quotas, cloud storage and generation history.',
-		stack: ['Next.js', 'AI SDK', 'Firebase', 'Vercel Blob']
+		stack: ['Next.js', 'AI SDK', 'Firebase', 'Vercel Blob'],
+		link: { label: 'Try it', url: 'https://pixelai-weld.vercel.app' }
 	},
 	{
 		name: 'TripSplit',
 		kind: 'Side project',
 		description:
 			'Splits group travel costs from a shared link, no accounts. Money is stored as integers and the balance maths is unit-tested to always sum to zero.',
-		stack: ['Next.js', 'TypeScript', 'Drizzle', 'Postgres']
+		stack: ['Next.js', 'TypeScript', 'Drizzle', 'Postgres'],
+		link: { label: 'Try it', url: 'https://tripsplit-eta.vercel.app' }
 	}
 ];
