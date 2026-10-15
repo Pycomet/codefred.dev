@@ -1016,8 +1016,9 @@ then build `typesById` from `typeLists[i]` (already parsed) instead of `parse(ty
 	}
 ```
 
-- [ ] **Step 3: Document the key**
+- [ ] **Step 3: Set the channel ID and document the key**
 
+`src/lib/data/channel.ts`: set `id: 'UCUqZH6DgHbhK06dwlmsvscQ'` (supplied by the owner; skips the handle lookup entirely).
 `.env.example`: keep `YOUTUBE_API_KEY=` with the comment `# YouTube Data API v3 key (no expiry). Without it the site falls back to RSS, which YouTube blocks from cloud builders.`
 
 - [ ] **Step 4: Verify where the network allows it**
@@ -1027,7 +1028,7 @@ This job cannot reach YouTube. Verify on the Vercel preview build of this branch
 - [ ] **Step 5: Commit**
 
 ```bash
-git add src/lib/server/youtube.ts .env.example
+git add src/lib/server/youtube.ts src/lib/data/channel.ts .env.example
 git commit -m "fix(content): read YouTube via the Data API (by handle) so the latest video shows on Home"
 ```
 
