@@ -47,14 +47,15 @@
 		Production AI systems, each with the numbers that changed. Open one to see how.
 	</p>
 
-	{#if ready && usedAreas.length > 1}
+	{#if usedAreas.length > 1}
 		<div role="group" aria-label="Filter by area" class="mt-8 flex flex-wrap gap-2">
 			{#each ['all', ...usedAreas] as a}
 				<button
 					type="button"
 					aria-pressed={area === a}
+					disabled={!ready}
 					onclick={() => choose(a as Area | 'all')}
-					class="rounded border px-3 py-1.5 text-sm transition-colors {area === a
+					class="min-h-11 rounded border px-3 text-sm transition-colors disabled:opacity-60 {area === a
 						? 'border-ink bg-ink text-canvas'
 						: 'border-line text-ink-muted hover:border-ink-subtle hover:text-ink'}"
 				>
@@ -63,6 +64,7 @@
 			{/each}
 		</div>
 	{/if}
+	<p role="status" class="sr-only">{visible.length} case {visible.length === 1 ? 'study' : 'studies'}</p>
 
 	<ol class="mt-10 divide-y divide-line border-y border-line">
 		{#each visible as study (study.slug)}

@@ -58,6 +58,7 @@ for (const path of paths) {
 	if (!path.startsWith('/work/')) {
 		check(path, 'section headings use .h-section', !/<h2(?![^>]*sr-only)(?![^>]*h-section)(?![^>]*data-heading=)[^>]*>/.test(body));
 	}
+	check(path, 'theme toggle has no mismatched aria-label', !/aria-label="Colour theme/.test(body));
 	check(path, 'footer links the CV', /href="\/cv\/codefred-cv\.pdf"[^>]*data-track-from="footer"/.test(body));
 
 	if (path.startsWith('/work/')) {
@@ -86,6 +87,13 @@ check('/', 'closing CTA is a panel', /data-cta="panel"/.test(home));
 check('/', 'proof cards say "Read case study"', (home.match(/Read case study/g) ?? []).length === 3);
 check('/', 'lead result is the large size', /data-result-size="xl"/.test(home));
 check('/', '"wifi" line appears only on About', !/wifi/.test(home));
+check('/work', 'filter result count is announced', /role="status"/.test(workHtml));
+check('/work', 'filter buttons are in the static HTML', /aria-label="Filter by area"/.test(workHtml));
+check('/work', 'filter buttons start disabled', /<button[^>]*aria-pressed[^>]*disabled/.test(workHtml));
+const cssHref = home.match(/href="\.?(\/_app\/immutable\/assets\/[^"]+\.css)"/)?.[1];
+const css = cssHref ? await (await fetch(`${base}${cssHref}`)).text() : '';
+check('css', 'stylesheet found', Boolean(css));
+check('css', 'code comments are not ink-subtle on surface', !/\.token\.comment\{[^}]*--ink-subtle/.test(css.replace(/\s/g, '')));
 check('/', 'About teaser links the CV', /href="\/cv\/codefred-cv\.pdf"[^>]*data-track-from="home-about"/.test(home));
 
 for (const [from, to] of [

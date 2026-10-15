@@ -1,14 +1,17 @@
 <script lang="ts">
+	import { tick } from 'svelte';
 	import type { Video } from '$lib/content/types';
 
 	// Thumbnail first; the YouTube player (and its ~1MB of script) loads only on click
 	let { video, eager = false, from }: { video: Video; eager?: boolean; from: string } = $props();
 	let playing = $state(false);
+	let frame: HTMLIFrameElement | undefined = $state();
 </script>
 
 <div class="relative aspect-video overflow-hidden rounded bg-surface">
 	{#if playing}
 		<iframe
+			bind:this={frame}
 			class="absolute inset-0 h-full w-full"
 			src="https://www.youtube-nocookie.com/embed/{video.id}?autoplay=1&rel=0"
 			title={video.title}
@@ -25,6 +28,7 @@
 			onclick={(e) => {
 				e.preventDefault();
 				playing = true;
+				tick().then(() => frame?.focus());
 			}}
 			aria-label="Play {video.title}"
 		>

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import SEO from '$components/SEO.svelte';
 	import LiteYouTube from '$components/content/LiteYouTube.svelte';
 	import PostStrip from '$components/content/PostStrip.svelte';
@@ -7,6 +8,8 @@
 	let { data } = $props();
 
 	let type = $state('all');
+	let ready = $state(false);
+	onMount(() => (ready = true));
 	const visible = $derived(
 		type === 'all' ? data.videos : data.videos.filter((v) => v.types.includes(type as never))
 	);
@@ -46,14 +49,16 @@
 					<button
 						type="button"
 						aria-pressed={type === t.key}
+						disabled={!ready}
 						onclick={() => (type = t.key)}
-						class="rounded border px-3 py-1.5 text-sm transition-colors {type === t.key
+						class="min-h-11 rounded border px-3 text-sm transition-colors disabled:opacity-60 {type === t.key
 							? 'border-ink bg-ink text-canvas'
 							: 'border-line text-ink-muted hover:border-ink-subtle hover:text-ink'}">{t.label}</button
 					>
 				{/each}
 			</div>
 		{/if}
+		<p role="status" class="sr-only">{visible.length} videos</p>
 
 		{#if visible.length}
 			<ul class="mt-6 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">

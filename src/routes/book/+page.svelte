@@ -66,6 +66,7 @@
 				const frame = host.querySelector('iframe');
 				if (!frame) return;
 				observer.disconnect();
+				if (!frame.title) frame.title = 'Booking calendar';
 				frame.addEventListener('load', () => {
 					if (embedState === 'loading') embedState = 'ready';
 				});
@@ -73,8 +74,7 @@
 			observer.observe(host, { childList: true, subtree: true });
 		};
 
-		if ('requestIdleCallback' in window) requestIdleCallback(start, { timeout: 2000 });
-		else setTimeout(start, 500);
+		start();
 	});
 </script>
 

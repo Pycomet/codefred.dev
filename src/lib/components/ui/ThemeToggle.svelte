@@ -28,6 +28,6 @@
 	}
 </script>
 
-<button type="button" onclick={cycle} class="rounded px-2 py-1 hover:text-ink" aria-label="Colour theme: {theme}. Change">
+<button type="button" onclick={cycle} class="min-h-11 rounded px-2 hover:text-ink">
 	Theme: {theme === 'system' ? 'auto' : theme}
 </button>

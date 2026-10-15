@@ -49,7 +49,7 @@
 
 	/* Buttons: one primary (book a call), one quiet secondary */
 	.btn {
-		@apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded px-4 py-2.5 text-sm font-medium transition-colors;
+		@apply min-h-11 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded px-4 py-2.5 text-sm font-medium transition-colors;
 	}
 	.btn:active {
 		transform: translateY(1px);
@@ -148,7 +148,7 @@
 	}
 	/* Prism tokens, kept quiet: comments and strings only */
 	.prose-cf .token.comment {
-		@apply italic text-ink-subtle;
+		@apply italic text-ink-muted;
 	}
 	.prose-cf .token.string {
 		@apply text-accent;
