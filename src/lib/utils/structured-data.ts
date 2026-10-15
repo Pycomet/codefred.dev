@@ -63,7 +63,8 @@ export function generateArticleSchema(data: {
 	headline: string;
 	description: string;
 	url: string;
-	datePublished: string;
+	// Optional: only emitted when a real date is known
+	datePublished?: string;
 	dateModified?: string;
 	author: {
 		name: string;
@@ -77,8 +78,10 @@ export function generateArticleSchema(data: {
 		headline: data.headline,
 		description: data.description,
 		url: data.url,
-		datePublished: data.datePublished,
-		dateModified: data.dateModified || data.datePublished,
+		...(data.datePublished && {
+			datePublished: data.datePublished,
+			dateModified: data.dateModified || data.datePublished
+		}),
 		author: {
 			'@type': 'Person',
 			name: data.author.name,

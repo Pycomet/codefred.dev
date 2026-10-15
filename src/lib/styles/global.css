@@ -1,144 +1,177 @@
-/* Import fonts */
-@import '@fontsource/inter';
-@import '@fontsource/jetbrains-mono';
+@import './tokens.css';
 
-/* Import Tailwind directives */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Custom CSS Variables */
-:root {
-	--foreground-rgb: 250, 250, 250;
-	--background-start-rgb: 9, 9, 11;
-	--background-end-rgb: 24, 24, 27;
-}
-
-/* Base Styles */
 @layer base {
 	html {
-		scroll-behavior: smooth;
 		scroll-padding-top: 5rem;
+		-webkit-text-size-adjust: 100%;
 	}
 
 	body {
-		background: linear-gradient(
-			to bottom,
-			rgb(var(--background-start-rgb)),
-			rgb(var(--background-end-rgb))
-		);
-		min-height: 100vh;
-		font-feature-settings: 'cv11', 'ss01';
-		font-variation-settings: 'opsz' 32;
+		@apply bg-canvas text-ink font-sans antialiased;
+		font-feature-settings: 'ss01';
 	}
 
-	/* Custom scrollbar for webkit browsers */
-	::-webkit-scrollbar {
-		width: 8px;
+	::selection {
+		@apply bg-accent text-accent-ink;
 	}
 
-	::-webkit-scrollbar-track {
-		@apply bg-bg-secondary;
+	/* One visible focus style for every interactive element */
+	:focus-visible {
+		outline: 2px solid rgb(var(--accent));
+		outline-offset: 3px;
+		border-radius: 2px;
 	}
 
-	::-webkit-scrollbar-thumb {
-		@apply bg-brand-primary;
-		border-radius: 4px;
-	}
-
-	::-webkit-scrollbar-thumb:hover {
-		@apply bg-brand-secondary;
-	}
-
-	/* Focus styles for keyboard navigation */
-	a:focus-visible,
-	button:focus-visible {
-		@apply outline-2 outline-offset-2 outline-brand-primary;
-		outline-style: solid;
+	@media (prefers-reduced-motion: no-preference) {
+		html {
+			scroll-behavior: smooth;
+		}
 	}
 }
 
-/* Component Layer */
 @layer components {
+	/* Page gutter: 16px on phones, wider on desktop */
+	.wrap {
+		@apply mx-auto w-full max-w-5xl px-4 sm:px-6 lg:px-8;
+	}
+
+	.skip-link {
+		@apply absolute left-4 -top-12 z-50 rounded bg-accent px-4 py-2 font-medium text-accent-ink;
+		transition: top 0.15s ease;
+	}
+	.skip-link:focus {
+		@apply top-3;
+	}
+
+	/* Buttons: one primary (book a call), one quiet secondary */
+	.btn {
+		@apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded px-4 py-2.5 text-sm font-medium transition-colors;
+	}
+	.btn:active {
+		transform: translateY(1px);
+	}
+	.btn-primary {
+		@apply btn bg-accent text-accent-ink hover:bg-accent/90;
+	}
+	.btn-quiet {
+		@apply btn border border-line text-ink hover:border-ink-subtle;
+	}
+
+	/* Text link with an underline that reads as a link in both themes */
+	.link {
+		@apply text-accent underline decoration-accent/30 underline-offset-4 hover:decoration-accent;
+	}
+
+	/* "before -> after" result line */
+	.ledger {
+		@apply font-mono tabular-nums tracking-tight;
+	}
+
+	/* Long-form case study body (rendered Markdown) */
+	.prose-cf {
+		@apply text-[17px] leading-[1.7] text-ink-muted;
+	}
+	.prose-cf > * + * {
+		margin-top: 1.1em;
+	}
+	.prose-cf h2 {
+		@apply mt-14 text-xl font-semibold tracking-tight text-ink;
+	}
+	.prose-cf h3 {
+		@apply mt-10 text-base font-semibold text-ink;
+	}
+	.prose-cf h2 + *,
+	.prose-cf h3 + * {
+		margin-top: 0.6em;
+	}
+	.prose-cf strong {
+		@apply font-medium text-ink;
+	}
+	.prose-cf a {
+		@apply link;
+	}
+	.prose-cf ul,
+	.prose-cf ol {
+		@apply space-y-2 pl-5;
+	}
+	.prose-cf ul {
+		list-style: disc;
+	}
+	.prose-cf ol {
+		list-style: decimal;
+	}
+	.prose-cf li::marker {
+		@apply text-ink-subtle;
+	}
+	.prose-cf blockquote {
+		@apply border-l-2 border-accent pl-5 text-ink;
+	}
+	.prose-cf blockquote p:last-child:not(:first-child) {
+		@apply mt-3 text-sm text-ink-muted;
+	}
+	.prose-cf :not(pre) > code {
+		@apply rounded bg-surface px-1.5 py-0.5 font-mono text-[0.85em] text-ink;
+	}
+	.prose-cf pre {
+		@apply overflow-x-auto rounded border border-line bg-surface p-4 font-mono text-[13px] leading-relaxed text-ink;
+	}
+	.prose-cf table {
+		@apply w-full text-left text-sm;
+	}
+	.prose-cf thead th {
+		@apply border-b border-line pb-2 font-medium text-ink-subtle;
+	}
+	.prose-cf tbody td {
+		@apply py-2.5 pr-4 align-top;
+	}
+	.prose-cf tbody td:first-child {
+		@apply text-ink-muted;
+	}
+	.prose-cf tbody td:not(:first-child) {
+		@apply font-mono tabular-nums text-ink;
+	}
+	.prose-cf tbody tr + tr td {
+		@apply border-t border-line/60;
+	}
+	/* Prism tokens, kept quiet: comments and strings only */
+	.prose-cf .token.comment {
+		@apply italic text-ink-subtle;
+	}
+	.prose-cf .token.string {
+		@apply text-accent;
+	}
+
+	/* Legacy helpers still used by pages awaiting migration */
 	.container-custom {
-		@apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+		@apply wrap;
 	}
-
 	.gradient-text {
-		@apply bg-gradient-to-r from-brand-primary to-brand-secondary bg-clip-text text-transparent;
+		@apply text-ink;
 	}
-
-	.gradient-border {
-		position: relative;
-		@apply bg-bg-secondary;
-		border-radius: 0.5rem;
-	}
-
 	.skip-to-content {
-		@apply absolute -top-12 left-4 z-[100] px-4 py-2 bg-brand-primary text-white font-semibold rounded-b-lg;
-		transition: top 0.2s ease;
-	}
-
-	.skip-to-content:focus {
-		@apply top-0;
-	}
-
-	.gradient-border::before {
-		content: '';
-		position: absolute;
-		inset: 0;
-		border-radius: 0.5rem;
-		padding: 1px;
-		background: linear-gradient(
-			135deg,
-			#0EA5E9,
-			#8B5CF6
-		);
-		-webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-		-webkit-mask-composite: xor;
-		mask-composite: exclude;
+		@apply skip-link;
 	}
 }
 
-/* Utility Layer */
 @layer utilities {
-	/* Glow effect utility */
-	.glow {
-		box-shadow: 0 0 20px rgba(14, 165, 233, 0.3);
-	}
-
-	.glow-strong {
-		box-shadow: 0 0 40px rgba(14, 165, 233, 0.5);
-	}
-
-	/* Backdrop blur utility */
-	.backdrop-blur-custom {
-		backdrop-filter: blur(10px);
-		-webkit-backdrop-filter: blur(10px);
-	}
-
-	/* Scroll-triggered animations */
-	/* Only hide when JS is running (html.js set in app.html), so content is never invisible without it */
+	/* Legacy reveal: content only hides when JS runs (html.js, set in app.html) */
 	html.js .fade-up {
 		opacity: 0;
-		transform: translateY(24px);
-		transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+		transform: translateY(16px);
+		transition:
+			opacity 0.5s ease-out,
+			transform 0.5s ease-out;
 	}
-
 	html.js .fade-up.in-view {
 		opacity: 1;
-		transform: translateY(0);
+		transform: none;
 	}
-
-	.stagger-children > .fade-up:nth-child(1) { transition-delay: 0ms; }
-	.stagger-children > .fade-up:nth-child(2) { transition-delay: 80ms; }
-	.stagger-children > .fade-up:nth-child(3) { transition-delay: 160ms; }
-	.stagger-children > .fade-up:nth-child(4) { transition-delay: 240ms; }
-	.stagger-children > .fade-up:nth-child(5) { transition-delay: 320ms; }
-	.stagger-children > .fade-up:nth-child(6) { transition-delay: 400ms; }
 }
 
-/* Reduced motion preferences */
 @media (prefers-reduced-motion: reduce) {
 	*,
 	*::before,
@@ -146,6 +179,9 @@
 		animation-duration: 0.01ms !important;
 		animation-iteration-count: 1 !important;
 		transition-duration: 0.01ms !important;
-		scroll-behavior: auto !important;
+	}
+	html.js .fade-up {
+		opacity: 1;
+		transform: none;
 	}
 }

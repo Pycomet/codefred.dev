@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { personalData } from '$data/personal';
+	import { site } from '$lib/config/site';
 
 	interface Props {
 		title: string;
@@ -30,7 +30,7 @@
 	const fullCanonical = canonical || siteUrl;
 	const fullOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
 	// Derived from the footer's profile URL so the two can't drift apart
-	const twitterHandle = `@${personalData.social.twitter.split('/').pop()}`;
+	const twitterHandle = site.social.x.handle;
 </script>
 
 <svelte:head>
@@ -86,6 +86,5 @@
 	<meta name="twitter:creator" content={twitterHandle} />
 
 	<!-- Additional SEO -->
-	<meta name="author" content="Alfred Emmanuel (Codefred)" />
-	<meta name="theme-color" content="#0EA5E9" />
+	<meta name="author" content={site.name} />
 </svelte:head>

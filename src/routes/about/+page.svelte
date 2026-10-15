@@ -1,270 +1,147 @@
 <script lang="ts">
-	import { personalData } from '$data/personal';
-	import EmailLink from '$components/ui/EmailLink.svelte';
-	import Card from '$components/ui/Card.svelte';
-	import Badge from '$components/ui/Badge.svelte';
 	import SEO from '$components/SEO.svelte';
-	import { generateBreadcrumbSchema } from '$lib/utils/structured-data';
+	import EmailLink from '$components/ui/EmailLink.svelte';
+	import { site } from '$lib/config/site';
+	import { portrait, roadPhotos } from '$lib/data/photos';
+	import { timeline, stack } from '$lib/data/timeline';
+	import { generatePersonSchema } from '$lib/utils/structured-data';
 
-	const siteUrl = 'https://codefred.dev';
+	const person = generatePersonSchema({
+		name: site.name,
+		url: site.url,
+		image: `${site.url}${portrait.src}`,
+		jobTitle: 'AI engineer',
+		email: site.email,
+		socialLinks: Object.values(site.social).map((s) => s.url)
+	});
 </script>
 
 <SEO
-	title="About Me | Codefred - AI Systems Architect Journey"
-	description="From Mechanical Engineering to AI Architecture. 8 years building production systems across Nigeria and globally. Based in Abuja, working with clients worldwide."
+	title="About Codefred: AI engineer, 8+ years, working remotely"
+	description="Mechanical engineer turned AI engineer. 8+ years building production systems for teams in the US, Canada and Australia, plus videos about the work."
 	canonical="https://codefred.dev/about"
-	ogImage="/og-image.png"
 />
 
 <svelte:head>
-	{@html `<script type="application/ld+json">
-		${generateBreadcrumbSchema([
-			{ name: 'Home', url: siteUrl },
-			{ name: 'About', url: `${siteUrl}/about` }
-		])}
-	<\/script>`}
+	{@html `<script type="application/ld+json">${person}<\/script>`}
 </svelte:head>
 
-<div class="py-20 bg-bg-primary">
-	<div class="container-custom max-w-4xl">
-		<!-- Header -->
-		<div class="text-center mb-16">
-			<div class="mb-6">
-				<img
-					src="/profile.png"
-					alt="Codefred"
-					class="w-32 h-32 rounded-full mx-auto object-cover border-4 border-brand-primary/20"
-				/>
+<div class="wrap pt-14 sm:pt-20">
+	<div class="grid gap-10 md:grid-cols-[1fr_16rem] md:gap-16">
+		<div class="max-w-prose">
+			<h1 class="text-3xl font-semibold tracking-tight sm:text-4xl">About</h1>
+			<div class="mt-6 space-y-5 text-[17px] leading-[1.7] text-ink-muted">
+				<p>
+					I studied mechanical engineering and wrote my first Python script to automate data collection for my thesis.
+					I've been building software ever since: more than eight years now, almost all of it remote, for teams in the
+					US, Canada and Australia.
+				</p>
+				<p>
+					Today I'm an AI engineer at O.xyz, working on an enterprise AI IDE. Alongside that I take on a few consulting
+					projects at a time: AI systems that cost too much, agents that need to get faster or multilingual, and products
+					that need to ship.
+				</p>
+				<p>
+					I also make videos about the work: build logs, plain explanations of AI engineering, and what working from
+					wherever the wifi works actually looks like.
+				</p>
 			</div>
-			<h1 class="text-4xl md:text-5xl lg:text-6xl font-display font-bold gradient-text mb-4">
-				About Me
-			</h1>
-			<p class="text-xl text-text-secondary">
-				How I went from Mechanical Engineering to building AI systems that actually work
-			</p>
-		</div>
 
-		<!-- The Story -->
-		<div class="prose prose-invert prose-lg max-w-none mb-16">
-			<h2>The Unconventional Path</h2>
-			<p>
-				I started as a Mechanical Engineering student in Nigeria. While my classmates were designing engines, I was building web scrapers and automating data collection for research projects. The engineering mindset stuck with me: <strong>systems thinking, failure analysis, and obsession with efficiency.</strong>
-			</p>
-
-			<p>
-				Fast forward 8 years: I've shipped 50+ production systems, cut AI costs by 92% for FinTech clients, and built computer vision systems processing 50+ camera streams across Nigerian retail stores. The path wasn't traditional, but it gave me something most developers don't have: <strong>real-world constraints.</strong>
-			</p>
-
-			<h2>Why Nigeria Matters</h2>
-			<p>
-				Building software in Abuja isn't like building in San Francisco. Power cuts out mid-deployment. Internet is unreliable. Users are on 3G. Your "edge cases" are my daily reality.
-			</p>
-
-			<p>
-				This forced me to design systems that are <strong>resilient by default</strong>. When I recommend an architecture, it's battle-tested against:
-			</p>
-			<ul>
-				<li>Frequent power outages (UPS + graceful degradation)</li>
-				<li>Spotty internet (offline-first, aggressive caching)</li>
-				<li>Low-bandwidth users (optimized assets, lazy loading)</li>
-				<li>Cost constraints (every dollar matters at Nigerian SaaS margins)</li>
-			</ul>
-
-			<h2>The GrindProof Philosophy</h2>
-			<p>
-				I don't recommend technology I haven't personally deployed. <a href="/case-studies/grindproof">GrindProof</a> (my AI accountability SaaS) is my architecture laboratory. Every pattern I suggest - Supabase RLS, Claude API integration, Stripe webhooks - runs in my production with real users and real money on the line.
-			</p>
-
-			<p>
-				When I tell you "this will cost $50/month," it's not a guess. I'm showing you my actual bills.
-			</p>
-
-			<h2>What I Actually Do</h2>
-			<p>I help companies with three main problems:</p>
-			<ol>
-				<li><strong>AI Cost Optimization:</strong> Your GPT-4 bill is $60K/month and growing. I implement semantic caching + model routing to cut it by 92%.</li>
-				<li><strong>Production AI Systems:</strong> You built a cool demo, but it breaks in production. I architect systems that scale reliably.</li>
-				<li><strong>Technical Leadership:</strong> Your team needs guidance on AI strategy, architecture decisions, or technology choices. I don't just consult - I show you the code.</li>
-			</ol>
-
-			<h2>The Honest Approach</h2>
-			<p>
-				I'll tell you if AI won't solve your problem. I've turned down projects where a simple SQL query would do the job. You get <strong>honest technical guidance</strong>, not sales pitches.
-			</p>
-
-			<p>
-				Some consultants talk about "best practices." I show you my production monitoring dashboard. Some consultants guess at costs. I show you my Supabase invoice. Some consultants recommend what's trending on Hacker News. I recommend what's running in my infrastructure without breaking.
-			</p>
-		</div>
-
-		<!-- Timeline -->
-		<div class="mb-16">
-			<h2 class="text-3xl font-display font-bold text-text-primary mb-8">The Journey</h2>
-			<div class="space-y-6">
-				<Card class="p-6">
-					<div class="flex items-start gap-4">
-						<div class="w-12 h-12 bg-brand-primary/20 rounded-full flex items-center justify-center flex-shrink-0">
-							<span class="text-brand-primary font-bold">2016</span>
-						</div>
-						<div>
-							<h3 class="text-xl font-semibold text-text-primary mb-2">Started Coding</h3>
-							<p class="text-text-secondary">
-								First Python script to automate data collection for thesis. Realized I enjoyed building more than designing mechanical systems.
-							</p>
-						</div>
-					</div>
-				</Card>
-
-				<Card class="p-6">
-					<div class="flex items-start gap-4">
-						<div class="w-12 h-12 bg-brand-primary/20 rounded-full flex items-center justify-center flex-shrink-0">
-							<span class="text-brand-primary font-bold">2018</span>
-						</div>
-						<div>
-							<h3 class="text-xl font-semibold text-text-primary mb-2">First Production System</h3>
-							<p class="text-text-secondary">
-								Built web scraping + data pipeline for e-commerce analytics. Processed 100K+ products daily. Learned about error handling the hard way.
-							</p>
-						</div>
-					</div>
-				</Card>
-
-				<Card class="p-6">
-					<div class="flex items-start gap-4">
-						<div class="w-12 h-12 bg-brand-primary/20 rounded-full flex items-center justify-center flex-shrink-0">
-							<span class="text-brand-primary font-bold">2020</span>
-						</div>
-						<div>
-							<h3 class="text-xl font-semibold text-text-primary mb-2">Deep Dive into AI/ML</h3>
-							<p class="text-text-secondary">
-								Started building computer vision systems. First project: retail security monitoring with YOLO. 50+ camera streams. Nigeria's infrastructure forced me to master edge computing.
-							</p>
-						</div>
-					</div>
-				</Card>
-
-				<Card class="p-6">
-					<div class="flex items-start gap-4">
-						<div class="w-12 h-12 bg-brand-primary/20 rounded-full flex items-center justify-center flex-shrink-0">
-							<span class="text-brand-primary font-bold">2023</span>
-						</div>
-						<div>
-							<h3 class="text-xl font-semibold text-text-primary mb-2">LLM Production Systems</h3>
-							<p class="text-text-secondary">
-								Built semantic search for 1M+ legal documents. Optimized GPT-4 costs from $60K/month to $4.8K. Realized cost architecture matters more than prompt engineering.
-							</p>
-						</div>
-					</div>
-				</Card>
-
-				<Card class="p-6">
-					<div class="flex items-start gap-4">
-						<div class="w-12 h-12 bg-brand-primary/20 rounded-full flex items-center justify-center flex-shrink-0">
-							<span class="text-brand-primary font-bold">2024</span>
-						</div>
-						<div>
-							<h3 class="text-xl font-semibold text-text-primary mb-2">Launch GrindProof + Consulting</h3>
-							<p class="text-text-secondary">
-								Started GrindProof (AI accountability SaaS) as my architecture lab. Began consulting to help companies avoid the mistakes I've already made.
-							</p>
-						</div>
-					</div>
-				</Card>
-			</div>
-		</div>
-
-		<!-- Current Focus -->
-		<div class="mb-16">
-			<h2 class="text-3xl font-display font-bold text-text-primary mb-6">What I'm Doing Now</h2>
-			<div class="grid md:grid-cols-2 gap-6">
-				<Card class="p-6">
-					<h3 class="text-xl font-semibold text-text-primary mb-3">Building in Public</h3>
-					<p class="text-text-secondary mb-4">
-						Running GrindProof with real users, testing every architecture pattern before recommending it to clients. Current focus: Claude API optimization and Supabase Realtime at scale.
-					</p>
-					<a href="/case-studies/grindproof" class="text-brand-primary hover:text-brand-secondary transition-colors">
-						See the lab →
-					</a>
-				</Card>
-
-				<Card class="p-6">
-					<h3 class="text-xl font-semibold text-text-primary mb-3">Client Work</h3>
-					<p class="text-text-secondary mb-4">
-						Helping 2-3 clients at a time with AI cost optimization, production system architecture, and technical leadership. Short engagements (3-8 weeks), focused outcomes.
-					</p>
-					<a href="/case-studies" class="text-brand-primary hover:text-brand-secondary transition-colors">
-						See case studies →
-					</a>
-				</Card>
-			</div>
-		</div>
-
-		<!-- CTA -->
-		<div class="text-center p-8 bg-gradient-to-r from-brand-primary/10 to-brand-secondary/10 rounded-lg border border-brand-primary/20">
-			<h3 class="text-2xl font-display font-bold text-text-primary mb-4">
-				Let's Work Together
-			</h3>
-			<p class="text-text-secondary mb-6 max-w-2xl mx-auto">
-				Whether you need a quick audit, architecture review, or ongoing technical leadership - I'm here to help. Start with a free 30-minute consultation.
-			</p>
-			<div class="flex flex-wrap gap-4 justify-center">
+			<div class="mt-8 flex flex-wrap gap-3">
 				<a
-					href="https://cal.com/codefred/30min"
+					href="{site.social.youtube.url}?sub_confirmation=1"
+					class="btn-primary"
 					target="_blank"
-					rel="noopener noreferrer"
-					class="px-6 py-3 bg-gradient-to-r from-brand-primary to-brand-secondary text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-brand-primary/50 transition-all"
+					rel="me noopener"
+					data-track="youtube"
+					data-track-from="about">Subscribe on YouTube</a
 				>
-					Book Free Call
-				</a>
-				<EmailLink
-					class="px-6 py-3 border border-brand-primary text-brand-primary font-semibold rounded-lg hover:bg-brand-primary hover:text-white transition-all"
+				<a
+					href={site.social.instagram.url}
+					class="btn-quiet"
+					target="_blank"
+					rel="me noopener"
+					data-track="instagram"
+					data-track-from="about">Follow {site.social.instagram.handle}</a
 				>
-					Send Email
-				</EmailLink>
 			</div>
+			<p class="mt-4 text-sm text-ink-muted">
+				Working on something? <EmailLink class="link" /> or <a href="/book" class="link" data-track="book" data-track-from="about"
+					>book a call</a
+				>.
+			</p>
 		</div>
+
+		<img
+			src={portrait.src}
+			srcset={portrait.srcset}
+			sizes="(min-width: 768px) 16rem, 60vw"
+			width={portrait.width}
+			height={portrait.height}
+			alt={portrait.alt}
+			class="order-first aspect-square w-48 rounded object-cover sm:w-56 md:order-none md:w-full"
+		/>
 	</div>
+
+	{#if roadPhotos.length}
+		<ul
+			class="mt-16 grid gap-3 {roadPhotos.length === 1
+				? 'max-w-sm'
+				: roadPhotos.length === 2
+					? 'grid-cols-2'
+					: 'grid-cols-2 md:grid-cols-3'}"
+			aria-label="Photos"
+		>
+			{#each roadPhotos as photo}
+				<li>
+					<figure>
+						<img
+							src={photo.src}
+							srcset={photo.srcset}
+							sizes="(min-width: 768px) 22rem, 50vw"
+							width={photo.width}
+							height={photo.height}
+							alt={photo.alt}
+							loading="lazy"
+							decoding="async"
+							class="w-full rounded object-cover"
+						/>
+						{#if photo.caption}
+							<figcaption class="mt-2 text-sm text-ink-subtle">{photo.caption}</figcaption>
+						{/if}
+					</figure>
+				</li>
+			{/each}
+		</ul>
+	{/if}
+
+	<section class="mt-24" aria-labelledby="timeline">
+		<div class="flex flex-wrap items-baseline justify-between gap-4">
+			<h2 id="timeline" class="text-xl font-semibold tracking-tight">Experience</h2>
+			<a href={site.cv} class="link text-sm" download data-track="cv" data-track-from="about">Download CV (PDF)</a>
+		</div>
+		<ol class="mt-8 space-y-8">
+			{#each timeline as m}
+				<li class="grid gap-1 sm:grid-cols-[9rem_1fr] sm:gap-8">
+					<p class="font-mono text-sm tabular-nums text-ink-subtle">{m.years}</p>
+					<div>
+						<p class="font-medium">{m.role}<span class="text-ink-muted">, {m.org}</span></p>
+						<p class="mt-1 max-w-prose text-ink-muted">{m.highlight}</p>
+					</div>
+				</li>
+			{/each}
+		</ol>
+	</section>
+
+	<section class="mt-24" aria-labelledby="stack">
+		<h2 id="stack" class="text-xl font-semibold tracking-tight">Stack</h2>
+		<dl class="mt-8 grid gap-x-10 gap-y-6 sm:grid-cols-2">
+			{#each stack as s}
+				<div>
+					<dt class="text-sm font-medium">{s.group}</dt>
+					<dd class="mt-1.5 font-mono text-sm text-ink-muted">{s.items.join(' / ')}</dd>
+				</div>
+			{/each}
+		</dl>
+	</section>
 </div>
-
-<style>
-	.prose h2 {
-		color: var(--brand-primary);
-		font-family: var(--font-display);
-		font-size: 1.875rem;
-		font-weight: 700;
-		margin-top: 2.5rem;
-		margin-bottom: 1rem;
-	}
-
-	.prose p {
-		margin-bottom: 1.25rem;
-		line-height: 1.75;
-	}
-
-	.prose strong {
-		color: var(--text-primary);
-		font-weight: 600;
-	}
-
-	.prose a {
-		color: var(--brand-primary);
-		text-decoration: none;
-		border-bottom: 1px solid var(--brand-primary);
-		transition: color 0.2s;
-	}
-
-	.prose a:hover {
-		color: var(--brand-secondary);
-		border-bottom-color: var(--brand-secondary);
-	}
-
-	.prose ul,
-	.prose ol {
-		margin-bottom: 1.25rem;
-		padding-left: 1.5rem;
-	}
-
-	.prose li {
-		margin-bottom: 0.5rem;
-	}
-</style>

@@ -1,90 +1,49 @@
 /** @type {import('tailwindcss').Config} */
-export default {
-  content: ['./src/**/*.{html,js,svelte,ts}'],
-  theme: {
-    extend: {
-      colors: {
-        bg: {
-          primary: '#09090B',
-          secondary: '#18181B',
-          accent: '#27272A',
-        },
-        text: {
-          primary: '#FAFAFA',
-          secondary: '#A1A1AA',
-          muted: '#71717A',
-        },
-        brand: {
-          primary: '#0EA5E9',
-          secondary: '#8B5CF6',
-          success: '#10B981',
-          warning: '#F59E0B',
-          danger: '#EF4444',
-        },
-      },
-      fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
-        display: ['Clash Display', 'Inter', 'sans-serif'],
-      },
-      fontSize: {
-        xs: ['clamp(0.75rem, 2vw, 0.875rem)', { lineHeight: '1.5' }],
-        sm: ['clamp(0.875rem, 2.5vw, 1rem)', { lineHeight: '1.5' }],
-        base: ['clamp(1rem, 3vw, 1.125rem)', { lineHeight: '1.6' }],
-        lg: ['clamp(1.125rem, 3.5vw, 1.25rem)', { lineHeight: '1.6' }],
-        xl: ['clamp(1.25rem, 4vw, 1.5rem)', { lineHeight: '1.4' }],
-        '2xl': ['clamp(1.5rem, 5vw, 2rem)', { lineHeight: '1.3' }],
-        '3xl': ['clamp(2rem, 6vw, 3rem)', { lineHeight: '1.2' }],
-        '4xl': ['clamp(2.5rem, 8vw, 4rem)', { lineHeight: '1.1' }],
-      },
-      container: {
-        center: true,
-        padding: {
-          DEFAULT: '1rem',
-          sm: '1.5rem',
-          lg: '3rem',
-          xl: '4rem',
-          '2xl': '6rem',
-        },
-        screens: {
-          sm: '640px',
-          md: '768px',
-          lg: '1024px',
-          xl: '1280px',
-          '2xl': '1536px',
-        },
-      },
-      screens: {
-        '3xl': '1920px',
-        '4k': '2560px',
-      },
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-      },
-      animation: {
-        'fade-in': 'fadeIn 0.6s ease-in-out',
-        'slide-up': 'slideUp 0.8s ease-out',
-        'glow': 'glow 2s ease-in-out infinite alternate',
-      },
-      keyframes: {
-        fadeIn: {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' },
-        },
-        slideUp: {
-          '0%': { transform: 'translateY(20px)', opacity: '0' },
-          '100%': { transform: 'translateY(0)', opacity: '1' },
-        },
-        glow: {
-          '0%': { boxShadow: '0 0 5px rgba(14, 165, 233, 0.5)' },
-          '100%': { boxShadow: '0 0 20px rgba(14, 165, 233, 0.8)' },
-        },
-      },
-    },
-  },
-  plugins: [
-    require('@tailwindcss/typography'),
-  ],
-}
 
+// Colors come from CSS variables in src/lib/styles/tokens.css (light + dark).
+// Stored as "R G B" so Tailwind opacity modifiers (bg-ink/10) still work.
+const token = (name) => `rgb(var(--${name}) / <alpha-value>)`;
+
+export default {
+	content: ['./src/**/*.{html,js,svelte,ts,md}'],
+	theme: {
+		extend: {
+			colors: {
+				canvas: token('canvas'),
+				surface: token('surface'),
+				line: token('line'),
+				ink: {
+					DEFAULT: token('ink'),
+					muted: token('ink-muted'),
+					subtle: token('ink-subtle')
+				},
+				accent: {
+					DEFAULT: token('accent'),
+					ink: token('accent-ink')
+				},
+
+				// Legacy names used by pages not yet migrated. They resolve to the same
+				// tokens so nothing renders off-palette; remove once the old sections are gone.
+				bg: { primary: token('canvas'), secondary: token('surface'), accent: token('line') },
+				text: { primary: token('ink'), secondary: token('ink-muted'), muted: token('ink-subtle') },
+				brand: {
+					primary: token('accent'),
+					secondary: token('accent'),
+					success: token('accent'),
+					warning: '#B45309',
+					danger: '#B91C1C'
+				}
+			},
+			fontFamily: {
+				sans: ['Geist', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif'],
+				mono: ['Geist Mono', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
+				display: ['Geist', 'system-ui', 'sans-serif']
+			},
+			borderRadius: {
+				// One radius for the whole site (buttons, images, inputs)
+				DEFAULT: '6px'
+			}
+		}
+	},
+	plugins: [require('@tailwindcss/typography')]
+};
