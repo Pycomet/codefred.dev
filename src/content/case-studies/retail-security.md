@@ -21,7 +21,7 @@ stack: [Python, FastAPI, OpenCV, YOLO, Redis, PostgreSQL, Docker]
 
 A retail chain in Nigeria needed to watch its stores for theft, empty shelves and safety issues in real time. Its CCTV only recorded footage, which nobody reviewed until after an incident had been reported.
 
-## The problem
+## What I found
 
 - **Reactive by design.** Incidents were found hours or days later.
 - **Too many screens.** Guards couldn't watch dozens of feeds at once.
@@ -30,7 +30,7 @@ A retail chain in Nigeria needed to watch its stores for theft, empty shelves an
 
 They needed alerts, not evidence.
 
-## The approach
+## What I built
 
 Instead of streaming raw video to the cloud, we brought the model to the cameras.
 
@@ -72,7 +72,7 @@ def process_stream(rtsp_url: str, camera_id: str):
                 publish_alert(camera_id, detection, thumbnail(frame))
 ```
 
-## The outcome
+## The numbers
 
 Piloted in 12 stores, then rolled out across the chain.
 

@@ -66,6 +66,7 @@
 				const frame = host.querySelector('iframe');
 				if (!frame) return;
 				observer.disconnect();
+				if (!frame.title) frame.title = 'Booking calendar';
 				frame.addEventListener('load', () => {
 					if (embedState === 'loading') embedState = 'ready';
 				});
@@ -73,8 +74,7 @@
 			observer.observe(host, { childList: true, subtree: true });
 		};
 
-		if ('requestIdleCallback' in window) requestIdleCallback(start, { timeout: 2000 });
-		else setTimeout(start, 500);
+		start();
 	});
 </script>
 
@@ -92,7 +92,7 @@
 				{site.booking.minutes} minutes on video, free. Pick any open time.
 			</p>
 
-			<h2 class="mt-10 text-sm font-medium">What happens on the call</h2>
+			<h2 data-heading="label" class="mt-10 text-sm font-medium">What happens on the call</h2>
 			<ol class="mt-3 list-decimal space-y-2 pl-5 text-sm text-ink-muted marker:text-ink-subtle">
 				<li>You walk me through the problem and what you've tried.</li>
 				<li>I ask about the system, the numbers and the deadline.</li>

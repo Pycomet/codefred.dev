@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import SEO from '$components/SEO.svelte';
 	import LiteYouTube from '$components/content/LiteYouTube.svelte';
 	import PostStrip from '$components/content/PostStrip.svelte';
@@ -7,6 +8,8 @@
 	let { data } = $props();
 
 	let type = $state('all');
+	let ready = $state(false);
+	onMount(() => (ready = true));
 	const visible = $derived(
 		type === 'all' ? data.videos : data.videos.filter((v) => v.types.includes(type as never))
 	);
@@ -38,7 +41,7 @@
 	</div>
 
 	<section class="mt-16" aria-labelledby="videos">
-		<h2 id="videos" class="text-xl font-semibold tracking-tight">Latest videos</h2>
+		<h2 id="videos" class="h-section">Latest videos</h2>
 
 		{#if data.types.length}
 			<div role="group" aria-label="Filter by type" class="mt-5 flex flex-wrap gap-2">
@@ -46,14 +49,16 @@
 					<button
 						type="button"
 						aria-pressed={type === t.key}
+						disabled={!ready}
 						onclick={() => (type = t.key)}
-						class="rounded border px-3 py-1.5 text-sm transition-colors {type === t.key
+						class="min-h-11 rounded border px-3 text-sm transition-colors disabled:opacity-60 {type === t.key
 							? 'border-ink bg-ink text-canvas'
-							: 'border-line text-ink-muted hover:border-ink-subtle hover:text-ink'}">{t.label}</button
+							: 'border-line text-ink-muted enabled:hover:border-ink-subtle enabled:hover:text-ink'}">{t.label}</button
 					>
 				{/each}
 			</div>
 		{/if}
+		<p role="status" class="sr-only">{visible.length} videos</p>
 
 		{#if visible.length}
 			<ul class="mt-6 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
@@ -76,14 +81,14 @@
 
 	{#if data.shorts.length}
 		<section class="mt-20" aria-labelledby="shorts">
-			<h2 id="shorts" class="text-xl font-semibold tracking-tight">Shorts</h2>
+			<h2 id="shorts" class="h-section">Shorts</h2>
 			<div class="mt-6"><PostStrip posts={data.shorts} from="content-shorts" /></div>
 		</section>
 	{/if}
 
 	<section class="mt-20" aria-labelledby="instagram">
 		<div class="flex flex-wrap items-baseline justify-between gap-4">
-			<h2 id="instagram" class="text-xl font-semibold tracking-tight">On Instagram</h2>
+			<h2 id="instagram" class="h-section">On Instagram</h2>
 			<a href={ig.url} class="link text-sm" target="_blank" rel="me noopener" data-track="instagram" data-track-from="content-strip"
 				>Follow {ig.handle}</a
 			>

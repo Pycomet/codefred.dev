@@ -5,12 +5,17 @@
 	let {
 		heading = 'Have a problem like this?',
 		body = `A ${site.booking.minutes}-minute call to look at what you're building and whether I can help.`,
-		from
-	}: { heading?: string; body?: string; from: string } = $props();
+		from,
+		variant = 'line'
+	}: { heading?: string; body?: string; from: string; variant?: 'line' | 'panel' } = $props();
 </script>
 
-<section class="border-t border-line pt-12" aria-labelledby="book-{from}">
-	<h2 id="book-{from}" class="text-2xl font-semibold tracking-tight">{heading}</h2>
+<section
+	class={variant === 'panel' ? 'rounded bg-surface p-8 md:p-12' : 'border-t border-line pt-12'}
+	data-cta={variant}
+	aria-labelledby="book-{from}"
+>
+	<h2 id="book-{from}" class="h-section">{heading}</h2>
 	<p class="mt-3 max-w-prose text-ink-muted">{body}</p>
 	<div class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-4">
 		<a href="/book" class="btn-primary" data-track="book" data-track-from={from}>Book a call</a>

@@ -3,6 +3,7 @@
 	import { replaceState } from '$app/navigation';
 	import SEO from '$components/SEO.svelte';
 	import Result from '$components/work/Result.svelte';
+	import BookCall from '$components/BookCall.svelte';
 	import type { Area } from '$lib/content/case-studies';
 	import { builds } from '$lib/data/builds';
 
@@ -20,7 +21,8 @@
 
 	onMount(() => {
 		const q = new URLSearchParams(location.search).get('area');
-		if (q && q in data.areas) area = q as Area;
+		// Unknown or empty areas fall back to "All" instead of an empty list
+		if (q && usedAreas.includes(q as Area)) area = q as Area;
 		ready = true;
 	});
 
@@ -45,32 +47,34 @@
 		Production AI systems, each with the numbers that changed. Open one to see how.
 	</p>
 
-	{#if ready && usedAreas.length > 1}
+	{#if usedAreas.length > 1}
 		<div role="group" aria-label="Filter by area" class="mt-8 flex flex-wrap gap-2">
 			{#each ['all', ...usedAreas] as a}
 				<button
 					type="button"
 					aria-pressed={area === a}
+					disabled={!ready}
 					onclick={() => choose(a as Area | 'all')}
-					class="rounded border px-3 py-1.5 text-sm transition-colors {area === a
+					class="min-h-11 rounded border px-3 text-sm transition-colors disabled:opacity-60 {area === a
 						? 'border-ink bg-ink text-canvas'
-						: 'border-line text-ink-muted hover:border-ink-subtle hover:text-ink'}"
+						: 'border-line text-ink-muted enabled:hover:border-ink-subtle enabled:hover:text-ink'}"
 				>
 					{a === 'all' ? 'All' : data.areas[a as Area]}
 				</button>
 			{/each}
 		</div>
 	{/if}
+	<p role="status" class="sr-only">{visible.length} case {visible.length === 1 ? 'study' : 'studies'}</p>
 
 	<ol class="mt-10 divide-y divide-line border-y border-line">
 		{#each visible as study (study.slug)}
-			<li>
+			<li data-area={study.area}>
 				<a
 					href="/work/{study.slug}"
 					class="group grid gap-3 py-8 md:grid-cols-[1fr_minmax(0,18rem)] md:gap-10"
 				>
 					<div>
-						<h2 class="text-lg font-medium leading-snug tracking-tight group-hover:text-accent sm:text-xl">
+						<h2 data-heading="item" class="text-lg font-medium leading-snug tracking-tight group-hover:text-accent sm:text-xl">
 							{study.title}
 						</h2>
 						<p class="mt-2 text-sm text-ink-muted">{study.client}</p>
@@ -87,11 +91,22 @@
 	</ol>
 
 	<section class="mt-24" aria-labelledby="builds">
-		<h2 id="builds" class="text-xl font-semibold tracking-tight">Things I've built</h2>
+		<h2 id="builds" class="h-section">Things I've built</h2>
 		<p class="mt-2 max-w-prose text-ink-muted">My own products and experiments, outside client work.</p>
 		<ul class="mt-8 grid gap-x-12 gap-y-10 md:grid-cols-2">
 			{#each builds as b}
 				<li>
+					{#if b.image}
+						<img
+							src={b.image.src}
+							alt={b.image.alt}
+							width="800"
+							height="500"
+							loading="lazy"
+							decoding="async"
+							class="mb-4 aspect-[16/10] w-full rounded border border-line object-cover object-top"
+						/>
+					{/if}
 					<div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
 						<h3 class="font-medium">{b.name}</h3>
 						<span class="text-sm text-ink-subtle">{b.kind}</span>
@@ -107,4 +122,8 @@
 			{/each}
 		</ul>
 	</section>
+
+	<div class="mt-24 max-w-3xl">
+		<BookCall from="work" heading="Want results like these?" />
+	</div>
 </div>

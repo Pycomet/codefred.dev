@@ -21,7 +21,7 @@ stack: [Python, FastAPI, Redis, OpenAI, Hugging Face, vLLM]
 
 A high-growth FinTech startup was burning $60,000 a month on OpenAI. Their product, an intelligent document processor, sent every single user interaction to GPT-4. Their user base had doubled in a quarter, and infrastructure costs had quadrupled. They were losing money on every active user.
 
-## The problem
+## What I found
 
 I spent the first 48 hours in their access logs and prompt code. The issue wasn't prompt engineering. It was architecture.
 
@@ -29,7 +29,7 @@ I spent the first 48 hours in their access logs and prompt code. The issue wasn'
 - **No memory.** If two users asked the same question five minutes apart, they paid for the answer twice.
 - **A thin wrapper.** The backend passed requests straight through to the API, with no handling for load or cost.
 
-## The approach
+## What I built
 
 We didn't rewrite their product. We put a traffic controller in front of it.
 
@@ -74,7 +74,7 @@ async def route_request(user_query: str):
     return response
 ```
 
-## The outcome
+## The numbers
 
 | | Before | After |
 | --- | --- | --- |

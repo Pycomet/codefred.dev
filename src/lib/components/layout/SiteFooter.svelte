@@ -10,8 +10,9 @@
 	<div class="wrap flex flex-col gap-8 py-10 md:flex-row md:items-start md:justify-between">
 		<div class="space-y-2">
 			<p class="font-semibold tracking-tight">{site.name}</p>
-			<p class="text-sm text-ink-muted">
+			<p class="flex flex-wrap gap-x-5 gap-y-1 text-sm text-ink-muted">
 				<EmailLink class="link" />
+				<a href={site.cv} class="link" download data-track="cv" data-track-from="footer">CV (PDF)</a>
 			</p>
 		</div>
 

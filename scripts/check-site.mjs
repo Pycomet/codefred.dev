@@ -52,11 +52,55 @@ for (const path of paths) {
 
 	check(path, 'header Book a call link', /href="\/book"[^>]*data-track="book"/.test(body));
 	check(path, 'footer YouTube and Instagram links', body.includes('youtube.com/@CodefredHQ') && body.includes('instagram.com/codefredhq'));
+	check(path, 'phone header has Book a call', /href="\/book"[^>]*data-track-from="header-mobile"/.test(body));
+	check(path, 'no small pre-title above the h1', !/<p[^>]*>[^<]*AI engineer<\/p>\s*<h1/.test(body));
+	// Case-study bodies are Markdown with their own heading styles, so only check page-level h2s
+	if (!path.startsWith('/work/')) {
+		check(path, 'section headings use .h-section', !/<h2(?![^>]*sr-only)(?![^>]*h-section)(?![^>]*data-heading=)[^>]*>/.test(body));
+	}
+	check(path, 'theme toggle has no mismatched aria-label', !/aria-label="Colour theme/.test(body));
+	check(path, 'footer links the CV', /href="\/cv\/codefred-cv\.pdf"[^>]*data-track-from="footer"/.test(body));
+
+	if (path.startsWith('/work/')) {
+		check(path, 'body does not repeat the spec sheet headings', !/<h2[^>]*>The (problem|approach|outcome)<\/h2>/.test(body));
+	}
+	const visible = body.replace(/<script[\s\S]*?<\/script>/g, '').replace(/<[^>]+>/g, ' ');
+	check(path, 'no "Alfred" in visible text', !/\bAlfred\b/.test(visible));
+	for (const [, q] of body.matchAll(/<blockquote[^>]*>([\s\S]*?)<\/blockquote>/g)) {
+		const words = q.replace(/<[^>]+>/g, ' ').trim().split(/\s+/).length;
+		check(path, `quote is 30 words or fewer (${words})`, words <= 30);
+	}
 
 	for (const img of body.match(/<img\b[^>]*>/g) ?? []) {
 		check(path, 'image has alt, width and height', /\salt="/.test(img) && /\swidth="/.test(img) && /\sheight="/.test(img), img.slice(0, 80));
 	}
 }
+
+// Every filter deep link must land on an area that has at least one case study
+const home = await (await fetch(`${base}/`)).text();
+const workHtml = await (await fetch(`${base}/work`)).text();
+for (const [, area] of home.matchAll(/href="\/work\?area=([\w-]+)"/g)) {
+	check('/', `area link "${area}" has case studies`, workHtml.includes(`data-area="${area}"`));
+}
+check('/work', 'ends with Book a call', workHtml.includes('data-track-from="work"'));
+check('/', 'closing CTA is a panel', /data-cta="panel"/.test(home));
+check('/', 'proof cards say "Read case study"', (home.match(/Read case study/g) ?? []).length === 3);
+check('/', 'lead result is the large size', /data-result-size="xl"/.test(home));
+check('/', '"wifi" line appears only on About', !/wifi/.test(home));
+check('/work', 'filter result count is announced', /role="status"/.test(workHtml));
+check('/work', 'filter buttons are in the static HTML', /aria-label="Filter by area"/.test(workHtml));
+// Disabled (pre-hydration) filter buttons must not react to hover, or they look clickable
+const contentHtml = await (await fetch(`${base}/content`)).text();
+for (const [page, html] of [['/work', workHtml], ['/content', contentHtml]]) {
+	const hoverOnDisabled = [...html.matchAll(/<button[^>]*disabled[^>]*>/g)].some((m) => /(^|\s)hover:/.test(m[0].match(/class="([^"]*)"/)?.[1] ?? ''));
+	check(page, 'disabled filter buttons have no hover styles', !hoverOnDisabled);
+}
+check('/work', 'filter buttons start disabled', /<button[^>]*aria-pressed[^>]*disabled/.test(workHtml));
+const cssHref = home.match(/href="\.?(\/_app\/immutable\/assets\/[^"]+\.css)"/)?.[1];
+const css = cssHref ? await (await fetch(`${base}${cssHref}`)).text() : '';
+check('css', 'stylesheet found', Boolean(css));
+check('css', 'code comments are not ink-subtle on surface', !/\.token\.comment\{[^}]*--ink-subtle/.test(css.replace(/\s/g, '')));
+check('/', 'About teaser links the CV', /href="\/cv\/codefred-cv\.pdf"[^>]*data-track-from="home-about"/.test(home));
 
 for (const [from, to] of [
 	['/case-studies', '/work'],

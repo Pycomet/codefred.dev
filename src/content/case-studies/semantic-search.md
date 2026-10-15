@@ -20,7 +20,7 @@ stack: [Python, FastAPI, Qdrant, Sentence Transformers, Elasticsearch, PostgreSQ
 
 A legal tech startup needed lawyers to find relevant case law across more than a million court documents. Keyword search was failing: legal language is complex, and lawyers rarely remember the exact phrases in the cases they need.
 
-## The problem
+## What I found
 
 - Searching "vehicular homicide" missed cases that said "death by dangerous driving".
 - "Breach of contract" returned thousands of irrelevant results.
@@ -28,7 +28,7 @@ A legal tech startup needed lawyers to find relevant case law across more than a
 
 Lawyers spent hours filtering results, or missed precedents entirely.
 
-## The approach
+## What I built
 
 ### Picking the embedding model
 
@@ -62,7 +62,7 @@ async def hybrid_search(query: str, filters: dict):
 - **Indexing time.** Batched embedding, eight parallel workers and bulk uploads cut a full re-index from 40 hours to 4.
 - **Storage.** Scalar quantisation shrank the index from 12GB to 3GB for under 2% accuracy loss.
 
-## The outcome
+## The numbers
 
 Launched to 500 lawyers in beta, then rolled out fully.
 
